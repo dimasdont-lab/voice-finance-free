@@ -7,6 +7,7 @@
 - Аудіо декодується локально у браузері та приводиться до mono 16 kHz.
 - Транскрипція працює локально через open-source Whisper у `whisper-worker.js` / Transformers.js.
 - На iPhone/iPad основним є безкоштовне вбудоване SpeechRecognition Safari з `uk-UA`: воно значно краще за Tiny розуміє живу українську. Це не платний API, але обробку контролює Safari/Apple, а не застосунок.
+- Через iOS-баг повторного запуску Safari SpeechRecognition перший запис використовує Safari, а наступні записи без перезавантаження автоматично переходять на MediaRecorder + локальний Whisper. На Safari 26/WebGPU спочатку використовується точніший multilingual Whisper Base.
 - Якщо браузерне розпізнавання недоступне, використовується multilingual Whisper Tiny q8 через однопотоковий WASM. `whisper-base` не вмикається автоматично на iPhone через підтверджені падіння вкладки iOS Safari.
 - На сумісних desktop-браузерах спочатку пробується Whisper Base q4 через WebGPU, потім Tiny q8 / WASM.
 - Мову жорстко не фіксує: розраховано на українську + польську + англійську в одній фразі.

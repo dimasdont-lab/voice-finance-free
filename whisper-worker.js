@@ -31,9 +31,12 @@ async function buildPipeline() {
   // through WASM. Tiny multilingual is deliberately the first and only iOS
   // model: lower accuracy is preferable to losing the whole finance session.
   const attempts = isIOS
-    ? [
+    ? (hasWebGPU ? [
+        { id: 'onnx-community/whisper-base', opts: { device: 'webgpu', dtype: 'q4', progress_callback: progress }, label: 'Whisper base multilingual · iPhone WebGPU' },
         { id: 'onnx-community/whisper-tiny', opts: { device: 'wasm', dtype: 'q8', progress_callback: progress }, label: 'Whisper tiny multilingual · iPhone safe mode' },
-      ]
+      ] : [
+        { id: 'onnx-community/whisper-tiny', opts: { device: 'wasm', dtype: 'q8', progress_callback: progress }, label: 'Whisper tiny multilingual · iPhone safe mode' },
+      ])
     : hasWebGPU
     ? [
         { id: 'onnx-community/whisper-base', opts: { device: 'webgpu', dtype: 'q4', progress_callback: progress }, label: 'Whisper base q4 · WebGPU' },

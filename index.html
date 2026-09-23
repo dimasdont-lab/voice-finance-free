@@ -380,6 +380,8 @@ let whisperBusy=false;
 let whisperModelName='';
 let speechRecognition=null;
 let speechTranscript='';
+let safariRecognitionRuns=0;
+let speechStartTimer=null;
 let editingDebtId=null;
 let debtDirection='owed';
 let voiceState='idle';
@@ -623,7 +625,9 @@ function wordsToNumber(s){
 function detectAmount(text){
   const raw=String(text||'').replace(/[−–—]/g,'-').replace(/(\d)\s+(\d{3})(?!\d)/g,'$1$2');
   const m=raw.match(/(?:^|\s)[+-]?(\d+(?:[.,]\d{1,2})?)(?=\s|$|zł|zl|pln|eur|euro|usd|gbp|злот|євро|евро|дол|фунт)/i)||raw.match(/(?:^|\s)[+-]?(\d+(?:[.,]\d{1,2})?)(?=\s)/);
-  if(m)return Math.abs(parseFloat(m[1].replace(',','.')));return wordsToNumber(raw);
+  if(m)return Math.abs(parseFloat(m[1].replace(',','.')));
+  const loose=raw.match(/[+-]?\s*(\d+(?:[.,]\d{1,2})?)/);if(loose)return Math.abs(parseFloat(loose[1].replace(',','.')));
+  return wordsToNumber(raw);
 }
 function detectCurrency(t){
   const x=foldText(t);
@@ -754,10 +758,11 @@ function startBrowserRecognition(){
   if(speechRecognition)try{speechRecognition.abort()}catch(e){}
   const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;if(!Recognition)return startRecording();
   const session=++voiceSession;speechTranscript='';document.querySelector('#voiceTestInput').value='';const recognition=new Recognition();speechRecognition=recognition;recognition.lang='uk-UA';recognition.interimResults=true;recognition.continuous=false;recognition.maxAlternatives=3;
-  recognition.onstart=()=>{if(session!==voiceSession)return;setRecordingVisual(true);setVoiceState('recording','Слухаю українською…','Говори зараз. Англійські та польські назви можна казати в цій самій фразі.');setModelStatus('Розпізнавання Safari · без платного API',null);};
+  speechStartTimer=setTimeout(()=>{if(session!==voiceSession||speechRecognition!==recognition)return;try{recognition.abort()}catch(e){}speechRecognition=null;setModelStatus('Safari не відповів — переходжу на локальний Whisper',null);startRecording();},2500);
+  recognition.onstart=()=>{clearTimeout(speechStartTimer);if(session!==voiceSession)return;setRecordingVisual(true);setVoiceState('recording','Слухаю українською…','Говори зараз. Англійські та польські назви можна казати в цій самій фразі.');setModelStatus('Розпізнавання Safari · без платного API',null);};
   recognition.onresult=e=>{if(session!==voiceSession)return;let interim='',final='';for(let i=e.resultIndex;i<e.results.length;i++){const text=e.results[i][0]?.transcript||'';if(e.results[i].isFinal)final+=text;else interim+=text;}if(final)speechTranscript=(speechTranscript+' '+final).trim();const shown=(speechTranscript+' '+interim).trim();if(shown){document.querySelector('#voiceText').textContent='“'+shown+'”';document.querySelector('#voiceTestInput').value=shown;}};
-  recognition.onerror=e=>{if(session!==voiceSession)return;setRecordingVisual(false);speechRecognition=null;const messages={'not-allowed':'Дозволь мікрофон у налаштуваннях Safari для цього сайту.','no-speech':'Не почув мовлення. Натисни мікрофон і спробуй ще раз.','network':'Safari не зміг запустити розпізнавання. Можна ввести фразу текстом.'};setVoiceState('error','Не вдалося розпізнати',messages[e.error]||'Натисни мікрофон і спробуй ще раз.');};
-  recognition.onend=()=>{if(session!==voiceSession)return;setRecordingVisual(false);speechRecognition=null;const text=(speechTranscript||document.querySelector('#voiceTestInput').value).trim();if(text){setVoiceState('confirmation','Розпізнано','“'+text+'”');renderVoiceParse(parseVoice(text));}else if(voiceState==='recording')setVoiceState('error','Не почув мовлення','Натисни мікрофон і спробуй ще раз.');};
+  recognition.onerror=e=>{clearTimeout(speechStartTimer);if(session!==voiceSession)return;setRecordingVisual(false);speechRecognition=null;const messages={'not-allowed':'Дозволь мікрофон у налаштуваннях Safari для цього сайту.','no-speech':'Не почув мовлення. Натисни мікрофон і спробуй ще раз.','network':'Safari не зміг запустити розпізнавання. Можна ввести фразу текстом.'};setVoiceState('error','Не вдалося розпізнати',messages[e.error]||'Натисни мікрофон і спробуй ще раз.');};
+  recognition.onend=()=>{clearTimeout(speechStartTimer);if(session!==voiceSession)return;setRecordingVisual(false);speechRecognition=null;const text=(speechTranscript||document.querySelector('#voiceTestInput').value).trim();if(text){safariRecognitionRuns++;setVoiceState('confirmation','Розпізнано','“'+text+'”');renderVoiceParse(parseVoice(text));}else if(voiceState==='recording')setVoiceState('error','Не почув мовлення','Натисни мікрофон і спробуй ще раз.');};
   try{recognition.start()}catch(e){speechRecognition=null;startRecording();}
 }
 function stopBrowserRecognition(){if(speechRecognition){setVoiceState('stopping','Завершую…','Обробляю сказане.');try{speechRecognition.stop()}catch(e){try{speechRecognition.abort()}catch(_){}}}}
@@ -765,10 +770,10 @@ function startVoice(){
   document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');
   if(voiceState==='recording'){if(speechRecognition)stopBrowserRecognition();else stopRecording();return;}
   if(['requesting','stopping','decoding','model-loading','transcribing'].includes(voiceState))return;
-  if(supportsBrowserRecognition())startBrowserRecognition();else startRecording();
+  if(supportsBrowserRecognition()&&safariRecognitionRuns===0)startBrowserRecognition();else{setModelStatus(safariRecognitionRuns?'Повторний запис · локальний Whisper':'Локальний Whisper',null);startRecording();}
 }
 function stopVoiceVisual(){setRecordingVisual(false)}
-function closeVoice(){voiceSession++;clearVoiceTimeouts();if(speechRecognition)try{speechRecognition.abort()}catch(e){}speechRecognition=null;if(mediaRecorder&&mediaRecorder.state==='recording')try{mediaRecorder.stop()}catch(e){}cleanupRecorder();if(whisperBusy)resetWhisperWorker();voiceState='idle';document.querySelector('#voicePopover').classList.remove('open')}
+function closeVoice(){voiceSession++;clearTimeout(speechStartTimer);clearVoiceTimeouts();if(speechRecognition)try{speechRecognition.abort()}catch(e){}speechRecognition=null;if(mediaRecorder&&mediaRecorder.state==='recording')try{mediaRecorder.stop()}catch(e){}cleanupRecorder();if(whisperBusy)resetWhisperWorker();voiceState='idle';document.querySelector('#voicePopover').classList.remove('open')}
 function voiceSave(){
   if(!parsedVoice?.amount)return;state.transactions.push({type:parsedVoice.type,amount:parsedVoice.amount,currency:parsedVoice.currency,category:parsedVoice.category,client:parsedVoice.client||'',note:parsedVoice.merchant?`${parsedVoice.merchant} — ${parsedVoice.note}`:parsedVoice.note,id:uid(),date:new Date().toISOString()});closeVoice();saveState();showToast('Операцію додано');
 }
