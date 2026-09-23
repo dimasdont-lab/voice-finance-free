@@ -55,12 +55,12 @@
     }
     .balance-card{padding:24px 22px;margin-bottom:22px}
     .label{color:var(--muted);font-size:15px}
-    .balance-main{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:10px;align-items:center;margin:7px 0 22px}.balance{font-size:clamp(26px,7.8vw,34px);letter-spacing:-1.2px;line-height:1.05;font-weight:600;white-space:nowrap}.balance-chart{width:108px;height:52px;overflow:visible}.balance-chart path{fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart .fill{fill:url(#balanceGradient);stroke:none}
+    .balance-main{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:10px;align-items:center;margin:7px 0 22px;min-width:0}.balance-main>*{min-width:0}.balance{width:100%;font-size:clamp(26px,7.8vw,34px);letter-spacing:-1.2px;line-height:1.05;font-weight:600;white-space:nowrap;overflow:hidden}.balance-chart{width:108px;height:52px;overflow:hidden}.balance-chart path{fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart .fill{fill:url(#balanceGradient);stroke:none}
     .split{display:grid;grid-template-columns:1fr 1px 1fr;gap:18px;align-items:center}
     .divider{height:50px;background:var(--line)}
-    .metric{display:flex;gap:10px;align-items:flex-start;border:0;background:transparent;padding:0;text-align:left;cursor:pointer}
+    .metric{display:flex;gap:10px;align-items:flex-start;border:0;background:transparent;padding:0;text-align:left;cursor:pointer;min-width:0;overflow:hidden}.metric>div:last-child{min-width:0;flex:1;overflow:hidden}
     .metric .dot{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.055)}
-    .metric strong{display:block;font-size:18px;margin-top:2px}
+    .metric strong{display:block;width:100%;font-size:18px;margin-top:2px;white-space:nowrap;overflow:hidden}
     .income strong,.income .dot{color:var(--green)}
     .expense strong,.expense .dot{color:var(--accent-strong)}
     .section{margin-top:20px}
@@ -85,10 +85,10 @@
     .tx-title{font-size:16px}.tx-meta{font-size:13px;color:var(--muted);margin-top:3px}
     .tx-amount{font-size:17px;font-variant-numeric:tabular-nums}.pos{color:var(--green)}.neg{color:#f0f0f4}
     .empty{padding:28px;text-align:center;color:var(--muted)}
-    .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:9px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,5,5,0),#050505 25%,#050505);z-index:30}
+    .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:9px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,5,5,0),rgba(5,5,5,.56) 25%,rgba(5,5,5,.62));z-index:30}
     .dock{height:84px;display:grid;grid-template-columns:1fr 78px 1fr;gap:9px;align-items:center}
-    .dock-group{height:72px;border:1px solid var(--line-strong);border-radius:36px;background:rgba(20,20,24,.97);display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;box-shadow:inset 0 1px rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.35);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-    .dock button{border:0;padding:0;color:#d7d7dd;display:grid;place-items:center}.dock-group button{border-radius:50%;background:linear-gradient(180deg,#1a1a1f,#121216);border:1px solid rgba(255,255,255,.07)}.dock-group button.active{color:var(--accent);background:#202024}.dock svg{width:27px;height:27px}
+    .dock-group{height:72px;border:1px solid rgba(255,255,255,.1);border-radius:36px;background:rgba(20,20,24,.48);display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;box-shadow:inset 0 1px rgba(255,255,255,.025),0 14px 40px rgba(0,0,0,.22);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+    .dock button{border:0;padding:0;color:#d7d7dd;display:grid;place-items:center}.dock-group button{border-radius:50%;background:linear-gradient(180deg,rgba(34,34,40,.56),rgba(18,18,22,.5));border:1px solid rgba(255,255,255,.055)}.dock-group button.active{color:var(--accent);background:rgba(32,32,36,.58)}.dock svg{width:27px;height:27px}
     .dock-plus{width:78px;height:78px;border-radius:50%;background:var(--accent-strong)!important;border:4px solid #f7f7f7!important;box-shadow:0 0 0 6px rgba(255,69,79,.16),0 0 28px rgba(255,69,79,.3);transition:.2s transform}.dock-plus:active{transform:scale(.96)}.dock-plus svg{width:38px;height:38px}.dock-plus.listening{transform:scale(1.05)}
     .profile-shortcut{position:fixed;top:calc(env(safe-area-inset-top) + 18px);left:max(18px,calc((100vw - 480px)/2 + 18px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#111114;color:var(--text);display:grid;place-items:center;z-index:25}.profile-shortcut.active{color:var(--accent);border-color:rgba(255,125,131,.28)}.profile-shortcut svg{width:22px;height:22px}.topline{padding-left:54px}
     .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:60;display:none;align-items:flex-end;justify-content:center}
@@ -128,9 +128,10 @@
     .voice-popover{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));width:min(440px,calc(100% - 28px));z-index:55;display:none;background:rgba(15,15,18,.98);border:1px solid var(--line-strong);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);transition:bottom .18s ease}
     body.keyboard-open .bottom-zone{opacity:0;pointer-events:none;transform:translate(-50%,28px);transition:opacity .16s ease,transform .2s ease}
     .voice-popover.open{display:block}.voice-popover .parse-card{margin-top:12px;padding:13px;border-radius:20px}.voice-popover .parse-amount{font-size:24px}.voice-popover-head{display:flex;gap:12px;align-items:flex-start}.voice-live-dot{width:11px;height:11px;border-radius:50%;background:var(--accent);margin-top:6px;flex:none}.voice-live-dot.pulse{animation:pulse 1.35s infinite}.voice-copy{min-width:0;flex:1}.voice-popover .voice-status{font-size:16px;margin:0 0 4px}.voice-popover .voice-text{font-size:14px;min-height:0;max-height:70px;overflow:auto}.voice-close{border:0;background:transparent;color:var(--muted);font-size:22px;padding:0 2px}.voice-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.voice-actions button{margin-top:8px}.voice-engine-note{margin-top:8px}
-    .debt-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.debt-total{padding:17px;border:1px solid var(--line);border-radius:24px;background:var(--panel)}.debt-total strong{display:block;font-size:22px;margin-top:5px}.debt-row{cursor:pointer}.debt-person{font-size:16px}.debt-note{font-size:12px;color:var(--muted);margin-top:3px}.debt-amount{font-variant-numeric:tabular-nums;white-space:nowrap}.debt-add{width:100%;border:1px solid var(--line);border-radius:20px;background:#141417;color:var(--text);padding:14px;margin:4px 0 16px}
-    .debt-sort{margin-bottom:12px}.debt-sort select{width:100%;border:1px solid var(--line);background:#101013;color:var(--text);border-radius:16px;padding:12px}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden}.debt-section>summary{cursor:pointer;padding:17px 18px;font-weight:650;display:flex;align-items:center;justify-content:space-between;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section>summary::after{content:'⌄';color:currentColor;transition:.2s transform}.debt-section[open]>summary::after{transform:rotate(180deg)}.debt-section.owed>summary{color:#f0c75e}.debt-section.receivable>summary{color:var(--green)}.debt-section.urgent>summary{color:#e92535}.debt-status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}.debt-status{border:1px solid var(--line);border-radius:17px;background:#111114;overflow:hidden;min-width:0}.debt-status summary{padding:12px 10px;display:flex;justify-content:space-between;gap:6px;font-size:12px;cursor:pointer;list-style:none}.debt-status .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.debt-status .tx{grid-template-columns:34px minmax(0,1fr);padding:10px 8px;gap:7px}.debt-status .tx-icon{width:32px;height:32px;border-radius:11px}.debt-status .debt-amount{grid-column:2;font-size:13px}.debt-status .empty{padding:16px 6px;font-size:12px}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
+    .debt-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.debt-total{padding:17px;border:1px solid var(--line);border-radius:24px;background:var(--panel);text-align:left;color:var(--text);cursor:pointer}.debt-total:active{transform:scale(.985)}.debt-total strong{display:block;font-size:22px;margin-top:5px}.debt-row{cursor:pointer}.debt-person{font-size:16px}.debt-note{font-size:12px;color:var(--muted);margin-top:3px}.debt-amount{font-variant-numeric:tabular-nums;white-space:nowrap}
+    .debt-sort{margin-bottom:12px}.debt-sort select{width:100%;border:1px solid var(--line);background:#101013;color:var(--text);border-radius:16px;padding:12px}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden;scroll-margin-top:20px}.debt-section>summary{cursor:pointer;padding:14px 15px;font-weight:650;display:grid;grid-template-columns:minmax(0,1fr) 36px 18px;gap:7px;align-items:center;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section>summary::after{content:'⌄';color:currentColor;text-align:right;transition:.2s transform}.debt-section[open]>summary::after{transform:rotate(180deg)}.debt-group-title{display:flex;align-items:center;gap:10px;min-width:0}.debt-group-icon{width:32px;height:32px;border-radius:11px;background:rgba(255,255,255,.055);display:grid;place-items:center;flex:none}.debt-group-icon svg{width:19px;height:19px}.debt-group-count{text-align:right;min-width:36px;font-variant-numeric:tabular-nums}.debt-status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}.debt-status{border:1px solid var(--line);border-radius:17px;background:#111114;overflow:hidden;min-width:0}.debt-status summary{padding:12px 10px;display:flex;justify-content:space-between;gap:6px;font-size:12px;cursor:pointer;list-style:none}.debt-status .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.debt-status .tx{grid-template-columns:34px minmax(0,1fr);padding:10px 8px;gap:7px}.debt-status .tx-icon{width:32px;height:32px;border-radius:11px}.debt-status .debt-amount{grid-column:2;font-size:13px}.debt-status .empty{padding:16px 6px;font-size:12px}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
     .debt-section.owed>summary,.debt-section.receivable>summary,.debt-section.urgent>summary{color:var(--text);background:transparent}.debt-section.owed,.debt-section.receivable,.debt-section.urgent{border-color:var(--line)}
+    .debt-section>summary{grid-template-columns:minmax(0,1fr) 18px 36px}.debt-section>summary::after{grid-column:2;grid-row:1;text-align:center}.debt-group-count{grid-column:3;grid-row:1;text-align:right}
     .sheet.swiping{transition:none!important}.sheet.settling{transition:transform .24s ease}
     .scan-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.scan-option{border:1px solid var(--line);border-radius:20px;background:#151518;color:var(--text);padding:18px 10px;text-align:center}.scan-preview{width:100%;max-height:260px;object-fit:contain;border-radius:18px;margin-top:12px;background:#060606}
     .clickable-card{cursor:pointer}.clickable-card:active{transform:scale(.99)}
@@ -190,18 +191,17 @@
   </section>
 
   <section id="insights" class="screen">
-    <div class="topline"><div><div class="eyebrow">Аналітика</div><h1>Insights</h1><div class="sub">Цей місяць</div></div></div>
+    <div class="topline"><div><div class="eyebrow">Фінанси</div><h1>Аналітика</h1><div class="sub">Цей місяць</div></div></div>
     <div id="insightsContent"></div>
   </section>
 
   <section id="goals" class="screen">
     <div class="topline"><div><div class="eyebrow">Облік</div><h1>Борги</h1><div class="sub">Кому винен я і хто винен мені</div></div></div>
     <div class="debt-summary">
-      <div class="debt-total"><div class="label">Мої борги</div><strong id="owedTotal">0 zł</strong></div>
-      <div class="debt-total"><div class="label">Мої боржники</div><strong id="receivableTotal">0 zł</strong></div>
+      <button class="debt-total" id="owedWidget"><div class="label">Мої борги</div><strong id="owedTotal">0 zł</strong></button>
+      <button class="debt-total" id="receivableWidget"><div class="label">Мої боржники</div><strong id="receivableTotal">0 zł</strong></button>
     </div>
     <div class="debt-sort"><select id="debtSortSelect" aria-label="Сортування боргів"><option value="name-asc">За ім’ям: А → Я</option><option value="name-desc">За ім’ям: Я → А</option></select></div>
-    <button class="debt-add" id="addDebtBtn">＋ Додати борг</button>
     <div id="debtGroups"></div>
   </section>
 
@@ -227,7 +227,7 @@
 <div class="bottom-zone" id="bottomZone">
   <nav class="dock" aria-label="Головна навігація">
     <div class="dock-group">
-      <button data-screen="insights" aria-label="Insights"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg></button>
+      <button data-screen="insights" aria-label="Аналітика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg></button>
       <button id="scanBtn" aria-label="Scan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><rect x="8" y="8" width="8" height="8" rx="2"/></svg></button>
     </div>
     <button class="dock-plus" id="voiceBtn" aria-label="Додати фразою"><svg id="voiceCircle" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -405,6 +405,7 @@ function render(){
   document.querySelector('#balance').textContent=fmt(t.balance);
   document.querySelector('#incomeTotal').textContent=fmt(t.income);
   document.querySelector('#expenseTotal').textContent=fmt(t.expense);
+  requestAnimationFrame(fitBalanceText);
   document.querySelector('#todayLabel').textContent=new Date().toLocaleDateString('uk-UA',{weekday:'long',day:'numeric',month:'long'});
   renderBalanceChart();
   renderCategories();
@@ -414,6 +415,11 @@ function render(){
   renderDebts();
   fillCategorySelect();
 }
+function fitTextToBox(el,minSize){
+  el.style.fontSize='';let size=parseFloat(getComputedStyle(el).fontSize);if(!el.clientWidth)return;
+  while(el.scrollWidth>el.clientWidth&&size>minSize){size-=.5;el.style.fontSize=size+'px'}
+}
+function fitBalanceText(){fitTextToBox(document.querySelector('#balance'),18);fitTextToBox(document.querySelector('#incomeTotal'),11);fitTextToBox(document.querySelector('#expenseTotal'),11)}
 function renderBalanceChart(){
   const values=[0];let running=0;
   plnOnly([...state.transactions].sort((a,b)=>new Date(a.date)-new Date(b.date))).forEach(t=>{running+=t.type==='income'?t.amount:-t.amount;values.push(running)});
@@ -481,12 +487,16 @@ function renderDebts(){
   document.querySelector('#debtSortSelect').value=debtSort;
   const direction=debtSort==='name-desc'?-1:1;
   const sorted=[...state.debts].sort((a,b)=>direction*a.person.localeCompare(b.person,'uk',{sensitivity:'base'}));
+  const icons={owed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="6" width="16" height="13" rx="3"/><path d="M4 10h16M15 14h2"/></svg>',receivable:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>',urgent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 4 21 20H3Z"/><path d="M12 9v5M12 17h.01"/></svg>'};
   const groups=[{key:'owed',title:'Мої борги',items:sorted.filter(d=>d.direction==='owed')},{key:'receivable',title:'Мої боржники',items:sorted.filter(d=>d.direction==='receivable')},{key:'urgent',title:'Термінові',items:sorted.filter(d=>d.urgent)}];
   const row=d=>`<div class="tx debt-row" data-debt-id="${d.id}"><div class="tx-icon">${d.direction==='owed'?'↗':'↙'}</div><div><div class="debt-person">${esc(d.person)}</div><div class="debt-note">${esc(d.note||'Без нотатки')}</div></div><strong class="debt-amount ${d.direction==='receivable'?'pos':'neg'}">${fmt(d.amount,d.currency)}</strong></div>`;
   const status=(items,paid)=>`<details class="debt-status" ${paid?'':'open'}><summary><span>${paid?'Оплачено':'Не оплачено'}</span><span>${items.filter(d=>d.paid===paid).length}</span></summary><div class="transactions">${items.filter(d=>d.paid===paid).map(row).join('')||'<div class="empty">Порожньо</div>'}</div></details>`;
-  const wrap=document.querySelector('#debtGroups');wrap.innerHTML=groups.map((g,i)=>`<details class="debt-section ${g.key}" ${i===0?'open':''} data-debt-group="${g.key}"><summary><span>${g.title}</span><span>${g.items.filter(d=>!d.paid).length}</span></summary><div class="debt-status-grid">${status(g.items,false)}${status(g.items,true)}</div></details>`).join('');
+  const wrap=document.querySelector('#debtGroups');wrap.innerHTML=groups.map((g,i)=>`<details class="debt-section ${g.key}" ${i===0?'open':''} data-debt-group="${g.key}"><summary><span class="debt-group-title"><span class="debt-group-icon">${icons[g.key]}</span><span>${g.title}</span></span><span class="debt-group-count">${g.items.filter(d=>!d.paid).length}</span></summary><div class="debt-status-grid">${status(g.items,false)}${status(g.items,true)}</div></details>`).join('');
   wrap.querySelectorAll('[data-debt-id]').forEach(row=>row.onclick=e=>{e.stopPropagation();openDebt(row.dataset.debtId)});
   wrap.querySelectorAll('[data-debt-group]').forEach(group=>group.addEventListener('toggle',()=>{if(group.open)debtView=group.dataset.debtGroup}));
+}
+function focusDebtGroup(key){
+  switchScreen('goals');requestAnimationFrame(()=>{const groups=[...document.querySelectorAll('[data-debt-group]')],target=groups.find(g=>g.dataset.debtGroup===key);groups.forEach(g=>g.open=g===target);debtView=key;target?.scrollIntoView({behavior:'smooth',block:'start'})});
 }
 function setDebtView(view){debtView=view;renderDebts()}
 function setDebtDirection(direction){debtDirection=direction;document.querySelector('#debtOwed').classList.toggle('active',direction==='owed');document.querySelector('#debtReceivable').classList.toggle('active',direction==='receivable');}
@@ -592,6 +602,7 @@ function switchScreen(id){
   document.querySelectorAll('.dock [data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
   document.querySelector('#profileShortcut').classList.toggle('active',id==='profile');
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
+  if(id==='home')requestAnimationFrame(fitBalanceText);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function openInsightSection(id){switchScreen('insights');requestAnimationFrame(()=>document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'}))}
@@ -855,7 +866,8 @@ document.querySelector('#addCategoryBtn').onclick=()=>{
   const name=document.querySelector('#newCatName').value.trim();if(!name)return;
   const id='custom-'+Date.now();state.categories.push({id,name,icon:'•'});document.querySelector('#newCatName').value='';saveState();renderCatManager()
 };
-document.querySelector('#addDebtBtn').onclick=()=>openDebt();
+document.querySelector('#owedWidget').onclick=()=>focusDebtGroup('owed');
+document.querySelector('#receivableWidget').onclick=()=>focusDebtGroup('receivable');
 document.querySelector('#debtSortSelect').onchange=e=>{debtSort=e.target.value;renderDebts()};
 document.querySelector('#debtOwed').onclick=()=>setDebtDirection('owed');
 document.querySelector('#debtReceivable').onclick=()=>setDebtDirection('receivable');
@@ -887,6 +899,7 @@ document.querySelector('#voiceTestInput').addEventListener('blur',()=>setTimeout
 window.visualViewport?.addEventListener('resize',positionVoicePopover);
 window.visualViewport?.addEventListener('scroll',positionVoicePopover);
 addEventListener('orientationchange',()=>{if(document.activeElement!==document.querySelector('#voiceTestInput'))stableViewportHeight=Math.max(window.innerHeight,window.visualViewport?.height||0)});
+addEventListener('resize',()=>requestAnimationFrame(fitBalanceText));
 
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
