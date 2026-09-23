@@ -58,7 +58,7 @@
     .balance{font-size:48px;letter-spacing:-2px;line-height:1.05;margin:9px 0 22px;font-weight:600}
     .split{display:grid;grid-template-columns:1fr 1px 1fr;gap:18px;align-items:center}
     .divider{height:50px;background:var(--line)}
-    .metric{display:flex;gap:10px;align-items:flex-start}
+    .metric{display:flex;gap:10px;align-items:flex-start;border:0;background:transparent;padding:0;text-align:left;cursor:pointer}
     .metric .dot{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.055)}
     .metric strong{display:block;font-size:18px;margin-top:2px}
     .income strong,.income .dot{color:var(--green)}
@@ -148,7 +148,8 @@
     .voice-popover{position:fixed;left:50%;transform:translateX(-50%);bottom:215px;width:min(440px,calc(100% - 28px));z-index:55;display:none;background:rgba(15,15,18,.98);border:1px solid var(--line-strong);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
     .voice-popover.open{display:block}.voice-popover .parse-card{margin-top:12px;padding:13px;border-radius:20px}.voice-popover .parse-amount{font-size:24px}.voice-popover-head{display:flex;gap:12px;align-items:flex-start}.voice-live-dot{width:11px;height:11px;border-radius:50%;background:var(--accent);margin-top:6px;flex:none}.voice-live-dot.pulse{animation:pulse 1.35s infinite}.voice-copy{min-width:0;flex:1}.voice-popover .voice-status{font-size:16px;margin:0 0 4px}.voice-popover .voice-text{font-size:14px;min-height:0;max-height:70px;overflow:auto}.voice-close{border:0;background:transparent;color:var(--muted);font-size:22px;padding:0 2px}.voice-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.voice-actions button{margin-top:8px}.voice-engine-note{margin-top:8px}
     .debt-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.debt-total{padding:17px;border:1px solid var(--line);border-radius:24px;background:var(--panel)}.debt-total strong{display:block;font-size:22px;margin-top:5px}.debt-row{cursor:pointer}.debt-person{font-size:16px}.debt-note{font-size:12px;color:var(--muted);margin-top:3px}.debt-amount{font-variant-numeric:tabular-nums;white-space:nowrap}.debt-add{width:100%;border:1px solid var(--line);border-radius:20px;background:#141417;color:var(--text);padding:14px;margin:4px 0 16px}
-    .debt-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:16px}.debt-tabs button{border:1px solid var(--line);background:#101013;color:var(--muted);border-radius:16px;padding:11px 4px;font-size:13px}.debt-tabs button.active{background:var(--accent-dim);border-color:rgba(255,125,131,.3);color:var(--accent)}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden}.debt-section summary{cursor:pointer;padding:16px 18px;font-weight:600;display:flex;justify-content:space-between;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
+    .debt-filters{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}.debt-filters label{font-size:12px;color:var(--muted)}.debt-filters select{display:block;width:100%;margin-top:6px;border:1px solid var(--line);background:#101013;color:var(--text);border-radius:16px;padding:12px 34px 12px 12px}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden}.debt-section summary{cursor:pointer;padding:16px 18px;font-weight:600;display:flex;justify-content:space-between;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
+    .clickable-card{cursor:pointer}.clickable-card:active{transform:scale(.99)}
     .hidden{display:none!important}
     @media (min-width:700px){
       body{background:#020202}
@@ -174,15 +175,15 @@
       <div class="label">Загальний баланс</div>
       <div class="balance" id="balance">0 zł</div>
       <div class="split">
-        <div class="metric income">
+        <button class="metric income" id="incomeSummary">
           <div class="dot">↑</div>
           <div><div class="label">Доходи</div><strong id="incomeTotal">0 zł</strong></div>
-        </div>
+        </button>
         <div class="divider"></div>
-        <div class="metric expense">
+        <button class="metric expense" id="expenseSummary">
           <div class="dot">↓</div>
           <div><div class="label">Витрати</div><strong id="expenseTotal">0 zł</strong></div>
-        </div>
+        </button>
       </div>
     </div>
 
@@ -195,6 +196,12 @@
       <div class="section-head"><h2>Останні операції</h2><button id="seeAllTx">Усі</button></div>
       <div class="transactions" id="recentTx"></div>
     </div>
+    <div class="section-head" style="margin-top:24px"><h2>Фінансовий контроль</h2></div>
+    <div class="goal-card">
+      <div class="label">Місячний ліміт витрат</div><div class="big-stat" id="goalValue">8 000 zł</div>
+      <div class="bar"><div id="goalBar" style="width:0%"></div></div><div class="tiny" id="goalCaption" style="margin-top:9px"></div>
+    </div>
+    <div class="goal-card"><div class="label">Накопичення</div><div class="big-stat" id="savingsValue">0 zł</div><div class="muted">Доходи мінус витрати за весь період.</div></div>
   </section>
 
   <section id="insights" class="screen">
@@ -208,22 +215,13 @@
       <div class="debt-total"><div class="label">Я винен</div><strong class="neg" id="owedTotal">0 zł</strong></div>
       <div class="debt-total"><div class="label">Мені винні</div><strong class="pos" id="receivableTotal">0 zł</strong></div>
     </div>
-    <div class="debt-tabs"><button id="viewOwed" class="active">Я винен</button><button id="viewReceivable">Мені винні</button><button id="viewUrgent">Термінові</button></div>
+    <div class="debt-filters">
+      <label>Показати<select id="debtViewSelect"><option value="owed">Я винен</option><option value="receivable">Мені винні</option><option value="urgent">Термінові</option></select></label>
+      <label>Сортування<select id="debtSortSelect"><option value="name-asc">Ім’я: А → Я</option><option value="name-desc">Ім’я: Я → А</option></select></label>
+    </div>
     <button class="debt-add" id="addDebtBtn">＋ Додати борг</button>
     <details class="debt-section" open><summary><span>Не оплачено</span><span id="unpaidCount"></span></summary><div class="transactions" id="unpaidDebtList"></div></details>
     <details class="debt-section"><summary><span>Оплачено</span><span id="paidCount"></span></summary><div class="transactions" id="paidDebtList"></div></details>
-    <div class="section-head" style="margin-top:24px"><h2>Фінансовий контроль</h2></div>
-    <div class="goal-card">
-      <div class="label">Місячний ліміт витрат</div>
-      <div class="big-stat" id="goalValue">8 000 zł</div>
-      <div class="bar"><div id="goalBar" style="width:0%"></div></div>
-      <div class="tiny" id="goalCaption" style="margin-top:9px"></div>
-    </div>
-    <div class="goal-card">
-      <div class="label">Накопичення</div>
-      <div class="big-stat" id="savingsValue">0 zł</div>
-      <div class="muted">Доходи мінус витрати за весь період.</div>
-    </div>
   </section>
 
   <section id="profile" class="screen">
@@ -382,6 +380,7 @@ let speechStartTimer=null;
 let editingDebtId=null;
 let debtDirection='owed';
 let debtView='owed';
+let debtSort='name-asc';
 let voiceState='idle';
 let voiceSession=0;
 let voiceTimeout=null;
@@ -462,7 +461,7 @@ function txHtml(tx){
     <div class="tx-amount ${tx.type==='income'?'pos':'neg'}">${sign}${fmt(tx.amount,tx.currency)}</div>
   </div>`;
 }
-function bindTxRows(root){root.querySelectorAll('.tx').forEach(x=>x.onclick=()=>openEdit(x.dataset.id))}
+function bindTxRows(root){root.querySelectorAll('.tx').forEach(x=>x.onclick=()=>{if(x.closest('#listBackdrop'))closeSheet('#listBackdrop');openEdit(x.dataset.id)})}
 function renderInsights(){
   const wrap=document.querySelector('#insightsContent');
   const ex=plnOnly(state.transactions).filter(t=>t.type==='expense');
@@ -470,10 +469,15 @@ function renderInsights(){
   const top=Object.entries(by).sort((a,b)=>b[1]-a[1]).slice(0,6);
   const clients={}; plnOnly(state.transactions).filter(t=>t.type==='income'&&t.client).forEach(t=>clients[t.client]=(clients[t.client]||0)+t.amount);
   const t=totals();
+  const openDebts=direction=>state.debts.filter(d=>d.direction===direction&&!d.paid&&d.currency==='PLN').reduce((sum,d)=>sum+d.amount,0);
+  const owed=openDebts('owed'),receivable=openDebts('receivable');
+  const urgent=state.debts.filter(d=>d.urgent&&!d.paid).length,paid=state.debts.filter(d=>d.paid).length;
   wrap.innerHTML=`
     <div class="insight-card"><div class="label">Чистий результат</div><div class="big-stat">${fmt(t.balance)}</div><div class="muted">Доходи мінус витрати</div></div>
-    <div class="insight-card"><div class="label">Витрати по категоріях</div>${top.length?top.map(([id,v])=>`<div class="list-row"><span>${esc(categoryById(id).name)}</span><strong>${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає даних</div>'}</div>
-    <div class="insight-card"><div class="label">Доходи по клієнтах</div>${Object.keys(clients).length?Object.entries(clients).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="list-row"><span>${esc(k)}</span><strong class="pos">+${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає доходів по клієнтах</div>'}</div>`;
+    <div class="insight-card clickable-card" id="debtInsight"><div class="label">Борги</div><div class="list-row"><span>Я винен</span><strong class="neg">${fmt(owed)}</strong></div><div class="list-row"><span>Мені винні</span><strong class="pos">${fmt(receivable)}</strong></div><div class="list-row"><span>Чиста позиція</span><strong class="${receivable-owed>=0?'pos':'neg'}">${fmt(receivable-owed)}</strong></div><div class="tiny" style="margin-top:12px">Термінових: ${urgent} · Оплачено: ${paid}</div></div>
+    <div class="insight-card" id="expenseInsight"><div class="label">Витрати по категоріях</div>${top.length?top.map(([id,v])=>`<div class="list-row"><span>${esc(categoryById(id).name)}</span><strong>${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає даних</div>'}</div>
+    <div class="insight-card" id="incomeInsight"><div class="label">Доходи по клієнтах</div>${Object.keys(clients).length?Object.entries(clients).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="list-row"><span>${esc(k)}</span><strong class="pos">+${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає доходів по клієнтах</div>'}</div>`;
+  document.querySelector('#debtInsight').onclick=()=>switchScreen('goals');
 }
 function renderGoals(){
   const t=totals(), pct=Math.min(100,(t.expense/state.goal)*100);
@@ -488,8 +492,10 @@ function renderDebts(){
   const sum=direction=>state.debts.filter(d=>d.direction===direction&&!d.paid&&d.currency==='PLN').reduce((a,d)=>a+d.amount,0);
   document.querySelector('#owedTotal').textContent=fmt(sum('owed'));
   document.querySelector('#receivableTotal').textContent=fmt(sum('receivable'));
-  ['owed','receivable','urgent'].forEach(v=>document.querySelector('#view'+v[0].toUpperCase()+v.slice(1)).classList.toggle('active',debtView===v));
-  const scoped=state.debts.filter(d=>debtView==='urgent'?d.urgent:d.direction===debtView).sort((a,b)=>a.person.localeCompare(b.person,'uk'));
+  document.querySelector('#debtViewSelect').value=debtView;
+  document.querySelector('#debtSortSelect').value=debtSort;
+  const direction=debtSort==='name-desc'?-1:1;
+  const scoped=state.debts.filter(d=>debtView==='urgent'?d.urgent:d.direction===debtView).sort((a,b)=>direction*a.person.localeCompare(b.person,'uk',{sensitivity:'base'}));
   const renderList=(id,paid)=>{
     const el=document.querySelector(id),items=scoped.filter(d=>d.paid===paid);
     el.innerHTML=items.length?items.map(d=>`<div class="tx debt-row" data-debt-id="${d.id}"><div class="tx-icon">${d.direction==='owed'?'↗':'↙'}</div><div><div class="debt-person">${esc(d.person)} ${d.urgent?'<span class="urgent-badge">● терміново</span>':''}</div><div class="debt-note">${esc(d.note||'Без нотатки')}</div></div><strong class="debt-amount ${d.direction==='receivable'?'pos':'neg'}">${fmt(d.amount,d.currency)}</strong></div>`).join(''):'<div class="empty">Поки порожньо</div>';
@@ -506,7 +512,15 @@ function openDebt(id=null){
 }
 function saveDebt(){
   const person=document.querySelector('#debtPerson').value.trim(),amount=parseFloat(document.querySelector('#debtAmount').value.replace(',','.'));if(!person)return showToast('Вкажи ім’я');if(!(amount>0))return showToast('Вкажи суму');
-  const debt={id:editingDebtId||uid(),direction:debtDirection,person,amount,currency:document.querySelector('#debtCurrency').value,note:document.querySelector('#debtNote').value.trim(),urgent:document.querySelector('#debtUrgent').checked,paid:document.querySelector('#debtPaid').checked,date:new Date().toISOString()};state.debts=editingDebtId?state.debts.map(d=>d.id===editingDebtId?debt:d):[...state.debts,debt];closeSheet('#debtBackdrop');saveState();showToast('Борг збережено');
+  const previous=state.debts.find(d=>d.id===editingDebtId);
+  const debt={id:editingDebtId||uid(),direction:debtDirection,person,amount,currency:document.querySelector('#debtCurrency').value,note:document.querySelector('#debtNote').value.trim(),urgent:document.querySelector('#debtUrgent').checked,paid:document.querySelector('#debtPaid').checked,date:previous?.date||new Date().toISOString()};
+  state.debts=editingDebtId?state.debts.map(d=>d.id===editingDebtId?debt:d):[...state.debts,debt];syncDebtPayment(debt);closeSheet('#debtBackdrop');saveState();showToast(debt.paid?'Борг оплачено й враховано в балансі':'Борг збережено');
+}
+function syncDebtPayment(debt){
+  const existing=state.transactions.find(t=>t.debtId===debt.id);
+  if(!debt.paid){if(existing)state.transactions=state.transactions.filter(t=>t.debtId!==debt.id);return}
+  const payment={id:existing?.id||uid(),debtId:debt.id,type:debt.direction==='receivable'?'income':'expense',amount:debt.amount,currency:debt.currency,category:debt.direction==='receivable'?'business':'other',client:debt.direction==='receivable'?debt.person:'',note:`Оплата боргу · ${debt.person}${debt.note?' · '+debt.note:''}`,date:existing?.date||new Date().toISOString()};
+  state.transactions=existing?state.transactions.map(t=>t.id===existing.id?payment:t):[...state.transactions,payment];
 }
 function fillCategorySelect(){
   document.querySelector('#categoryInput').innerHTML=state.categories.map(c=>`<option value="${c.id}">${esc(c.icon)} ${esc(c.name)}</option>`).join('');
@@ -580,10 +594,13 @@ function openAllTx(){
   openSheet('#listBackdrop');
 }
 function switchScreen(id){
+  if(!document.getElementById(id)?.classList.contains('screen'))id='home';
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+  if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function openInsightSection(id){switchScreen('insights');requestAnimationFrame(()=>document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'}))}
 function normalizeWords(s){
   return String(s||'')
     .toLowerCase()
@@ -801,6 +818,8 @@ function exportData(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='voice-finance-data.json';a.click();URL.revokeObjectURL(a.href);
 }
 document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchScreen(b.dataset.screen));
+document.querySelector('#incomeSummary').onclick=()=>openInsightSection('#incomeInsight');
+document.querySelector('#expenseSummary').onclick=()=>openInsightSection('#expenseInsight');
 document.querySelector('#quickAdd').onclick=()=>openAdd();
 document.querySelector('#voiceBtn').onclick=startVoice;
 document.querySelector('#scanBtn').onclick=()=>showToast('Скан чеків — наступний етап');
@@ -808,7 +827,7 @@ document.querySelector('#typeExpense').onclick=()=>setFormType('expense');
 document.querySelector('#typeIncome').onclick=()=>setFormType('income');
 document.querySelector('#saveTx').onclick=saveForm;
 document.querySelector('#deleteTx').onclick=()=>{
-  if(!editingId)return;state.transactions=state.transactions.filter(t=>t.id!==editingId);closeSheet('#manualBackdrop');saveState();showToast('Видалено')
+  if(!editingId)return;const removed=state.transactions.find(t=>t.id===editingId);state.transactions=state.transactions.filter(t=>t.id!==editingId);if(removed?.debtId)state.debts=state.debts.map(d=>d.id===removed.debtId?{...d,paid:false}:d);closeSheet('#manualBackdrop');saveState();showToast('Видалено')
 };
 document.querySelector('#voiceCancel').onclick=closeVoice;
 document.querySelector('#voiceTestBtn').onclick=()=>{
@@ -830,13 +849,12 @@ document.querySelector('#addCategoryBtn').onclick=()=>{
   const id='custom-'+Date.now();state.categories.push({id,name,icon:'•'});document.querySelector('#newCatName').value='';saveState();renderCatManager()
 };
 document.querySelector('#addDebtBtn').onclick=()=>openDebt();
-document.querySelector('#viewOwed').onclick=()=>setDebtView('owed');
-document.querySelector('#viewReceivable').onclick=()=>setDebtView('receivable');
-document.querySelector('#viewUrgent').onclick=()=>setDebtView('urgent');
+document.querySelector('#debtViewSelect').onchange=e=>setDebtView(e.target.value);
+document.querySelector('#debtSortSelect').onchange=e=>{debtSort=e.target.value;renderDebts()};
 document.querySelector('#debtOwed').onclick=()=>setDebtDirection('owed');
 document.querySelector('#debtReceivable').onclick=()=>setDebtDirection('receivable');
 document.querySelector('#saveDebt').onclick=saveDebt;
-document.querySelector('#deleteDebt').onclick=()=>{if(!editingDebtId)return;state.debts=state.debts.filter(d=>d.id!==editingDebtId);closeSheet('#debtBackdrop');saveState();showToast('Борг видалено')};
+document.querySelector('#deleteDebt').onclick=()=>{if(!editingDebtId)return;state.debts=state.debts.filter(d=>d.id!==editingDebtId);state.transactions=state.transactions.filter(t=>t.debtId!==editingDebtId);closeSheet('#debtBackdrop');saveState();showToast('Борг видалено')};
 document.querySelector('#exportData').onclick=exportData;
 document.querySelector('#loadDemo').onclick=()=>{state.transactions=demoTx.map(x=>({...x,id:uid()}));saveState();showToast('Демо-дані завантажено')};
 document.querySelector('#clearData').onclick=()=>{if(confirm('Очистити всі операції та борги?')){state.transactions=[];state.debts=[];saveState();showToast('Дані очищено')}};
@@ -852,6 +870,8 @@ if('serviceWorker' in navigator && location.protocol!=='file:'){
 }
 try{
   render();
+  switchScreen(location.hash.slice(1)||'home');
+  addEventListener('hashchange',()=>switchScreen(location.hash.slice(1)||'home'));
   window.__VOICE_FINANCE_READY__=true;
   window.__VOICE_FINANCE_TEST__={parseVoice,getVoiceState:()=>voiceState,getActiveTrackCount:()=>mediaStream?.getTracks().filter(t=>t.readyState==='live').length||0};
 }catch(err){
