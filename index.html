@@ -779,7 +779,7 @@ function startBrowserRecognition(){
   try{recognition.start()}catch(e){speechRecognition=null;startRecording();}
 }
 function stopBrowserRecognition(){if(speechRecognition){setVoiceState('stopping','Завершую…','Обробляю сказане.');try{speechRecognition.stop()}catch(e){try{speechRecognition.abort()}catch(_){}}}}
-function startVoice(){document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');document.querySelector('#voiceTestInput').value='';document.querySelector('#voiceStatus').textContent='Введи операцію або борг';document.querySelector('#voiceText').textContent='Наприклад: «-200 на продукти» або «я винен Олегу 500».';setTimeout(()=>document.querySelector('#voiceTestInput').focus(),50)}
+function startVoice(){const input=document.querySelector('#voiceTestInput');document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');input.value='';document.querySelector('#voiceStatus').textContent='Введи операцію або борг';document.querySelector('#voiceText').textContent='Наприклад: «-200 на продукти» або «я винен Олегу 500».';input.focus({preventScroll:true})}
 function stopVoiceVisual(){setRecordingVisual(false)}
 function closeVoice(){voiceSession++;clearTimeout(speechStartTimer);clearVoiceTimeouts();if(speechRecognition)try{speechRecognition.abort()}catch(e){}speechRecognition=null;if(mediaRecorder&&mediaRecorder.state==='recording')try{mediaRecorder.stop()}catch(e){}cleanupRecorder();if(whisperBusy)resetWhisperWorker();voiceState='idle';document.querySelector('#voicePopover').classList.remove('open')}
 function voiceSave(){
