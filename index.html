@@ -429,7 +429,7 @@ function renderCategories(){
 function renderTransactions(){
   const el=document.querySelector('#recentTx');
   const arr=[...state.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
-  if(!arr.length){el.innerHTML='<div class="empty">Ще немає операцій.<br>Додай першу фразою або кнопкою «Додати».</div>';return}
+  if(!arr.length){el.innerHTML='<div class="empty">Ще немає операцій.<br>Додай першу центральним плюсом.</div>';return}
   el.innerHTML=arr.map(tx=>txHtml(tx)).join('');
   bindTxRows(el);
 }
