@@ -125,7 +125,8 @@
     .muted{color:var(--muted)}
     .profile-actions button{width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:16px 0}.profile-actions button:last-child{border-bottom:0}
     .tiny{font-size:12px;color:var(--muted)}
-    .voice-popover{position:fixed;left:50%;transform:translateX(-50%);bottom:215px;width:min(440px,calc(100% - 28px));z-index:55;display:none;background:rgba(15,15,18,.98);border:1px solid var(--line-strong);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+    .voice-popover{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));width:min(440px,calc(100% - 28px));z-index:55;display:none;background:rgba(15,15,18,.98);border:1px solid var(--line-strong);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);transition:bottom .18s ease}
+    body.keyboard-open .bottom-zone{opacity:0;pointer-events:none;transform:translate(-50%,28px);transition:opacity .16s ease,transform .2s ease}
     .voice-popover.open{display:block}.voice-popover .parse-card{margin-top:12px;padding:13px;border-radius:20px}.voice-popover .parse-amount{font-size:24px}.voice-popover-head{display:flex;gap:12px;align-items:flex-start}.voice-live-dot{width:11px;height:11px;border-radius:50%;background:var(--accent);margin-top:6px;flex:none}.voice-live-dot.pulse{animation:pulse 1.35s infinite}.voice-copy{min-width:0;flex:1}.voice-popover .voice-status{font-size:16px;margin:0 0 4px}.voice-popover .voice-text{font-size:14px;min-height:0;max-height:70px;overflow:auto}.voice-close{border:0;background:transparent;color:var(--muted);font-size:22px;padding:0 2px}.voice-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.voice-actions button{margin-top:8px}.voice-engine-note{margin-top:8px}
     .debt-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.debt-total{padding:17px;border:1px solid var(--line);border-radius:24px;background:var(--panel)}.debt-total strong{display:block;font-size:22px;margin-top:5px}.debt-row{cursor:pointer}.debt-person{font-size:16px}.debt-note{font-size:12px;color:var(--muted);margin-top:3px}.debt-amount{font-variant-numeric:tabular-nums;white-space:nowrap}.debt-add{width:100%;border:1px solid var(--line);border-radius:20px;background:#141417;color:var(--text);padding:14px;margin:4px 0 16px}
     .debt-sort{margin-bottom:12px}.debt-sort select{width:100%;border:1px solid var(--line);background:#101013;color:var(--text);border-radius:16px;padding:12px}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden}.debt-section>summary{cursor:pointer;padding:17px 18px;font-weight:650;display:flex;align-items:center;justify-content:space-between;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section>summary::after{content:'⌄';color:currentColor;transition:.2s transform}.debt-section[open]>summary::after{transform:rotate(180deg)}.debt-section.owed>summary{color:#f0c75e}.debt-section.receivable>summary{color:var(--green)}.debt-section.urgent>summary{color:#e92535}.debt-status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}.debt-status{border:1px solid var(--line);border-radius:17px;background:#111114;overflow:hidden;min-width:0}.debt-status summary{padding:12px 10px;display:flex;justify-content:space-between;gap:6px;font-size:12px;cursor:pointer;list-style:none}.debt-status .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.debt-status .tx{grid-template-columns:34px minmax(0,1fr);padding:10px 8px;gap:7px}.debt-status .tx-icon{width:32px;height:32px;border-radius:11px}.debt-status .debt-amount{grid-column:2;font-size:13px}.debt-status .empty{padding:16px 6px;font-size:12px}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
@@ -359,6 +360,8 @@ let debtView='owed';
 let debtSort='name-asc';
 let selectedScanFile=null;
 let scanPreviewUrl='';
+let voicePositionTimers=[];
+let stableViewportHeight=Math.max(window.innerHeight,window.visualViewport?.height||0);
 let voiceState='idle';
 let voiceSession=0;
 let voiceTimeout=null;
@@ -790,9 +793,19 @@ function startBrowserRecognition(){
   try{recognition.start()}catch(e){speechRecognition=null;startRecording();}
 }
 function stopBrowserRecognition(){if(speechRecognition){setVoiceState('stopping','Завершую…','Обробляю сказане.');try{speechRecognition.stop()}catch(e){try{speechRecognition.abort()}catch(_){}}}}
-function startVoice(){const input=document.querySelector('#voiceTestInput');document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');input.value='';document.querySelector('#voiceStatus').textContent='Введи операцію або борг';document.querySelector('#voiceText').textContent='Наприклад: «-200 на продукти» або «я винен Олегу 500».';input.focus({preventScroll:true})}
+function positionVoicePopover(){
+  const popover=document.querySelector('#voicePopover');if(!popover.classList.contains('open'))return;
+  const viewport=window.visualViewport,input=document.querySelector('#voiceTestInput');
+  if(document.activeElement!==input)stableViewportHeight=Math.max(window.innerHeight,viewport?.height||0);
+  const keyboardOffset=viewport?Math.max(0,stableViewportHeight-viewport.height-viewport.offsetTop,window.innerHeight-viewport.height-viewport.offsetTop):0;
+  const keyboardOpen=keyboardOffset>80&&document.activeElement===input;
+  document.body.classList.toggle('keyboard-open',keyboardOpen);
+  popover.style.bottom=keyboardOpen?`${keyboardOffset+10}px`:'';
+}
+function scheduleVoicePosition(){voicePositionTimers.forEach(clearTimeout);voicePositionTimers=[40,180,360,600].map(delay=>setTimeout(positionVoicePopover,delay))}
+function startVoice(){const input=document.querySelector('#voiceTestInput');document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');input.value='';document.querySelector('#voiceStatus').textContent='Введи операцію або борг';document.querySelector('#voiceText').textContent='Наприклад: «-200 на продукти» або «я винен Олегу 500».';input.focus({preventScroll:true});scheduleVoicePosition()}
 function stopVoiceVisual(){setRecordingVisual(false)}
-function closeVoice(){voiceSession++;clearTimeout(speechStartTimer);clearVoiceTimeouts();if(speechRecognition)try{speechRecognition.abort()}catch(e){}speechRecognition=null;if(mediaRecorder&&mediaRecorder.state==='recording')try{mediaRecorder.stop()}catch(e){}cleanupRecorder();if(whisperBusy)resetWhisperWorker();voiceState='idle';document.querySelector('#voicePopover').classList.remove('open')}
+function closeVoice(){voiceSession++;voicePositionTimers.forEach(clearTimeout);voicePositionTimers=[];document.body.classList.remove('keyboard-open');const popover=document.querySelector('#voicePopover');popover.style.bottom='';clearTimeout(speechStartTimer);clearVoiceTimeouts();if(speechRecognition)try{speechRecognition.abort()}catch(e){}speechRecognition=null;if(mediaRecorder&&mediaRecorder.state==='recording')try{mediaRecorder.stop()}catch(e){}cleanupRecorder();if(whisperBusy)resetWhisperWorker();voiceState='idle';popover.classList.remove('open')}
 function voiceSave(){
   if(!parsedVoice?.amount)return;if(parsedVoice.kind==='debt'){if(!parsedVoice.person)return openDebtFromParse(parsedVoice);state.debts.push({id:uid(),direction:parsedVoice.direction,person:parsedVoice.person,amount:parsedVoice.amount,currency:parsedVoice.currency,note:parsedVoice.note,urgent:!!parsedVoice.urgent,paid:false,date:new Date().toISOString()});closeVoice();saveState();showToast('Борг додано');return;}state.transactions.push({type:parsedVoice.type,amount:parsedVoice.amount,currency:parsedVoice.currency,category:parsedVoice.category,client:parsedVoice.client||'',note:parsedVoice.merchant?`${parsedVoice.merchant} — ${parsedVoice.note}`:parsedVoice.note,id:uid(),date:new Date().toISOString()});closeVoice();saveState();showToast('Операцію додано');
 }
@@ -869,6 +882,11 @@ document.querySelector('#cameraInput').onchange=e=>handleScanFile(e.target.files
 document.querySelector('#fileInput').onchange=e=>handleScanFile(e.target.files[0]);
 document.querySelector('#scanContinue').onclick=()=>{const name=selectedScanFile?.name||'чек';closeSheet('#scanBackdrop');openAdd({note:`Чек: ${name}`});showToast('Внеси суму та категорію з чека')};
 document.querySelector('#voiceTestInput').onkeydown=e=>{if(e.key==='Enter')document.querySelector('#voiceTestBtn').click()};
+document.querySelector('#voiceTestInput').addEventListener('focus',scheduleVoicePosition);
+document.querySelector('#voiceTestInput').addEventListener('blur',()=>setTimeout(positionVoicePopover,120));
+window.visualViewport?.addEventListener('resize',positionVoicePopover);
+window.visualViewport?.addEventListener('scroll',positionVoicePopover);
+addEventListener('orientationchange',()=>{if(document.activeElement!==document.querySelector('#voiceTestInput'))stableViewportHeight=Math.max(window.innerHeight,window.visualViewport?.height||0)});
 
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
