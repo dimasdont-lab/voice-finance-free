@@ -106,8 +106,8 @@
       height:76px;border:1px solid var(--line);border-radius:30px;background:rgba(16,16,19,.96);
       display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:8px;backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px)
     }
-    .nav button{border:0;background:transparent;color:var(--muted);border-radius:22px;height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px}
-    .nav .pill{padding:7px 16px;border-radius:999px;display:flex;align-items:center;gap:7px}
+    .nav button{border:0;background:transparent;color:var(--muted);border-radius:22px;height:58px;min-width:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px}
+    .nav .pill{max-width:100%;padding:7px 9px;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap}
     .nav button.active{color:var(--accent)}
     .nav button.active .pill{background:#171719}
     .nav svg{width:21px;height:21px}
@@ -148,6 +148,7 @@
     .voice-popover{position:fixed;left:50%;transform:translateX(-50%);bottom:215px;width:min(440px,calc(100% - 28px));z-index:55;display:none;background:rgba(15,15,18,.98);border:1px solid var(--line-strong);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
     .voice-popover.open{display:block}.voice-popover .parse-card{margin-top:12px;padding:13px;border-radius:20px}.voice-popover .parse-amount{font-size:24px}.voice-popover-head{display:flex;gap:12px;align-items:flex-start}.voice-live-dot{width:11px;height:11px;border-radius:50%;background:var(--accent);margin-top:6px;flex:none}.voice-live-dot.pulse{animation:pulse 1.35s infinite}.voice-copy{min-width:0;flex:1}.voice-popover .voice-status{font-size:16px;margin:0 0 4px}.voice-popover .voice-text{font-size:14px;min-height:0;max-height:70px;overflow:auto}.voice-close{border:0;background:transparent;color:var(--muted);font-size:22px;padding:0 2px}.voice-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.voice-actions button{margin-top:8px}.voice-engine-note{margin-top:8px}
     .debt-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.debt-total{padding:17px;border:1px solid var(--line);border-radius:24px;background:var(--panel)}.debt-total strong{display:block;font-size:22px;margin-top:5px}.debt-row{cursor:pointer}.debt-person{font-size:16px}.debt-note{font-size:12px;color:var(--muted);margin-top:3px}.debt-amount{font-variant-numeric:tabular-nums;white-space:nowrap}.debt-add{width:100%;border:1px solid var(--line);border-radius:20px;background:#141417;color:var(--text);padding:14px;margin:4px 0 16px}
+    .debt-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:16px}.debt-tabs button{border:1px solid var(--line);background:#101013;color:var(--muted);border-radius:16px;padding:11px 4px;font-size:13px}.debt-tabs button.active{background:var(--accent-dim);border-color:rgba(255,125,131,.3);color:var(--accent)}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden}.debt-section summary{cursor:pointer;padding:16px 18px;font-weight:600;display:flex;justify-content:space-between;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
     .hidden{display:none!important}
     @media (min-width:700px){
       body{background:#020202}
@@ -207,11 +208,10 @@
       <div class="debt-total"><div class="label">Я винен</div><strong class="neg" id="owedTotal">0 zł</strong></div>
       <div class="debt-total"><div class="label">Мені винні</div><strong class="pos" id="receivableTotal">0 zł</strong></div>
     </div>
+    <div class="debt-tabs"><button id="viewOwed" class="active">Я винен</button><button id="viewReceivable">Мені винні</button><button id="viewUrgent">Термінові</button></div>
     <button class="debt-add" id="addDebtBtn">＋ Додати борг</button>
-    <div class="section-head"><h2>Я винен</h2></div>
-    <div class="transactions" id="owedList"></div>
-    <div class="section-head" style="margin-top:20px"><h2>Мені винні</h2></div>
-    <div class="transactions" id="receivableList"></div>
+    <details class="debt-section" open><summary><span>Не оплачено</span><span id="unpaidCount"></span></summary><div class="transactions" id="unpaidDebtList"></div></details>
+    <details class="debt-section"><summary><span>Оплачено</span><span id="paidCount"></span></summary><div class="transactions" id="paidDebtList"></div></details>
     <div class="section-head" style="margin-top:24px"><h2>Фінансовий контроль</h2></div>
     <div class="goal-card">
       <div class="label">Місячний ліміт витрат</div>
@@ -235,13 +235,12 @@
       <button id="clearData" style="color:var(--accent)">Очистити всі дані</button>
     </div>
     <div class="profile-card">
-      <div class="label">Голос — без платного API</div>
-      <div class="big-stat" style="font-size:22px;margin-top:8px">Safari UA + назви PL / EN</div>
+      <div class="label">Швидке введення</div>
+      <div class="big-stat" style="font-size:22px;margin-top:8px">UA + PL + EN текстом</div>
       <div class="tiny" style="margin-top:8px">
-        На iPhone використовується вбудоване розпізнавання Safari — воно значно краще розуміє українську. Платних API немає.
-        Якщо Safari API недоступне, застосунок переходить на локальний open-source Whisper.
+        Центральний плюс відкриває клавіатуру. Фраза локально перетворюється на операцію або борг без API та без завантаження аудіо.
       </div>
-      <div class="tiny" id="modelProfileStatus" style="margin-top:10px">Готово до диктування</div>
+      <div class="tiny" id="modelProfileStatus" style="margin-top:10px">Готово до введення</div>
     </div>
   </section>
 </div>
@@ -251,9 +250,9 @@
     <button class="quick" id="quickAdd"><div class="quick-circle">＋</div><small>Додати</small></button>
     <button class="quick" id="voiceBtn">
       <div class="voice-circle" id="voiceCircle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v4M9 21h6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
       </div>
-      <small>Голосом</small>
+      <small>Фразою</small>
     </button>
     <button class="quick" id="scanBtn"><div class="quick-circle">⌗</div><small>Скан</small></button>
   </div>
@@ -292,22 +291,18 @@
 
 <div class="voice-popover" id="voicePopover">
   <div class="voice-popover-head">
-    <div class="voice-live-dot" id="voiceLiveDot"></div>
     <div class="voice-copy">
-      <div class="voice-status" id="voiceStatus">Слухаю…</div>
-      <div class="voice-text" id="voiceText">Говори природно.</div>
-      <div class="tiny" id="recordTimer"></div>
+      <div class="voice-status" id="voiceStatus">Введи операцію або борг</div>
+      <div class="voice-text" id="voiceText">Наприклад: «-200 на продукти» або «я винен Олегу 500».</div>
     </div>
     <button class="voice-close" id="voiceCancel" aria-label="Закрити">×</button>
   </div>
-  <div class="tiny voice-engine-note" id="modelStatus">Safari розпізнає українську без платного API.</div>
-  <div class="bar" id="modelProgressWrap" style="display:none;margin-top:8px"><div id="modelProgress" style="width:0%"></div></div>
-  <div style="display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:10px"><input id="voiceTestInput" aria-label="Текст фрази" placeholder="Або введи фразу" style="min-width:0;border:1px solid var(--line);background:#121215;color:var(--text);border-radius:14px;padding:10px 12px"><button id="voiceTestBtn" style="border:1px solid var(--line);background:#17171a;border-radius:14px;padding:0 12px">Розібрати</button></div>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:10px"><input id="voiceTestInput" aria-label="Текст фрази" placeholder="Сума, категорія або борг…" style="min-width:0;border:1px solid var(--line);background:#121215;color:var(--text);border-radius:14px;padding:12px"><button id="voiceTestBtn" class="round-action" aria-label="Розібрати">⌁</button></div>
   <div class="parse-card hidden" id="parseCard">
     <div class="parse-amount" id="parseAmount"></div>
     <div class="parse-sub" id="parseSub"></div>
     <div class="tiny" id="parseTranscript" style="margin-top:7px"></div>
-    <div class="voice-actions"><button class="primary" id="confirmVoice">Зберегти</button><button class="danger" id="editVoice">Змінити</button></div>
+    <div class="round-actions"><button class="round-action danger-icon" id="editVoice" aria-label="Змінити">✎</button><button class="round-action primary-icon" id="confirmVoice" aria-label="Зберегти">✓</button></div>
   </div>
 </div>
 
@@ -319,6 +314,8 @@
     <div class="field"><label>Сума</label><input id="debtAmount" inputmode="decimal" placeholder="500"></div>
     <div class="field"><label>Валюта</label><select id="debtCurrency"><option>PLN</option><option>EUR</option><option>USD</option><option>GBP</option></select></div>
     <div class="field"><label>Нотатка</label><input id="debtNote" placeholder="За що або до якої дати"></div>
+    <div class="field"><label><input id="debtUrgent" type="checkbox" style="width:auto;margin-right:8px">Терміновий</label></div>
+    <div class="field"><label><input id="debtPaid" type="checkbox" style="width:auto;margin-right:8px">Оплачено</label></div>
     <button class="primary" id="saveDebt">Зберегти</button><button class="danger hidden" id="deleteDebt">Видалити</button>
   </div>
 </div>
@@ -384,6 +381,7 @@ let safariRecognitionRuns=0;
 let speechStartTimer=null;
 let editingDebtId=null;
 let debtDirection='owed';
+let debtView='owed';
 let voiceState='idle';
 let voiceSession=0;
 let voiceTimeout=null;
@@ -449,7 +447,7 @@ function renderCategories(){
 function renderTransactions(){
   const el=document.querySelector('#recentTx');
   const arr=[...state.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
-  if(!arr.length){el.innerHTML='<div class="empty">Ще немає операцій.<br>Додай першу голосом або кнопкою «Додати».</div>';return}
+  if(!arr.length){el.innerHTML='<div class="empty">Ще немає операцій.<br>Додай першу фразою або кнопкою «Додати».</div>';return}
   el.innerHTML=arr.map(tx=>txHtml(tx)).join('');
   bindTxRows(el);
 }
@@ -486,24 +484,29 @@ function renderGoals(){
 }
 function renderDebts(){
   state.debts=state.debts||[];
-  const sum=direction=>state.debts.filter(d=>d.direction===direction&&d.currency==='PLN').reduce((a,d)=>a+d.amount,0);
+  state.debts=state.debts.map(d=>({...d,paid:!!d.paid,urgent:!!d.urgent}));
+  const sum=direction=>state.debts.filter(d=>d.direction===direction&&!d.paid&&d.currency==='PLN').reduce((a,d)=>a+d.amount,0);
   document.querySelector('#owedTotal').textContent=fmt(sum('owed'));
   document.querySelector('#receivableTotal').textContent=fmt(sum('receivable'));
-  const renderList=(id,direction)=>{
-    const el=document.querySelector(id),items=state.debts.filter(d=>d.direction===direction);
-    el.innerHTML=items.length?items.map(d=>`<div class="tx debt-row" data-debt-id="${d.id}"><div class="tx-icon">${direction==='owed'?'↗':'↙'}</div><div><div class="debt-person">${esc(d.person)}</div><div class="debt-note">${esc(d.note||'Без нотатки')}</div></div><strong class="debt-amount ${direction==='receivable'?'pos':'neg'}">${fmt(d.amount,d.currency)}</strong></div>`).join(''):'<div class="empty">Поки порожньо</div>';
+  ['owed','receivable','urgent'].forEach(v=>document.querySelector('#view'+v[0].toUpperCase()+v.slice(1)).classList.toggle('active',debtView===v));
+  const scoped=state.debts.filter(d=>debtView==='urgent'?d.urgent:d.direction===debtView).sort((a,b)=>a.person.localeCompare(b.person,'uk'));
+  const renderList=(id,paid)=>{
+    const el=document.querySelector(id),items=scoped.filter(d=>d.paid===paid);
+    el.innerHTML=items.length?items.map(d=>`<div class="tx debt-row" data-debt-id="${d.id}"><div class="tx-icon">${d.direction==='owed'?'↗':'↙'}</div><div><div class="debt-person">${esc(d.person)} ${d.urgent?'<span class="urgent-badge">● терміново</span>':''}</div><div class="debt-note">${esc(d.note||'Без нотатки')}</div></div><strong class="debt-amount ${d.direction==='receivable'?'pos':'neg'}">${fmt(d.amount,d.currency)}</strong></div>`).join(''):'<div class="empty">Поки порожньо</div>';
     el.querySelectorAll('[data-debt-id]').forEach(row=>row.onclick=()=>openDebt(row.dataset.debtId));
   };
-  renderList('#owedList','owed');renderList('#receivableList','receivable');
+  document.querySelector('#unpaidCount').textContent=scoped.filter(d=>!d.paid).length;document.querySelector('#paidCount').textContent=scoped.filter(d=>d.paid).length;
+  renderList('#unpaidDebtList',false);renderList('#paidDebtList',true);
 }
+function setDebtView(view){debtView=view;renderDebts()}
 function setDebtDirection(direction){debtDirection=direction;document.querySelector('#debtOwed').classList.toggle('active',direction==='owed');document.querySelector('#debtReceivable').classList.toggle('active',direction==='receivable');}
 function openDebt(id=null){
-  editingDebtId=id;const d=state.debts.find(x=>x.id===id);setDebtDirection(d?.direction||'owed');
-  document.querySelector('#debtFormTitle').textContent=d?'Редагувати борг':'Новий борг';document.querySelector('#debtPerson').value=d?.person||'';document.querySelector('#debtAmount').value=d?.amount||'';document.querySelector('#debtCurrency').value=d?.currency||'PLN';document.querySelector('#debtNote').value=d?.note||'';document.querySelector('#deleteDebt').classList.toggle('hidden',!d);openSheet('#debtBackdrop');
+  editingDebtId=id;const d=state.debts.find(x=>x.id===id);setDebtDirection(d?.direction||(debtView==='receivable'?'receivable':'owed'));
+  document.querySelector('#debtFormTitle').textContent=d?'Редагувати борг':'Новий борг';document.querySelector('#debtPerson').value=d?.person||'';document.querySelector('#debtAmount').value=d?.amount||'';document.querySelector('#debtCurrency').value=d?.currency||'PLN';document.querySelector('#debtNote').value=d?.note||'';document.querySelector('#debtUrgent').checked=!!d?.urgent;document.querySelector('#debtPaid').checked=!!d?.paid;document.querySelector('#deleteDebt').classList.toggle('hidden',!d);openSheet('#debtBackdrop');
 }
 function saveDebt(){
   const person=document.querySelector('#debtPerson').value.trim(),amount=parseFloat(document.querySelector('#debtAmount').value.replace(',','.'));if(!person)return showToast('Вкажи ім’я');if(!(amount>0))return showToast('Вкажи суму');
-  const debt={id:editingDebtId||uid(),direction:debtDirection,person,amount,currency:document.querySelector('#debtCurrency').value,note:document.querySelector('#debtNote').value.trim(),date:new Date().toISOString()};state.debts=editingDebtId?state.debts.map(d=>d.id===editingDebtId?debt:d):[...state.debts,debt];closeSheet('#debtBackdrop');saveState();showToast('Борг збережено');
+  const debt={id:editingDebtId||uid(),direction:debtDirection,person,amount,currency:document.querySelector('#debtCurrency').value,note:document.querySelector('#debtNote').value.trim(),urgent:document.querySelector('#debtUrgent').checked,paid:document.querySelector('#debtPaid').checked,date:new Date().toISOString()};state.debts=editingDebtId?state.debts.map(d=>d.id===editingDebtId?debt:d):[...state.debts,debt];closeSheet('#debtBackdrop');saveState();showToast('Борг збережено');
 }
 function fillCategorySelect(){
   document.querySelector('#categoryInput').innerHTML=state.categories.map(c=>`<option value="${c.id}">${esc(c.icon)} ${esc(c.name)}</option>`).join('');
@@ -688,15 +691,25 @@ function detectClient(raw,type){
   if(type!=='income')return'';const ps=[/(?:від|от|from|od)\s+([A-ZА-ЯІЇЄҐŁŚŻŹĆŃ][\p{L}\-']+)/u,/(?:клієнт|клиент|client)\s+([A-ZА-ЯІЇЄҐŁŚŻŹĆŃ]?[\p{L}\-']+)/iu,/^([A-ZА-ЯІЇЄҐŁŚŻŹĆŃ][\p{L}\-']+)\s+(?:заплатив|заплатила|paid|zapłacił|zaplacil)/u];
   for(const re of ps){const m=raw.match(re);if(m)return m[1];}return'';
 }
+function detectDebt(raw){
+  const x=foldText(raw);let direction='';
+  if(/(борг мені|мені вин(ен|на|ні)|вин(ен|на|ні) мені)/.test(x))direction='receivable';
+  else if(/(я вин(ен|на)|мій борг|вин(ен|на) комусь)/.test(x))direction='owed';
+  if(!direction)return null;
+  const patterns=direction==='owed'?[/(?:я\s+вин(?:ен|на)|мій\s+борг)\s+([\p{L}'-]+)/iu]:[/([\p{L}'-]+)\s+вин(?:ен|на|ні)\s+мені/iu,/мені\s+вин(?:ен|на|ні)\s+([\p{L}'-]+)/iu,/борг\s+мені\s+([\p{L}'-]+)/iu];
+  let person='';for(const re of patterns){const m=raw.match(re);if(m){person=m[1];break;}}
+  return{direction,person,urgent:/(термінов|срочн|urgent)/.test(x)};
+}
 function parseVoice(text){
-  const raw=String(text||'').trim(),merchant=findMerchant(raw),type=detectType(raw);
-  return{type,amount:detectAmount(raw),currency:detectCurrency(raw),category:detectCategory(raw),client:detectClient(raw,type),merchant:merchant?merchant.canonical:'',note:raw,transcript:raw};
+  const raw=String(text||'').trim(),debt=detectDebt(raw),merchant=findMerchant(raw),type=detectType(raw);
+  if(debt)return{kind:'debt',...debt,amount:detectAmount(raw),currency:detectCurrency(raw),note:raw,transcript:raw};
+  return{kind:'transaction',type,amount:detectAmount(raw),currency:detectCurrency(raw),category:detectCategory(raw),client:detectClient(raw,type),merchant:merchant?merchant.canonical:'',note:raw,transcript:raw};
 }
 function renderVoiceParse(p){
   parsedVoice=p;const card=document.querySelector('#parseCard');
   if(!p.amount){card.classList.add('hidden');document.querySelector('#voiceStatus').textContent='Не знайшов суму';document.querySelector('#voiceText').textContent='Спробуй сказати суму чітко або відредагуй текст нижче.';return;}
-  const c=categoryById(p.category),detail=[p.type==='income'?'Дохід':'Витрата',c.name];if(p.client)detail.push('клієнт '+p.client);if(p.merchant)detail.push(p.merchant);
-  document.querySelector('#parseAmount').textContent=`${p.type==='income'?'+':'−'}${fmt(p.amount,p.currency)}`;document.querySelector('#parseSub').textContent=detail.join(' · ');document.querySelector('#parseTranscript').textContent='“'+(p.transcript||p.note||'')+'”';card.classList.remove('hidden');document.querySelector('#voiceStatus').textContent='Готово до збереження';
+  let detail,sign='−';if(p.kind==='debt'){detail=[p.direction==='owed'?'Я винен':'Мені винні',p.person||'потрібне ім’я'];if(p.urgent)detail.push('терміново');sign=p.direction==='receivable'?'+':'−';}else{const c=categoryById(p.category);detail=[p.type==='income'?'Дохід':'Витрата',c.name];if(p.client)detail.push('клієнт '+p.client);if(p.merchant)detail.push(p.merchant);sign=p.type==='income'?'+':'−';}
+  document.querySelector('#parseAmount').textContent=`${sign}${fmt(p.amount,p.currency)}`;document.querySelector('#parseSub').textContent=detail.join(' · ');document.querySelector('#parseTranscript').textContent='“'+(p.transcript||p.note||'')+'”';card.classList.remove('hidden');document.querySelector('#voiceStatus').textContent='Готово до збереження';
 }
 function setModelStatus(text,pct=null){
   const el=document.querySelector('#modelStatus');if(el)el.textContent=text;const pr=document.querySelector('#modelProfileStatus');if(pr)pr.textContent=text;const wrap=document.querySelector('#modelProgressWrap'),bar=document.querySelector('#modelProgress');
@@ -706,7 +719,7 @@ function setVoiceState(next,status,text){
   voiceState=next;
   if(status)document.querySelector('#voiceStatus').textContent=status;
   if(text)document.querySelector('#voiceText').textContent=text;
-  document.querySelector('#voiceLiveDot').classList.toggle('pulse',next==='recording');
+  document.querySelector('#voiceLiveDot')?.classList.toggle('pulse',next==='recording');
 }
 function clearVoiceTimeouts(){clearTimeout(voiceTimeout);clearTimeout(recordingTimeout);voiceTimeout=null;recordingTimeout=null;}
 function resetWhisperWorker(message){
@@ -726,7 +739,7 @@ function ensureWhisperWorker(){
   whisperWorker.onerror=()=>{resetWhisperWorker();setModelStatus('Не вдалося запустити локальну модель',null);setVoiceState('error','Помилка локальної моделі','Текстове поле та ручне додавання продовжують працювати.');};return whisperWorker;
 }
 function chooseMimeType(){const choices=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];for(const t of choices)if(window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))return t;return'';}
-function setRecordingVisual(on){document.querySelector('#voiceCircle').classList.toggle('listening',on);document.querySelector('#voiceLiveDot').classList.toggle('pulse',on);}
+function setRecordingVisual(on){document.querySelector('#voiceCircle').classList.toggle('listening',on);document.querySelector('#voiceLiveDot')?.classList.toggle('pulse',on);}
 function updateTimer(){if(!recordingStartedAt)return;document.querySelector('#recordTimer').textContent='● '+((Date.now()-recordingStartedAt)/1000).toFixed(1)+' с';}
 async function startRecording(){
   if(mediaRecorder&&mediaRecorder.state==='recording')return stopRecording();
@@ -766,17 +779,13 @@ function startBrowserRecognition(){
   try{recognition.start()}catch(e){speechRecognition=null;startRecording();}
 }
 function stopBrowserRecognition(){if(speechRecognition){setVoiceState('stopping','Завершую…','Обробляю сказане.');try{speechRecognition.stop()}catch(e){try{speechRecognition.abort()}catch(_){}}}}
-function startVoice(){
-  document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');
-  if(voiceState==='recording'){if(speechRecognition)stopBrowserRecognition();else stopRecording();return;}
-  if(['requesting','stopping','decoding','model-loading','transcribing'].includes(voiceState))return;
-  if(supportsBrowserRecognition()&&safariRecognitionRuns===0)startBrowserRecognition();else{setModelStatus(safariRecognitionRuns?'Повторний запис · локальний Whisper':'Локальний Whisper',null);startRecording();}
-}
+function startVoice(){document.querySelector('#voicePopover').classList.add('open');document.querySelector('#parseCard').classList.add('hidden');document.querySelector('#voiceTestInput').value='';document.querySelector('#voiceStatus').textContent='Введи операцію або борг';document.querySelector('#voiceText').textContent='Наприклад: «-200 на продукти» або «я винен Олегу 500».';setTimeout(()=>document.querySelector('#voiceTestInput').focus(),50)}
 function stopVoiceVisual(){setRecordingVisual(false)}
 function closeVoice(){voiceSession++;clearTimeout(speechStartTimer);clearVoiceTimeouts();if(speechRecognition)try{speechRecognition.abort()}catch(e){}speechRecognition=null;if(mediaRecorder&&mediaRecorder.state==='recording')try{mediaRecorder.stop()}catch(e){}cleanupRecorder();if(whisperBusy)resetWhisperWorker();voiceState='idle';document.querySelector('#voicePopover').classList.remove('open')}
 function voiceSave(){
-  if(!parsedVoice?.amount)return;state.transactions.push({type:parsedVoice.type,amount:parsedVoice.amount,currency:parsedVoice.currency,category:parsedVoice.category,client:parsedVoice.client||'',note:parsedVoice.merchant?`${parsedVoice.merchant} — ${parsedVoice.note}`:parsedVoice.note,id:uid(),date:new Date().toISOString()});closeVoice();saveState();showToast('Операцію додано');
+  if(!parsedVoice?.amount)return;if(parsedVoice.kind==='debt'){if(!parsedVoice.person)return openDebtFromParse(parsedVoice);state.debts.push({id:uid(),direction:parsedVoice.direction,person:parsedVoice.person,amount:parsedVoice.amount,currency:parsedVoice.currency,note:parsedVoice.note,urgent:!!parsedVoice.urgent,paid:false,date:new Date().toISOString()});closeVoice();saveState();showToast('Борг додано');return;}state.transactions.push({type:parsedVoice.type,amount:parsedVoice.amount,currency:parsedVoice.currency,category:parsedVoice.category,client:parsedVoice.client||'',note:parsedVoice.merchant?`${parsedVoice.merchant} — ${parsedVoice.note}`:parsedVoice.note,id:uid(),date:new Date().toISOString()});closeVoice();saveState();showToast('Операцію додано');
 }
+function openDebtFromParse(p){closeVoice();openDebt();setDebtDirection(p.direction);document.querySelector('#debtPerson').value=p.person||'';document.querySelector('#debtAmount').value=p.amount||'';document.querySelector('#debtCurrency').value=p.currency||'PLN';document.querySelector('#debtNote').value=p.note||'';document.querySelector('#debtUrgent').checked=!!p.urgent}
 function renderCatManager(){
   const el=document.querySelector('#catManager');
   el.innerHTML=state.categories.map(c=>`<div class="list-row"><span>${esc(c.icon)} ${esc(c.name)}</span><button data-id="${c.id}" style="border:0;background:transparent;color:var(--accent)">Видалити</button></div>`).join('');
@@ -809,7 +818,7 @@ document.querySelector('#voiceTestBtn').onclick=()=>{
   renderVoiceParse(parseVoice(text));
 };
 document.querySelector('#confirmVoice').onclick=voiceSave;
-document.querySelector('#editVoice').onclick=()=>{const p=parsedVoice;closeVoice();openAdd(p||{})};
+document.querySelector('#editVoice').onclick=()=>{const p=parsedVoice;if(p?.kind==='debt')openDebtFromParse(p);else{closeVoice();openAdd(p||{})}};
 document.querySelector('#seeAllTx').onclick=openAllTx;
 document.querySelector('#openHistory').onclick=openAllTx;
 document.querySelector('#closeList').onclick=()=>closeSheet('#listBackdrop');
@@ -821,6 +830,9 @@ document.querySelector('#addCategoryBtn').onclick=()=>{
   const id='custom-'+Date.now();state.categories.push({id,name,icon:'•'});document.querySelector('#newCatName').value='';saveState();renderCatManager()
 };
 document.querySelector('#addDebtBtn').onclick=()=>openDebt();
+document.querySelector('#viewOwed').onclick=()=>setDebtView('owed');
+document.querySelector('#viewReceivable').onclick=()=>setDebtView('receivable');
+document.querySelector('#viewUrgent').onclick=()=>setDebtView('urgent');
 document.querySelector('#debtOwed').onclick=()=>setDebtDirection('owed');
 document.querySelector('#debtReceivable').onclick=()=>setDebtDirection('receivable');
 document.querySelector('#saveDebt').onclick=saveDebt;
@@ -832,6 +844,7 @@ document.querySelector('#manualBackdrop').onclick=e=>{if(e.target.id==='manualBa
 document.querySelector('#debtBackdrop').onclick=e=>{if(e.target.id==='debtBackdrop')closeSheet('#debtBackdrop')};
 document.querySelector('#listBackdrop').onclick=e=>{if(e.target.id==='listBackdrop')closeSheet('#listBackdrop')};
 document.querySelector('#catBackdrop').onclick=e=>{if(e.target.id==='catBackdrop')closeSheet('#catBackdrop')};
+document.querySelector('#voiceTestInput').onkeydown=e=>{if(e.key==='Enter')document.querySelector('#voiceTestBtn').click()};
 
 
 if('serviceWorker' in navigator && location.protocol!=='file:'){
