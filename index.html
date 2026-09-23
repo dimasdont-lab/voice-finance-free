@@ -37,7 +37,7 @@
       max-width:480px;
       margin:0 auto;
       min-height:100dvh;
-      padding:calc(env(safe-area-inset-top) + 18px) 18px calc(188px + env(safe-area-inset-bottom));
+      padding:calc(env(safe-area-inset-top) + 18px) 18px calc(128px + env(safe-area-inset-bottom));
       background:#050505;
     }
     .topline{display:flex;justify-content:space-between;align-items:flex-start;margin:8px 4px 18px}
@@ -85,32 +85,12 @@
     .tx-title{font-size:16px}.tx-meta{font-size:13px;color:var(--muted);margin-top:3px}
     .tx-amount{font-size:17px;font-variant-numeric:tabular-nums}.pos{color:var(--green)}.neg{color:#f0f0f4}
     .empty{padding:28px;text-align:center;color:var(--muted)}
-    .bottom-zone{
-      position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);
-      padding:8px 14px calc(10px + env(safe-area-inset-bottom));
-      background:linear-gradient(180deg,rgba(5,5,5,0),#050505 20%,#050505 100%);
-      z-index:30;
-    }
-    .quick-actions{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:12px;margin:0 12px 10px;max-height:94px;position:relative;z-index:0;transition:max-height .78s cubic-bezier(.22,.75,.2,1),margin .78s cubic-bezier(.22,.75,.2,1)}
-    .bottom-zone.quick-hidden .quick-actions{pointer-events:none;max-height:0;margin-bottom:0}.nav{position:relative;z-index:2}
-    .quick{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--muted);padding:0;transition:transform .68s cubic-bezier(.22,.75,.2,1),opacity .5s ease}.bottom-zone.quick-hidden .quick{transform:translateY(102px);opacity:0}.bottom-zone.quick-hidden #voiceBtn{transition-delay:0s}.bottom-zone.quick-hidden #quickAdd{transition-delay:.09s}.bottom-zone.quick-hidden #scanBtn{transition-delay:.16s}
-    .quick-circle{width:58px;height:58px;border-radius:50%;border:1px solid var(--line);background:#0d0d10;display:grid;place-items:center;font-size:28px;color:#f5f5f7}
-    .voice-circle{
-      width:76px;height:76px;border-radius:50%;border:4px solid #f7f7f7;background:var(--accent-strong);
-      box-shadow:0 0 0 5px rgba(255,69,79,.08);display:grid;place-items:center;transition:.2s transform,.2s box-shadow;
-    }
-    .voice-circle svg{width:32px;height:32px}
-    .voice-circle.listening{transform:scale(1.05);box-shadow:0 0 0 9px rgba(255,69,79,.12),0 0 40px rgba(255,69,79,.22)}
-    .quick small{font-size:12px}
-    .nav{
-      height:76px;border:1px solid var(--line);border-radius:30px;background:rgba(16,16,19,.96);
-      display:grid;grid-template-columns:repeat(4,1fr);align-items:center;padding:8px;backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px)
-    }
-    .nav button{border:0;background:transparent;color:var(--muted);border-radius:22px;height:58px;min-width:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px}
-    .nav .pill{max-width:100%;padding:7px 9px;border-radius:999px;display:flex;align-items:center;gap:5px;white-space:nowrap}
-    .nav button.active{color:var(--accent)}
-    .nav button.active .pill{background:#171719}
-    .nav svg{width:21px;height:21px}
+    .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:9px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,5,5,0),#050505 25%,#050505);z-index:30}
+    .dock{height:84px;display:grid;grid-template-columns:1fr 78px 1fr;gap:9px;align-items:center}
+    .dock-group{height:72px;border:1px solid var(--line-strong);border-radius:36px;background:rgba(20,20,24,.97);display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;box-shadow:inset 0 1px rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.35);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+    .dock button{border:0;padding:0;color:#d7d7dd;display:grid;place-items:center}.dock-group button{border-radius:50%;background:linear-gradient(180deg,#1a1a1f,#121216);border:1px solid rgba(255,255,255,.07)}.dock-group button.active{color:var(--accent);background:#202024}.dock svg{width:27px;height:27px}
+    .dock-plus{width:78px;height:78px;border-radius:50%;background:var(--accent-strong)!important;border:4px solid #f7f7f7!important;box-shadow:0 0 0 6px rgba(255,69,79,.16),0 0 28px rgba(255,69,79,.3);transition:.2s transform}.dock-plus:active{transform:scale(.96)}.dock-plus svg{width:38px;height:38px}.dock-plus.listening{transform:scale(1.05)}
+    .profile-shortcut{position:fixed;top:calc(env(safe-area-inset-top) + 18px);left:max(18px,calc((100vw - 480px)/2 + 18px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#111114;color:var(--text);display:grid;place-items:center;z-index:25}.profile-shortcut.active{color:var(--accent);border-color:rgba(255,125,131,.28)}.profile-shortcut svg{width:22px;height:22px}.topline{padding-left:54px}
     .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:60;display:none;align-items:flex-end;justify-content:center}
     .sheet-backdrop.open{display:flex}
     .sheet{
@@ -161,6 +141,7 @@
   </style>
 </head>
 <body>
+<button class="profile-shortcut" id="profileShortcut" aria-label="Profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></button>
 <div class="app">
   <section id="home" class="screen active">
     <div class="topline">
@@ -243,30 +224,16 @@
 </div>
 
 <div class="bottom-zone" id="bottomZone">
-  <div class="quick-actions">
-    <button class="quick" id="quickAdd"><div class="quick-circle">＋</div><small>Додати</small></button>
-    <button class="quick" id="voiceBtn">
-      <div class="voice-circle" id="voiceCircle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-      <small>Фразою</small>
-    </button>
-    <button class="quick" id="scanBtn"><div class="quick-circle">⌗</div><small>Скан</small></button>
-  </div>
-
-  <nav class="nav">
-    <button class="active" data-screen="home"><span class="pill">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg><span>Home</span>
-    </span></button>
-    <button data-screen="insights"><span class="pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 20V10M10 20V4M15 20v-7M20 20V7"/></svg><span>Insights</span>
-    </span></button>
-    <button data-screen="goals"><span class="pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 7h10v10H7z"/><path d="M4 10h3M17 14h3"/></svg><span>Борги</span>
-    </span></button>
-    <button data-screen="profile"><span class="pill">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Profile</span>
-    </span></button>
+  <nav class="dock" aria-label="Головна навігація">
+    <div class="dock-group">
+      <button data-screen="insights" aria-label="Insights"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg></button>
+      <button id="scanBtn" aria-label="Scan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><rect x="8" y="8" width="8" height="8" rx="2"/></svg></button>
+    </div>
+    <button class="dock-plus" id="voiceBtn" aria-label="Додати фразою"><svg id="voiceCircle" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+    <div class="dock-group">
+      <button data-screen="goals" aria-label="Борги"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
+      <button class="active" data-screen="home" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg></button>
+    </div>
   </nav>
 </div>
 
@@ -619,7 +586,8 @@ function openAllTx(){
 function switchScreen(id){
   if(!document.getElementById(id)?.classList.contains('screen'))id='home';
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+  document.querySelectorAll('.dock [data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+  document.querySelector('#profileShortcut').classList.toggle('active',id==='profile');
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -782,7 +750,7 @@ function ensureWhisperWorker(){
   whisperWorker.onerror=()=>{resetWhisperWorker();setModelStatus('Не вдалося запустити локальну модель',null);setVoiceState('error','Помилка локальної моделі','Текстове поле та ручне додавання продовжують працювати.');};return whisperWorker;
 }
 function chooseMimeType(){const choices=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];for(const t of choices)if(window.MediaRecorder&&MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))return t;return'';}
-function setRecordingVisual(on){document.querySelector('#voiceCircle').classList.toggle('listening',on);document.querySelector('#voiceLiveDot')?.classList.toggle('pulse',on);}
+function setRecordingVisual(on){document.querySelector('#voiceBtn').classList.toggle('listening',on);document.querySelector('#voiceLiveDot')?.classList.toggle('pulse',on);}
 function updateTimer(){if(!recordingStartedAt)return;document.querySelector('#recordTimer').textContent='● '+((Date.now()-recordingStartedAt)/1000).toFixed(1)+' с';}
 async function startRecording(){
   if(mediaRecorder&&mediaRecorder.state==='recording')return stopRecording();
@@ -843,10 +811,10 @@ function exportData(){
   const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='voice-finance-data.json';a.click();URL.revokeObjectURL(a.href);
 }
-document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>switchScreen(b.dataset.screen));
+document.querySelectorAll('.dock [data-screen]').forEach(b=>b.onclick=()=>switchScreen(b.dataset.screen));
+document.querySelector('#profileShortcut').onclick=()=>switchScreen('profile');
 document.querySelector('#incomeSummary').onclick=()=>openInsightSection('#incomeInsight');
 document.querySelector('#expenseSummary').onclick=()=>openInsightSection('#expenseInsight');
-document.querySelector('#quickAdd').onclick=()=>openAdd();
 document.querySelector('#voiceBtn').onclick=startVoice;
 document.querySelector('#scanBtn').onclick=()=>openSheet('#scanBackdrop');
 document.querySelector('#typeExpense').onclick=()=>setFormType('expense');
@@ -901,10 +869,6 @@ document.querySelector('#cameraInput').onchange=e=>handleScanFile(e.target.files
 document.querySelector('#fileInput').onchange=e=>handleScanFile(e.target.files[0]);
 document.querySelector('#scanContinue').onclick=()=>{const name=selectedScanFile?.name||'чек';closeSheet('#scanBackdrop');openAdd({note:`Чек: ${name}`});showToast('Внеси суму та категорію з чека')};
 document.querySelector('#voiceTestInput').onkeydown=e=>{if(e.key==='Enter')document.querySelector('#voiceTestBtn').click()};
-
-let lastScrollY=scrollY,scrollDistance=0;
-addEventListener('scroll',()=>{const y=Math.max(0,scrollY),delta=y-lastScrollY;if(Math.sign(delta)!==Math.sign(scrollDistance))scrollDistance=0;scrollDistance+=delta;if(y<24||scrollDistance<-18)document.querySelector('#bottomZone').classList.remove('quick-hidden');else if(scrollDistance>18)document.querySelector('#bottomZone').classList.add('quick-hidden');lastScrollY=y},{passive:true});
-
 
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
