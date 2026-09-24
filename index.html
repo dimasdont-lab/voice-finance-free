@@ -86,17 +86,18 @@
     .tx-amount{font-size:17px;font-variant-numeric:tabular-nums}.pos{color:var(--green)}.neg{color:#f0f0f4}
     .empty{padding:28px;text-align:center;color:var(--muted)}
     .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:8px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(0deg,#050505 0 48%,transparent);z-index:30;transition:transform .5s cubic-bezier(.22,.82,.22,1),bottom .22s ease}
-    .dock-layout{position:relative;height:146px;transition:height .8s cubic-bezier(.22,.72,.18,1)}
-    .quick-entry-shell{position:absolute;z-index:3;left:0;top:0;width:100%;height:60px;border:1px solid rgba(255,255,255,.16);border-radius:30px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);display:flex;align-items:center;padding:0 18px;transition:left .8s cubic-bezier(.65,0,.35,1),top .8s cubic-bezier(.65,0,.35,1),width .8s cubic-bezier(.65,0,.35,1),height .8s cubic-bezier(.65,0,.35,1),border-radius .8s cubic-bezier(.65,0,.35,1),padding .8s cubic-bezier(.65,0,.35,1),opacity .35s ease;overflow:hidden}
+    .dock-layout{position:relative;height:146px;transition:height .26s cubic-bezier(.22,.72,.18,1)}
+    .quick-entry-shell{position:absolute;z-index:3;left:0;top:0;width:100%;height:60px;border:1px solid rgba(255,255,255,.16);border-radius:30px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);display:flex;align-items:center;padding:0 18px;transition:top .26s cubic-bezier(.65,0,.35,1),left .34s cubic-bezier(.65,0,.35,1) .18s,width .34s cubic-bezier(.65,0,.35,1) .18s,height .34s cubic-bezier(.65,0,.35,1) .18s,border-radius .34s cubic-bezier(.65,0,.35,1) .18s,padding .34s cubic-bezier(.65,0,.35,1) .18s,opacity .25s ease;overflow:hidden}
     .quick-entry-shell>svg{width:22px;height:22px;flex:none;color:#f5f5f7}.quick-entry-shell.listening{border-color:rgba(255,64,96,.6)}.quick-entry-input{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f5f5f7;padding:0 9px 0 11px;font-size:16px}.quick-entry-input::placeholder{color:#8d8d94}.quick-send{width:38px;height:38px;flex:none;border:0;border-radius:50%;background:#ff4060;color:#fff;display:grid;place-items:center;padding:0;transition:transform .18s ease,filter .18s ease}.quick-send:active{transform:scale(.9);filter:brightness(.82)}.quick-send svg{width:19px;height:19px}
-    .dock{position:absolute;left:0;top:68px;width:100%;height:78px;transition:top .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1)}
-    .dock-group{position:relative;isolation:isolate;width:100%;height:78px;border:1px solid rgba(255,255,255,.16);border-radius:39px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);overflow:hidden;transition:height .8s cubic-bezier(.22,.72,.18,1),border-color .8s ease,background-color .8s ease,box-shadow .8s ease}
+    .dock{position:absolute;left:0;top:68px;width:100%;height:78px;transition:top .56s cubic-bezier(.22,.72,.18,1),height .56s cubic-bezier(.22,.72,.18,1)}
+    .dock-group{position:relative;isolation:isolate;width:100%;height:78px;border:1px solid rgba(255,255,255,.16);border-radius:39px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);overflow:hidden;transition:height .56s cubic-bezier(.22,.72,.18,1),border-color .56s ease,background-color .56s ease,box-shadow .56s ease}
     .profile-drawer::before{content:"";position:absolute;pointer-events:none;inset:1px;border-radius:inherit;background:linear-gradient(100deg,rgba(255,255,255,.07),transparent 18% 82%,rgba(255,255,255,.055));opacity:.5}
     .dock-group::after{content:"";position:absolute;pointer-events:none;inset:0;border-radius:inherit;padding:12px;background:rgba(255,255,255,.001);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;backdrop-filter:blur(.75px) contrast(112%);backdrop-filter:url(#glassRefraction) blur(.75px) contrast(112%);-webkit-backdrop-filter:blur(.75px) contrast(112%);-webkit-backdrop-filter:url(#glassRefraction) blur(.75px) contrast(112%)}
     .dock-indicator{position:absolute;z-index:0;left:6px;top:6px;width:calc((100% - 12px)/5);height:64px;border-radius:31px;transform:translateX(0);will-change:transform,width,height,left,top;transition:left .8s cubic-bezier(.65,0,.35,1),top .8s cubic-bezier(.65,0,.35,1),width .8s cubic-bezier(.65,0,.35,1),height .8s cubic-bezier(.65,0,.35,1),border-radius .8s cubic-bezier(.65,0,.35,1)}.dock-indicator::before{content:"";position:absolute;inset:0;border-radius:inherit;background:#09090a;transform-origin:center}
     .dock-indicator.moving{animation:dockIndicatorMove .5s cubic-bezier(.65,0,.35,1) both}.dock-indicator.moving::before{animation:dockIndicatorSqueeze .5s ease-in-out both}@keyframes dockIndicatorMove{from{transform:translateX(var(--indicator-from))}to{transform:translateX(var(--indicator-to))}}@keyframes dockIndicatorSqueeze{0%,100%{transform:scaleY(1)}50%{transform:scaleY(var(--indicator-squeeze))}}
     .dock button{border:0;color:#f1f1f3}.dock-group button{--i:0;position:absolute;z-index:1;left:6px;top:6px;width:calc((100% - 12px)/5);height:64px;border-radius:31px;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;padding:5px 2px;transform:translateX(calc(var(--i) * 100%));transition:transform .8s cubic-bezier(.22,.72,.18,1),opacity .55s ease,color .35s ease,width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),left .8s cubic-bezier(.22,.72,.18,1)}.dock-group button:nth-of-type(2){--i:1}.dock-group button:nth-of-type(3){--i:2}.dock-group button:nth-of-type(4){--i:3}.dock-group button:nth-of-type(5){--i:4}.dock-group button.active{color:#ff4060}.dock-group button:active{filter:brightness(.82)}.dock svg{width:25px;height:25px}.dock-label{font-size:10px;line-height:1;white-space:nowrap;letter-spacing:-.1px;transition:opacity .35s ease}
     .bottom-zone.compact .dock-layout{height:58px}.bottom-zone.compact .quick-entry-shell{left:66px;top:0;width:calc(100% - 132px);height:58px;border-radius:29px;padding:0 9px 0 14px}.bottom-zone.compact .dock{top:0;height:58px}.bottom-zone.compact .dock-group{height:58px;border-color:transparent;background:transparent;box-shadow:none;overflow:visible}.bottom-zone.compact .dock-group::after{opacity:0}.bottom-zone.compact .dock-indicator{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0)!important;border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-indicator::before{background:rgba(31,31,33,.96)}.bottom-zone.compact .dock-group button{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0) scale(.72);opacity:0;pointer-events:none}.bottom-zone.compact .dock-group button.active{transform:translateX(0) scale(1);opacity:1;pointer-events:auto}.bottom-zone.compact .dock-group .more-btn{left:calc(100% - 58px);transform:translateX(0) scale(1);opacity:1;pointer-events:auto;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-label{opacity:0}.bottom-zone.compact .quick-entry-shell>svg{width:0;opacity:0}.bottom-zone.compact .quick-send{width:38px;height:38px}
+    .dock-indicator{transition-duration:.56s}.dock-group button{transition-duration:.56s,.39s,.25s,.56s,.56s,.56s,.56s}.dock-label{transition-duration:.25s}.bottom-zone.compact .dock-layout{transition:height .26s cubic-bezier(.22,.72,.18,1) .18s}.bottom-zone.compact .quick-entry-shell{transition:top .26s cubic-bezier(.65,0,.35,1) .18s,left .34s cubic-bezier(.65,0,.35,1),width .34s cubic-bezier(.65,0,.35,1),height .34s cubic-bezier(.65,0,.35,1),border-radius .34s cubic-bezier(.65,0,.35,1),padding .34s cubic-bezier(.65,0,.35,1),opacity .25s ease}
     .topline{padding-left:0}.page-search{height:58px;margin:0 0 18px;border:1px solid rgba(255,255,255,.1);border-radius:29px;background:#1c1c1e;display:flex;align-items:center;padding:0 16px}.page-search svg{width:23px;height:23px;flex:none}.page-search input{width:100%;height:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);padding:0 12px;font-size:17px}.page-search input::placeholder{color:#77777f}
     .home-topline{min-height:72px;align-items:flex-start}.home-topline h1{font-size:31px;margin-bottom:7px}.home-topline .sub{margin:0;font-size:16px;text-transform:capitalize}
     .profile-drawer-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0);pointer-events:none;transition:background .46s ease}
@@ -105,8 +106,9 @@
     .profile-drawer::before{position:fixed;inset:1px 0 1px 1px;border-radius:29px 0 0 29px;background:radial-gradient(ellipse at 12% 45%,rgba(255,255,255,.14),transparent 18%),linear-gradient(92deg,rgba(255,255,255,.1),transparent 9% 88%,rgba(255,255,255,.025));filter:saturate(130%);opacity:.58}
     .profile-drawer-backdrop.open .profile-drawer{transform:translateX(0)}
     body.drawer-open .app{transform:translateX(calc(-1 * min(22vw,105px)));filter:brightness(.72)}
-    body.drawer-open .bottom-zone{z-index:52}body.drawer-open .quick-entry-shell,body.drawer-open .dock-indicator,body.drawer-open .dock-group button:not(.more-btn){opacity:0;pointer-events:none}body.drawer-open .dock-group{background:transparent;border-color:transparent;box-shadow:none}body.drawer-open .dock-group::after{opacity:0}.more-icon,.back-icon{position:absolute;transition:opacity .32s ease,transform .42s cubic-bezier(.65,0,.35,1)}.back-icon{opacity:0;transform:scale(.65) rotate(-24deg)}body.drawer-open .more-icon{opacity:0;transform:scale(.65) rotate(24deg)}body.drawer-open .back-icon{opacity:1;transform:scale(1) rotate(0)}body.drawer-open .more-btn .dock-label{font-size:0}body.drawer-open .more-btn .dock-label::after{content:"Назад";font-size:10px}
+    body.drawer-open .bottom-zone{z-index:52}body.drawer-open .quick-entry-shell,body.drawer-open .dock-indicator,body.drawer-open .dock-group button:not(.more-btn){opacity:0;pointer-events:none}body.drawer-open .dock-group{background:transparent;border-color:transparent;box-shadow:none}body.drawer-open .dock-group::after{opacity:0}.more-btn .more-icon,.more-btn .back-icon{position:absolute;left:50%;top:13px;width:25px;height:25px;transform:translateX(-50%);transition:opacity .25s ease,transform .3s cubic-bezier(.65,0,.35,1)}.more-btn .back-icon{opacity:0;transform:translateX(-50%) scale(.65) rotate(-24deg)}.more-btn .dock-label{position:absolute;left:50%;bottom:8px;transform:translateX(-50%)}body.drawer-open .more-btn .more-icon{opacity:0;transform:translateX(-50%) scale(.65) rotate(24deg)}body.drawer-open .more-btn .back-icon{opacity:1;transform:translateX(-50%) scale(1) rotate(0)}body.drawer-open .more-btn .dock-label{font-size:0}body.drawer-open .more-btn .dock-label::after{content:"Назад";font-size:10px}.bottom-zone.compact .more-btn .more-icon,.bottom-zone.compact .more-btn .back-icon{top:16px}
     .drawer-title{font-size:28px;margin:0 0 5px}.drawer-sub{color:var(--muted);font-size:13px;margin-bottom:22px}.drawer-section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 3px 10px}.drawer-section-head h2{font-size:18px;margin:0}.drawer-section-head button{border:0;background:transparent;color:var(--muted);padding:5px}.drawer-settings{width:100%;margin-top:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.045);padding:15px;display:flex;justify-content:space-between;align-items:center;text-align:left}.profile-drawer .category-grid{border-radius:24px}.profile-drawer .category{grid-template-columns:39px minmax(0,1fr) auto;padding-inline:9px}.profile-drawer .cat-icon{width:34px;height:34px}.profile-drawer .cat-name,.profile-drawer .cat-sum{font-size:14px}
+    .person-status{font-size:12px;font-weight:650}.person-status.paid{color:var(--green)}.person-status.unpaid{color:var(--accent-strong)}.person-back{border:0;background:transparent;color:var(--muted);padding:5px 0 15px;font-size:15px}.person-summary{margin-bottom:14px}.person-list .tx{grid-template-columns:42px minmax(0,1fr) auto}.person-list .debt-amount{grid-row:1 / span 2;grid-column:3;align-self:center}
     .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:60;display:none;align-items:flex-end;justify-content:center}
     .sheet-backdrop.open{display:flex}
     .sheet{
@@ -146,6 +148,7 @@
     .tiny{font-size:12px;color:var(--muted)}
     .voice-popover{position:fixed;isolation:isolate;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));width:min(440px,calc(100% - 28px));z-index:55;display:none;background:linear-gradient(145deg,rgba(38,38,44,.5),rgba(12,12,15,.3) 48%,rgba(36,36,42,.36));border:1px solid rgba(255,255,255,.18);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.48),inset 0 2px 10px rgba(255,255,255,.035);backdrop-filter:blur(15px) saturate(145%);-webkit-backdrop-filter:blur(15px) saturate(145%);transition:bottom .18s ease}
     body.keyboard-open .bottom-zone{opacity:0;pointer-events:none;transform:translate(-50%,28px);transition:opacity .16s ease,transform .2s ease}
+    body.sheet-open .bottom-zone{opacity:0;pointer-events:none;transform:translate(-50%,28px)}
     .voice-popover.open{display:block}.voice-popover .parse-card{margin-top:12px;padding:13px;border-radius:20px}.voice-popover .parse-amount{font-size:24px}.voice-popover-head{display:flex;gap:12px;align-items:flex-start}.voice-live-dot{width:11px;height:11px;border-radius:50%;background:var(--accent);margin-top:6px;flex:none}.voice-live-dot.pulse{animation:pulse 1.35s infinite}.voice-copy{min-width:0;flex:1}.voice-popover .voice-status{font-size:16px;margin:0 0 4px}.voice-popover .voice-text{font-size:14px;min-height:0;max-height:70px;overflow:auto}.voice-close{border:0;background:transparent;color:var(--muted);font-size:22px;padding:0 2px}.voice-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.voice-actions button{margin-top:8px}.voice-engine-note{margin-top:8px}
     .debt-summary{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.debt-total{padding:17px;border:1px solid var(--line);border-radius:24px;background:var(--panel);text-align:left;color:var(--text);cursor:pointer}.debt-total:active{transform:scale(.985)}.debt-total strong{display:block;font-size:22px;margin-top:5px}.debt-row{cursor:pointer}.debt-person{font-size:16px}.debt-note{font-size:12px;color:var(--muted);margin-top:3px}.debt-amount{font-variant-numeric:tabular-nums;white-space:nowrap}
     .debt-sort{margin-bottom:12px}.debt-sort select{width:100%;border:1px solid var(--line);background:#101013;color:var(--text);border-radius:16px;padding:12px}.debt-section{border:1px solid var(--line);background:var(--panel);border-radius:24px;margin-bottom:10px;overflow:hidden;scroll-margin-top:20px}.debt-section>summary{cursor:pointer;padding:14px 15px;font-weight:650;display:grid;grid-template-columns:minmax(0,1fr) 36px 18px;gap:7px;align-items:center;list-style:none}.debt-section summary::-webkit-details-marker{display:none}.debt-section>summary::after{content:'⌄';color:currentColor;text-align:right;transition:.2s transform}.debt-section[open]>summary::after{transform:rotate(180deg)}.debt-group-title{display:flex;align-items:center;gap:10px;min-width:0}.debt-group-icon{width:32px;height:32px;border-radius:11px;background:rgba(255,255,255,.055);display:grid;place-items:center;flex:none}.debt-group-icon svg{width:19px;height:19px}.debt-group-count{text-align:right;min-width:36px;font-variant-numeric:tabular-nums}.debt-status-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}.debt-status{border:1px solid var(--line);border-radius:17px;background:#111114;overflow:hidden;min-width:0}.debt-status summary{padding:12px 10px;display:flex;justify-content:space-between;gap:6px;font-size:12px;cursor:pointer;list-style:none}.debt-status .transactions{border:0;border-top:1px solid var(--line);border-radius:0}.debt-status .tx{grid-template-columns:34px minmax(0,1fr);padding:10px 8px;gap:7px}.debt-status .tx-icon{width:32px;height:32px;border-radius:11px}.debt-status .debt-amount{grid-column:2;font-size:13px}.debt-status .empty{padding:16px 6px;font-size:12px}.urgent-badge{color:var(--accent);font-size:12px}.round-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:10px}.round-action{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#1a1a1e;color:var(--text);display:grid;place-items:center;font-size:20px;padding:0}.round-action.primary-icon{background:var(--text);color:#080808}.round-action.danger-icon{color:var(--accent)}
@@ -183,6 +186,10 @@
     <div class="drawer-sub">Швидкий доступ до категорій і налаштувань</div>
     <div class="drawer-section-head"><h2>Категорії</h2><button id="allCategories">Усі</button></div>
     <div class="category-grid" id="categoryGrid"></div>
+    <div class="drawer-section-head"><h2>Клієнти</h2><button id="allClients">Усі</button></div>
+    <div class="category-grid" id="clientQuickList"></div>
+    <div class="drawer-section-head"><h2>Мої борги</h2><button id="allCreditors">Усі</button></div>
+    <div class="category-grid" id="creditorQuickList"></div>
     <button class="drawer-settings" id="openSettings"><span>Налаштування</span><span aria-hidden="true">›</span></button>
   </aside>
 </div>
@@ -241,6 +248,19 @@
     <div class="topline"><div><div class="eyebrow">Планування</div><h1>Цілі</h1><div class="sub">Ліміти та накопичення</div></div></div>
     <div class="goal-card"><div class="label">Місячний ліміт витрат</div><div class="big-stat" id="goalsPageValue">8 000 zł</div><div class="bar"><div id="goalsPageBar" style="width:0%"></div></div><div class="tiny" id="goalsPageCaption" style="margin-top:9px"></div></div>
     <div class="goal-card"><div class="label">Накопичення</div><div class="big-stat" id="goalsPageSavings">0 zł</div><div class="muted">Доходи мінус витрати за весь період.</div></div>
+  </section>
+
+  <section id="people" class="screen">
+    <button class="person-back" id="peopleBack">‹ Борги</button>
+    <div class="topline"><div><div class="eyebrow">Анкети</div><h1 id="peopleTitle">Клієнти</h1><div class="sub" id="peopleSubtitle"></div></div></div>
+    <div class="transactions person-list" id="peopleList"></div>
+  </section>
+
+  <section id="person" class="screen">
+    <button class="person-back" id="personBack">‹ Усі анкети</button>
+    <div class="topline"><div><div class="eyebrow" id="personEyebrow">Клієнт</div><h1 id="personTitle"></h1><div class="sub" id="personSubtitle"></div></div></div>
+    <div class="debt-summary person-summary"><div class="debt-total"><div class="label">Не оплачено</div><strong id="personOpenTotal">0 zł</strong></div><div class="debt-total"><div class="label">Оплачено</div><strong id="personPaidTotal">0 zł</strong></div></div>
+    <div class="transactions person-list" id="personDebtList"></div>
   </section>
 
 </div>
@@ -398,6 +418,9 @@ let editingDebtId=null;
 let debtDirection='owed';
 let debtView='owed';
 let debtSort='name-asc';
+let peopleDirection=sessionStorage.getItem('voice-finance-people-direction')||'receivable';
+let selectedPerson=sessionStorage.getItem('voice-finance-selected-person')||'';
+let selectedPersonDirection=sessionStorage.getItem('voice-finance-selected-person-direction')||'receivable';
 let selectedScanFile=null;
 let scanPreviewUrl='';
 let voicePositionTimers=[];
@@ -467,6 +490,9 @@ function render(){
   renderInsights();
   renderGoals();
   renderDebts();
+  renderDrawerPeople();
+  renderPeople();
+  renderPersonProfile();
   fillCategorySelect();
   requestAnimationFrame(refreshJellyItems);
 }
@@ -554,8 +580,33 @@ function renderDebts(){
   const row=d=>`<div class="tx debt-row" data-debt-id="${d.id}"><div class="tx-icon">${d.direction==='owed'?'↗':'↙'}</div><div><div class="debt-person">${esc(d.person)}</div><div class="debt-note">${esc(d.note||'Без нотатки')}</div></div><strong class="debt-amount ${d.direction==='receivable'?'pos':'neg'}">${fmt(d.amount,d.currency)}</strong></div>`;
   const status=(items,paid)=>`<details class="debt-status" ${paid?'':'open'}><summary><span>${paid?'Оплачено':'Не оплачено'}</span><span>${items.filter(d=>d.paid===paid).length}</span></summary><div class="transactions">${items.filter(d=>d.paid===paid).map(row).join('')||'<div class="empty">Порожньо</div>'}</div></details>`;
   const wrap=document.querySelector('#debtGroups');wrap.innerHTML=groups.map((g,i)=>`<details class="debt-section ${g.key}" ${i===0?'open':''} data-debt-group="${g.key}"><summary><span class="debt-group-title"><span class="debt-group-icon">${icons[g.key]}</span><span>${g.title}</span></span><span class="debt-group-count">${g.items.filter(d=>!d.paid).length}</span></summary><div class="debt-status-grid">${status(g.items,false)}${status(g.items,true)}</div></details>`).join('');
-  wrap.querySelectorAll('[data-debt-id]').forEach(row=>row.onclick=e=>{e.stopPropagation();openDebt(row.dataset.debtId)});
+  wrap.querySelectorAll('[data-debt-id]').forEach(row=>row.onclick=e=>{e.stopPropagation();const d=state.debts.find(x=>x.id===row.dataset.debtId);if(d)openPersonProfile(d.direction,d.person)});
   wrap.querySelectorAll('[data-debt-group]').forEach(group=>group.addEventListener('toggle',()=>{if(group.open)debtView=group.dataset.debtGroup}));
+}
+function personProfiles(direction){
+  const grouped=new Map();
+  state.debts.filter(d=>d.direction===direction&&d.person).forEach(d=>{const key=foldText(d.person);if(!key)return;const profile=grouped.get(key)||{key,name:d.person,items:[],latest:''};profile.items.push(d);if(!profile.latest||new Date(d.date)>new Date(profile.latest)){profile.name=d.person;profile.latest=d.date}grouped.set(key,profile)});
+  return [...grouped.values()].map(p=>({...p,open:p.items.filter(d=>!d.paid),paid:p.items.filter(d=>d.paid)})).sort((a,b)=>a.name.localeCompare(b.name,'uk',{sensitivity:'base'}));
+}
+function profileAmount(items){const pln=items.filter(d=>d.currency==='PLN').reduce((sum,d)=>sum+d.amount,0);return fmt(pln)}
+function profileRow(profile,direction){return `<div class="category" data-person="${esc(profile.name)}" data-direction="${direction}"><div class="cat-icon">${direction==='receivable'?'👤':'↗'}</div><div class="cat-name">${esc(profile.name)}</div><div class="cat-sum">${profileAmount(profile.open)}</div></div>`}
+function bindProfileRows(root){root?.querySelectorAll('[data-person]').forEach(row=>row.onclick=()=>openPersonProfile(row.dataset.direction,row.dataset.person))}
+function renderDrawerPeople(){
+  const clients=document.querySelector('#clientQuickList'),creditors=document.querySelector('#creditorQuickList');if(!clients||!creditors)return;
+  const fill=(root,direction)=>{const profiles=personProfiles(direction).slice(0,4);root.innerHTML=profiles.map(p=>profileRow(p,direction)).join('')||'<div class="empty">Поки порожньо</div>';bindProfileRows(root)};
+  fill(clients,'receivable');fill(creditors,'owed');
+}
+function openPeople(direction){peopleDirection=direction;sessionStorage.setItem('voice-finance-people-direction',direction);renderPeople();switchScreen('people')}
+function renderPeople(){
+  const list=document.querySelector('#peopleList');if(!list)return;const profiles=personProfiles(peopleDirection),receivable=peopleDirection==='receivable';
+  document.querySelector('#peopleTitle').textContent=receivable?'Клієнти':'Мої борги';document.querySelector('#peopleSubtitle').textContent=receivable?'Усі, хто винен мені':'Усі, кому винен я';
+  list.innerHTML=profiles.length?profiles.map(p=>`<div class="tx" data-person="${esc(p.name)}" data-direction="${peopleDirection}"><div class="tx-icon">${receivable?'👤':'↗'}</div><div><div class="tx-title">${esc(p.name)}</div><div class="tx-meta">Не оплачено: ${p.open.length} · Оплачено: ${p.paid.length}</div></div><strong class="debt-amount ${receivable?'pos':'neg'}">${profileAmount(p.open)}</strong></div>`).join(''):'<div class="empty">Анкет ще немає</div>';bindProfileRows(list);
+}
+function openPersonProfile(direction,person){selectedPersonDirection=direction;selectedPerson=person;sessionStorage.setItem('voice-finance-selected-person-direction',direction);sessionStorage.setItem('voice-finance-selected-person',person);renderPersonProfile();closeProfileDrawer();switchScreen('person')}
+function renderPersonProfile(){
+  const list=document.querySelector('#personDebtList');if(!list||!selectedPerson)return;const key=foldText(selectedPerson),items=state.debts.filter(d=>d.direction===selectedPersonDirection&&foldText(d.person)===key).sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const receivable=selectedPersonDirection==='receivable';document.querySelector('#personEyebrow').textContent=receivable?'Клієнт':'Мій борг';document.querySelector('#personTitle').textContent=selectedPerson;document.querySelector('#personSubtitle').textContent=receivable?'Всі борги цього клієнта':'Всі борги цій людині';document.querySelector('#personOpenTotal').textContent=profileAmount(items.filter(d=>!d.paid));document.querySelector('#personPaidTotal').textContent=profileAmount(items.filter(d=>d.paid));
+  list.innerHTML=items.length?items.map(d=>`<div class="tx" data-edit-debt="${d.id}"><div class="tx-icon">${d.paid?'✓':receivable?'↙':'↗'}</div><div><div class="tx-title">${esc(d.note||'Борг')}</div><div class="person-status ${d.paid?'paid':'unpaid'}">${d.paid?'Оплачено':'Не оплачено'}</div><div class="tx-meta">${dateLabel(d.date)}</div></div><strong class="debt-amount ${receivable?'pos':'neg'}">${fmt(d.amount,d.currency)}</strong></div>`).join(''):'<div class="empty">Боргів немає</div>';list.querySelectorAll('[data-edit-debt]').forEach(row=>row.onclick=()=>openDebt(row.dataset.editDebt));
 }
 function focusDebtGroup(key){
   switchScreen('debts');requestAnimationFrame(()=>{const groups=[...document.querySelectorAll('[data-debt-group]')],target=groups.find(g=>g.dataset.debtGroup===key);groups.forEach(g=>g.open=g===target);debtView=key;target?.scrollIntoView({behavior:'smooth',block:'start'})});
@@ -668,10 +719,10 @@ function openAllTx(){
 }
 function switchScreen(id){
   if(!document.getElementById(id)?.classList.contains('screen'))id='home';
-  const buttons=[...document.querySelectorAll('.dock [data-screen]')],nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===id));
+  const buttons=[...document.querySelectorAll('.dock [data-screen]')],navId=(id==='people'||id==='person')?'debts':id,nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===navId));
   closeProfileDrawer();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
-  buttons.forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+  buttons.forEach(b=>b.classList.toggle('active',b.dataset.screen===navId));
   moveDockIndicator(nextIndex);
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
   if(id==='home')requestAnimationFrame(fitBalanceText);
@@ -834,14 +885,14 @@ function findMerchant(raw){
 function detectCategory(t){
   const merchant=findMerchant(t);if(merchant&&state.categories.some(c=>c.id===merchant.category))return merchant.category;
   const x=foldText(t);const rules=[
-    ['groceries',/(продукт|закуп|магазин|супермаркет|grocer|supermarket|sklep|spozyw|zakupy)/],
-    ['transport',/(uber|bolt|таксі|такси|taxi|транспорт|metro|метро|автобус|tramw|benzyn|бензин|палив|fuel|parking)/],
-    ['food',/(ресторан|кафе|кава|coffee|pizza|burger|food|їжа|обід|вечеря|sniad|obiad|kolac|restaur)/],
-    ['tech',/(технік|компют|computer|kamera|camera|lens|обєктив|monitor|iphone|ipad|apple)/],
-    ['subscriptions',/(підписк|subscription|abonament|netflix|spotify|adobe|openai)/],
-    ['home',/(дім|дом|ikea|мебл|ремонт|home|mieszk)/],
-    ['travel',/(готел|hotel|flight|літак|авіа|booking|airbnb|подорож|travel|lotn|wakac)/],
-    ['business',/(бізнес|студі|робот|монтаж|з[йи]омк|shoot|editing|edit|montaz|nagran|client|клієнт|davinci)/]
+    ['groceries',/(продукт|харч|молок|хліб|хлеб|овоч|фрукт|мяс|риба|вода|напій|закуп|магазин|супермаркет|grocer|supermarket|sklep|spozyw|zakupy|jedzeni|warzyw|owoc|mleko|chleb)/],
+    ['transport',/(uber|bolt|таксі|такси|taxi|транспорт|metro|метро|автобус|трамва|поїзд|поезд|квиток|білет|tramw|pociag|bilet|benzyn|бензин|дизел|палив|fuel|parking|парков|авто|машин|serwis.*auto)/],
+    ['food',/(ресторан|кафе|кава|coffee|чай|pizza|піца|пицца|burger|бургер|food|їжа|обід|вечеря|снідан|доставка|sniad|obiad|kolac|restaur|kawiarn|lunch|dinner|breakfast|sushi|суші)/],
+    ['tech',/(технік|електрон|гаджет|компют|ноутбук|лептоп|laptop|computer|телефон|смартфон|smartphone|камера|kamera|camera|lens|обєктив|monitor|монітор|клавіат|миша|мишк|mouse|навушник|наушник|headphone|headset|earbuds|airpods|słuchawk|sluchawk|колонк|speaker|зарядк|charger|кабел|cable|iphone|ipad|macbook|apple|samsung|xiaomi|телевізор|telewizor|tv|консол|playstation|xbox)/],
+    ['subscriptions',/(підписк|subscription|abonament|щомісяч|monthly|netflix|spotify|adobe|openai|youtube premium|icloud|google one|patreon|canva|dropbox)/],
+    ['home',/(дім|дом|квартир|ikea|мебл|ремонт|посуд|ламп|ліжк|кровать|стіл|стол|стілец|home|house|mieszk|mebl|remont|czynsz|оренд|rent|комунал|prad|газ|electric|прибиран|cleaning)/],
+    ['travel',/(готел|hotel|hostel|flight|літак|самолет|авіа|booking|airbnb|подорож|travel|lotn|wakac|відпуст|urlop|валіз|багаж|visa|віза|тур|resort)/],
+    ['business',/(бізнес|студі|робот|зарплат|гонорар|проєкт|проект|монтаж|з[йи]омк|фото|відео|shoot|editing|edit|montaz|nagran|client|клієнт|замовник|invoice|рахунок|фактур|davinci|реклам|marketing|офіс|office)/]
   ];
   for(const [id,re] of rules)if(re.test(x)&&state.categories.some(c=>c.id===id))return id;
   const custom=state.categories.find(c=>x.includes(foldText(c.name)));return custom?.id||(state.categories.some(c=>c.id==='other')?'other':state.categories[0]?.id);
@@ -852,9 +903,15 @@ function detectClient(raw,type){
 }
 function detectDebt(raw){
   const x=foldText(raw);let direction='';
-  if(/(борг мені|мені вин(ен|на|ні)|вин(ен|на|ні) мені)/.test(x))direction='receivable';
+  const clientMatch=raw.match(/^\s*(?:клієнт|клиент|client|klient)\s+([\p{L}'’\-]+)(?=\s|$)/iu);
+  const owedMatch=raw.match(/^\s*(?:борг|долг|debt|dług|dlug)\s+(?!мені\b|мне\b|mnie\b)([\p{L}'’\-]+)(?=\s|$)/iu);
+  if(clientMatch)direction='receivable';
+  else if(owedMatch)direction='owed';
+  else if(/(борг мені|мені вин(ен|на|ні)|вин(ен|на|ні) мені)/.test(x))direction='receivable';
   else if(/(я вин(ен|на)|мій борг|вин(ен|на) комусь)/.test(x))direction='owed';
   if(!direction)return null;
+  if(clientMatch)return{direction,person:clientMatch[1],urgent:/(термінов|срочн|urgent)/.test(x)};
+  if(owedMatch)return{direction,person:owedMatch[1],urgent:/(термінов|срочн|urgent)/.test(x)};
   const patterns=direction==='owed'?[/(?:я\s+вин(?:ен|на)|мій\s+борг)\s+([\p{L}'-]+)/iu]:[/([\p{L}'-]+)\s+вин(?:ен|на|ні)\s+мені/iu,/мені\s+вин(?:ен|на|ні)\s+([\p{L}'-]+)/iu,/борг\s+мені\s+([\p{L}'-]+)/iu];
   let person='';for(const re of patterns){const m=raw.match(re);if(m){person=m[1];break;}}
   return{direction,person,urgent:/(термінов|срочн|urgent)/.test(x)};
@@ -1000,14 +1057,18 @@ document.querySelector('#editVoice').onclick=()=>{const p=parsedVoice;if(p?.kind
 document.querySelector('#seeAllTx').onclick=openAllTx;
 document.querySelector('#closeList').onclick=()=>closeSheet('#listBackdrop');
 document.querySelector('#allCategories').onclick=()=>{renderCatManager();openSheet('#catBackdrop')};
+document.querySelector('#allClients').onclick=()=>{closeProfileDrawer();openPeople('receivable')};
+document.querySelector('#allCreditors').onclick=()=>{closeProfileDrawer();openPeople('owed')};
+document.querySelector('#peopleBack').onclick=()=>switchScreen('debts');
+document.querySelector('#personBack').onclick=()=>openPeople(selectedPersonDirection);
 document.querySelector('#manageCategories').onclick=()=>{renderCatManager();openSheet('#catBackdrop')};
 document.querySelector('#closeCategories').onclick=()=>closeSheet('#catBackdrop');
 document.querySelector('#addCategoryBtn').onclick=()=>{
   const name=document.querySelector('#newCatName').value.trim();if(!name)return;
   const id='custom-'+Date.now();state.categories.push({id,name,icon:'•'});document.querySelector('#newCatName').value='';saveState();renderCatManager()
 };
-document.querySelector('#owedWidget').onclick=()=>focusDebtGroup('owed');
-document.querySelector('#receivableWidget').onclick=()=>focusDebtGroup('receivable');
+document.querySelector('#owedWidget').onclick=()=>openPeople('owed');
+document.querySelector('#receivableWidget').onclick=()=>openPeople('receivable');
 document.querySelector('#debtSortSelect').onchange=e=>{debtSort=e.target.value;renderDebts()};
 document.querySelector('#debtOwed').onclick=()=>setDebtDirection('owed');
 document.querySelector('#debtReceivable').onclick=()=>setDebtDirection('receivable');
@@ -1052,7 +1113,7 @@ addEventListener('wheel',handleBoundaryWheel,{passive:true});
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   let reloadingForUpdate=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloadingForUpdate)return;reloadingForUpdate=true;location.reload()});
-  navigator.serviceWorker.register('./sw.js?v=27',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+  navigator.serviceWorker.register('./sw.js?v=30',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
 }
 try{
   if('scrollRestoration' in history)history.scrollRestoration='manual';
