@@ -117,10 +117,10 @@
     .drawer-title{font-size:28px;margin:0 0 5px}.drawer-sub{color:var(--muted);font-size:13px;margin-bottom:22px}.drawer-section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 3px 10px}.drawer-section-head h2{font-size:18px;margin:0}.drawer-section-head button{border:0;background:transparent;color:var(--muted);padding:5px}.drawer-settings{width:100%;margin-top:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.045);padding:15px;display:flex;justify-content:space-between;align-items:center;text-align:left}.profile-drawer .category-grid{border-radius:24px}.profile-drawer .category{grid-template-columns:39px minmax(0,1fr) auto;padding-inline:9px}.profile-drawer .cat-icon{width:34px;height:34px}.profile-drawer .cat-name,.profile-drawer .cat-sum{font-size:14px}
     .person-status{font-size:12px;font-weight:650}.person-status.paid{color:var(--green)}.person-status.unpaid{color:var(--accent-strong)}.person-back{border:0;background:transparent;color:var(--muted);padding:5px 0 15px;font-size:15px}.person-summary{margin-bottom:14px}.person-list .tx{grid-template-columns:42px minmax(0,1fr) auto}.person-list .debt-amount{grid-row:1 / span 2;grid-column:3;align-self:center}
     .market-picker{margin-top:18px}.market-search{height:48px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.045);padding:0 15px;color:var(--text);width:100%;outline:0}.market-list{max-height:290px;overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:20px}.market-option{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line)}.market-option:last-child{border-bottom:0}.market-option input{accent-color:#ff4060}.market-option small{margin-left:auto;color:var(--muted)}.data-note{font-size:12px;color:var(--muted);line-height:1.45;margin-top:10px}.empty-chart{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);padding:28px}.detail-title{margin:2px 0 18px}.detail-title h1{font-size:30px}.account-picker{margin:0 0 14px}.account-picker select{width:100%;height:48px;border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:0 14px}
-    .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:60;display:none;align-items:flex-end;justify-content:center}
+    .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:60;display:none;align-items:flex-end;justify-content:center;overflow:hidden;overscroll-behavior:none;touch-action:none}
     .sheet-backdrop.open{display:flex}
     .sheet{
-      position:relative;isolation:isolate;width:min(480px,100%);max-height:90dvh;overflow:auto;border-radius:34px 34px 0 0;
+      position:relative;isolation:isolate;width:min(480px,100%);max-height:90dvh;overflow:auto;overscroll-behavior:contain;touch-action:pan-y;border-radius:34px 34px 0 0;
       background:linear-gradient(145deg,rgba(35,35,41,.5),rgba(11,11,14,.3) 48%,rgba(33,33,39,.36));
       border:1px solid rgba(255,255,255,.18);padding:12px 18px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -22px 80px rgba(0,0,0,.46),inset 0 2px 12px rgba(255,255,255,.035);backdrop-filter:blur(15px) saturate(145%);-webkit-backdrop-filter:blur(15px) saturate(145%)
     }
@@ -763,11 +763,11 @@ function fillCategorySelect(){
 function showToast(text){const t=document.querySelector('#toast');t.textContent=text;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
 function lockPageScroll(){
   if(document.body.classList.contains('sheet-open'))return;
-  lockedScrollY=window.scrollY;document.body.classList.add('sheet-open');document.body.style.position='fixed';document.body.style.top=`-${lockedScrollY}px`;document.body.style.left='0';document.body.style.right='0';document.body.style.width='100%';
+  lockedScrollY=window.scrollY;document.body.classList.add('sheet-open');document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';
 }
 function unlockPageScroll(){
   if(!document.body.classList.contains('sheet-open'))return;
-  document.body.classList.remove('sheet-open');document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';document.body.style.width='';window.scrollTo(0,lockedScrollY);lastPageScrollY=lockedScrollY;
+  document.body.classList.remove('sheet-open');document.documentElement.style.overflow='';document.body.style.overflow='';if(Math.abs(window.scrollY-lockedScrollY)>1)window.scrollTo(0,lockedScrollY);lastPageScrollY=lockedScrollY;
 }
 function openSheet(id){lockPageScroll();document.querySelector(id).classList.add('open')}
 function closeSheet(id){const backdrop=document.querySelector(id),sheet=backdrop?.querySelector('.sheet');if(sheet){sheet.style.transform='';sheet.classList.remove('swiping','settling')}backdrop?.classList.remove('open');requestAnimationFrame(()=>{if(!document.querySelector('.sheet-backdrop.open'))unlockPageScroll()})}
@@ -862,8 +862,8 @@ function switchScreen(id){
   dockIgnoreScrollUntil=performance.now()+550;window.scrollTo({top:0,behavior:'auto'});lastPageScrollY=0;
   requestAnimationFrame(refreshJellyItems);
 }
-function lockDrawerPage(){if(document.body.classList.contains('drawer-scroll-locked'))return;drawerLockedScrollY=window.scrollY;document.body.classList.add('drawer-scroll-locked');document.body.style.position='fixed';document.body.style.top=`-${drawerLockedScrollY}px`;document.body.style.left='0';document.body.style.right='0';document.body.style.width='100%'}
-function unlockDrawerPage(){if(!document.body.classList.contains('drawer-scroll-locked'))return;document.body.classList.remove('drawer-scroll-locked');document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';document.body.style.width='';window.scrollTo(0,drawerLockedScrollY);lastPageScrollY=drawerLockedScrollY}
+function lockDrawerPage(){if(document.body.classList.contains('drawer-scroll-locked'))return;drawerLockedScrollY=window.scrollY;document.body.classList.add('drawer-scroll-locked');document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden'}
+function unlockDrawerPage(){if(!document.body.classList.contains('drawer-scroll-locked'))return;document.body.classList.remove('drawer-scroll-locked');document.documentElement.style.overflow='';document.body.style.overflow='';if(Math.abs(window.scrollY-drawerLockedScrollY)>1)window.scrollTo(0,drawerLockedScrollY);lastPageScrollY=drawerLockedScrollY}
 function openProfileDrawer(){lockDrawerPage();document.body.classList.add('drawer-open');const drawer=document.querySelector('#profileDrawer');drawer.scrollTop=0;document.querySelector('#profileDrawerBackdrop').classList.add('open');const button=document.querySelector('#moreBtn');button.classList.add('active');button.setAttribute('aria-label','Назад')}
 function closeProfileDrawer(){const wasOpen=document.body.classList.contains('drawer-open');document.body.classList.remove('drawer-open');document.querySelector('#profileDrawerBackdrop')?.classList.remove('open');const button=document.querySelector('#moreBtn');button?.classList.remove('active');button?.setAttribute('aria-label','Додатково');if(wasOpen)unlockDrawerPage()}
 function toggleProfileDrawer(){document.body.classList.contains('drawer-open')?closeProfileDrawer():openProfileDrawer()}
@@ -1273,7 +1273,7 @@ addEventListener('wheel',handleBoundaryWheel,{passive:true});
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   let reloadingForUpdate=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloadingForUpdate)return;reloadingForUpdate=true;location.reload()});
-  navigator.serviceWorker.register('./sw.js?v=38',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+  navigator.serviceWorker.register('./sw.js?v=39',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
 }
 try{
   if('scrollRestoration' in history)history.scrollRestoration='manual';

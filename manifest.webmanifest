@@ -1,7 +1,7 @@
 {
   "name": "Voice Finance Free",
   "short_name": "Voice Finance",
-  "start_url": "./?v=20",
+  "start_url": "./?v=21",
   "id": "./",
   "scope": "./",
   "display": "standalone",
