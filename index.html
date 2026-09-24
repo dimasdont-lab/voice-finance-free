@@ -88,7 +88,7 @@
     .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:8px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(0deg,#050505 0 48%,transparent);z-index:30;transition:transform .5s cubic-bezier(.22,.82,.22,1),bottom .22s ease}
     .dock-layout{position:relative;height:146px;transition:height .8s cubic-bezier(.22,.72,.18,1)}
     .quick-entry-shell{position:absolute;left:0;top:0;width:100%;height:60px;border:1px solid rgba(255,255,255,.16);border-radius:30px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);display:flex;align-items:center;padding:0 18px;transition:left .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),border-radius .8s cubic-bezier(.22,.72,.18,1),padding .8s cubic-bezier(.22,.72,.18,1);overflow:hidden}
-    .quick-entry-shell svg{width:22px;height:22px;flex:none;color:#f5f5f7}.quick-entry-shell.listening{border-color:rgba(255,64,96,.6)}.quick-entry-input{min-width:0;width:100%;height:100%;border:0;outline:0;background:transparent;color:#f5f5f7;padding:0 11px;font-size:16px}.quick-entry-input::placeholder{color:#8d8d94}
+    .quick-entry-shell>svg{width:22px;height:22px;flex:none;color:#f5f5f7}.quick-entry-shell.listening{border-color:rgba(255,64,96,.6)}.quick-entry-input{min-width:0;flex:1;height:100%;border:0;outline:0;background:transparent;color:#f5f5f7;padding:0 9px 0 11px;font-size:16px}.quick-entry-input::placeholder{color:#8d8d94}.quick-send{width:38px;height:38px;flex:none;border:0;border-radius:50%;background:#ff4060;color:#fff;display:grid;place-items:center;padding:0;transition:transform .18s ease,filter .18s ease}.quick-send:active{transform:scale(.9);filter:brightness(.82)}.quick-send svg{width:19px;height:19px}
     .dock{position:absolute;left:0;top:68px;width:100%;height:78px;transition:top .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1)}
     .dock-group{position:relative;isolation:isolate;width:100%;height:78px;border:1px solid rgba(255,255,255,.16);border-radius:39px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);overflow:hidden;transition:height .8s cubic-bezier(.22,.72,.18,1),border-color .8s ease,background-color .8s ease,box-shadow .8s ease}
     .profile-drawer::before{content:"";position:absolute;pointer-events:none;inset:1px;border-radius:inherit;background:linear-gradient(100deg,rgba(255,255,255,.07),transparent 18% 82%,rgba(255,255,255,.055));opacity:.5}
@@ -96,7 +96,7 @@
     .dock-indicator{position:absolute;z-index:0;left:6px;top:6px;width:calc((100% - 12px)/5);height:64px;border-radius:31px;background:#09090a;transform:translateX(0);transform-origin:center;will-change:transform,width,height,left,top;transition:left .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),border-radius .8s cubic-bezier(.22,.72,.18,1)}
     .dock-indicator.moving{animation:dockIndicatorMove .8s cubic-bezier(.22,.72,.18,1) both}@keyframes dockIndicatorMove{0%{transform:translateX(var(--indicator-from)) scaleY(1)}50%{transform:translateX(var(--indicator-mid)) scaleY(var(--indicator-squeeze))}100%{transform:translateX(var(--indicator-to)) scaleY(1)}}
     .dock button{border:0;color:#f1f1f3}.dock-group button{--i:0;position:absolute;z-index:1;left:6px;top:6px;width:calc((100% - 12px)/5);height:64px;border-radius:31px;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;padding:5px 2px;transform:translateX(calc(var(--i) * 100%));transition:transform .8s cubic-bezier(.22,.72,.18,1),opacity .55s ease,color .35s ease,width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),left .8s cubic-bezier(.22,.72,.18,1)}.dock-group button:nth-of-type(2){--i:1}.dock-group button:nth-of-type(3){--i:2}.dock-group button:nth-of-type(4){--i:3}.dock-group button:nth-of-type(5){--i:4}.dock-group button.active{color:#ff4060}.dock-group button:active{filter:brightness(.82)}.dock svg{width:25px;height:25px}.dock-label{font-size:10px;line-height:1;white-space:nowrap;letter-spacing:-.1px;transition:opacity .35s ease}
-    .bottom-zone.compact .dock-layout{height:58px}.bottom-zone.compact .quick-entry-shell{left:66px;top:0;width:calc(100% - 132px);height:58px;border-radius:29px;padding:0 14px}.bottom-zone.compact .dock{top:0;height:58px}.bottom-zone.compact .dock-group{height:58px;border-color:transparent;background:transparent;box-shadow:none;overflow:visible}.bottom-zone.compact .dock-group::after{opacity:0}.bottom-zone.compact .dock-indicator{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0)!important;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-group button{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0) scale(.72);opacity:0;pointer-events:none}.bottom-zone.compact .dock-group button.active{transform:translateX(0) scale(1);opacity:1;pointer-events:auto}.bottom-zone.compact .dock-group .more-btn{left:calc(100% - 58px);transform:translateX(0) scale(1);opacity:1;pointer-events:auto;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-label{opacity:0}.bottom-zone.compact .quick-entry-shell>svg{width:0;opacity:0}
+    .bottom-zone.compact .dock-layout{height:58px}.bottom-zone.compact .quick-entry-shell{left:66px;top:0;width:calc(100% - 132px);height:58px;border-radius:29px;padding:0 9px 0 14px}.bottom-zone.compact .dock{top:0;height:58px}.bottom-zone.compact .dock-group{height:58px;border-color:transparent;background:transparent;box-shadow:none;overflow:visible}.bottom-zone.compact .dock-group::after{opacity:0}.bottom-zone.compact .dock-indicator{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0)!important;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-group button{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0) scale(.72);opacity:0;pointer-events:none}.bottom-zone.compact .dock-group button.active{transform:translateX(0) scale(1);opacity:1;pointer-events:auto}.bottom-zone.compact .dock-group .more-btn{left:calc(100% - 58px);transform:translateX(0) scale(1);opacity:1;pointer-events:auto;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-label{opacity:0}.bottom-zone.compact .quick-entry-shell>svg{width:0;opacity:0}.bottom-zone.compact .quick-send{width:38px;height:38px}
     .topline{padding-left:0}.page-search{height:58px;margin:0 0 18px;border:1px solid rgba(255,255,255,.1);border-radius:29px;background:#1c1c1e;display:flex;align-items:center;padding:0 16px}.page-search svg{width:23px;height:23px;flex:none}.page-search input{width:100%;height:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);padding:0 12px;font-size:17px}.page-search input::placeholder{color:#77777f}
     .home-topline{min-height:72px;align-items:flex-start}.home-topline h1{font-size:31px;margin-bottom:7px}.home-topline .sub{margin:0;font-size:16px;text-transform:capitalize}
     .profile-drawer-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0);pointer-events:none;transition:background .46s ease}
@@ -247,7 +247,7 @@
 
 <div class="bottom-zone" id="bottomZone">
   <div class="dock-layout">
-    <label class="quick-entry-shell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5v14"/></svg><input class="quick-entry-input" id="quickEntryInput" placeholder="Введи операцію або борг" autocomplete="off" enterkeyhint="done"></label>
+    <div class="quick-entry-shell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5v14"/></svg><input class="quick-entry-input" id="quickEntryInput" placeholder="Введи операцію або борг" autocomplete="off" enterkeyhint="done"><button class="quick-send" id="quickSend" aria-label="Розпізнати фразу"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"/></svg></button></div>
     <nav class="dock" aria-label="Головна навігація"><div class="dock-group"><div class="dock-indicator" aria-hidden="true"></div>
       <button class="active" data-screen="home" aria-label="Дім"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg><span class="dock-label">Дім</span></button>
       <button data-screen="insights" aria-label="Аналітика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg><span class="dock-label">Аналітика</span></button>
@@ -410,6 +410,9 @@ let lockedScrollY=0;
 let lastPageScrollY=window.scrollY;
 let dockCompact=false;
 let dockTouchStartY=0;
+let dockTouchAtTop=false;
+let dockTouchAtBottom=false;
+let dockInteractionsReady=false;
 let dockIndicatorIndex=0;
 let jellyVelocity=0;
 let jellyFrame=null;
@@ -676,7 +679,10 @@ function switchScreen(id){
 function openProfileDrawer(){document.body.classList.add('drawer-open');document.querySelector('#profileDrawerBackdrop').classList.add('open');document.querySelector('#moreBtn').classList.add('active')}
 function closeProfileDrawer(){document.body.classList.remove('drawer-open');document.querySelector('#profileDrawerBackdrop')?.classList.remove('open');document.querySelector('#moreBtn')?.classList.remove('active')}
 function toggleProfileDrawer(){document.body.classList.contains('drawer-open')?closeProfileDrawer():openProfileDrawer()}
-function setDockCompact(compact){dockCompact=compact;document.querySelector('#bottomZone').classList.toggle('compact',compact)}
+function setDockCompact(compact){
+  if(dockCompact===compact)return;
+  dockCompact=compact;const zone=document.querySelector('#bottomZone'),indicator=document.querySelector('.dock-indicator');indicator?.classList.remove('moving');zone.classList.toggle('compact',compact);
+}
 function moveDockIndicator(nextIndex,animate=true){
   const indicator=document.querySelector('.dock-indicator'),group=document.querySelector('.dock-group');if(!indicator||!group)return;
   const unit=(group.clientWidth-12)/5,from=dockIndicatorIndex*unit,to=nextIndex*unit,distance=Math.abs(nextIndex-dockIndicatorIndex);
@@ -701,7 +707,7 @@ function runJelly(){
 function handlePageScroll(){
   if(document.body.classList.contains('sheet-open')||document.body.classList.contains('drawer-open'))return;
   const y=window.scrollY,delta=y-lastPageScrollY;lastPageScrollY=y;
-  if(delta>5)setDockCompact(true);
+  if(dockInteractionsReady&&delta>5)setDockCompact(true);
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   jellyVelocity=Math.max(-16,Math.min(16,delta));if(!jellyFrame)jellyFrame=requestAnimationFrame(runJelly);
 }
@@ -709,9 +715,12 @@ function handleDockTouchEnd(e){
   if(document.body.classList.contains('sheet-open')||document.body.classList.contains('drawer-open'))return;
   const endY=e.changedTouches?.[0]?.clientY??dockTouchStartY,delta=dockTouchStartY-endY;
   if(Math.abs(delta)<26)return;
-  const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight),atTop=window.scrollY<=2,atBottom=maxScroll<2||window.scrollY>=maxScroll-2;
-  if(delta>0){if(atBottom&&dockCompact)setDockCompact(false);else setDockCompact(true)}
-  else if(atTop&&dockCompact)setDockCompact(false);
+  if(delta>0){if(dockTouchAtBottom&&dockCompact)setDockCompact(false);else setDockCompact(true)}
+  else if(dockTouchAtTop&&dockCompact)setDockCompact(false);
+}
+function handleBoundaryWheel(e){
+  if(!dockCompact)return;const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+  if((e.deltaY>0&&window.scrollY>=maxScroll-2)||(e.deltaY<0&&window.scrollY<=2))setDockCompact(false);
 }
 function positionQuickEntry(){
   const input=document.querySelector('#quickEntryInput'),zone=document.querySelector('#bottomZone'),viewport=window.visualViewport;
@@ -953,7 +962,7 @@ function exportData(){
   const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='voice-finance-data.json';a.click();URL.revokeObjectURL(a.href);
 }
-document.querySelectorAll('.dock [data-screen]').forEach(b=>b.onclick=()=>switchScreen(b.dataset.screen));
+document.querySelectorAll('.dock [data-screen]').forEach(b=>b.onclick=()=>{if(dockCompact&&b.classList.contains('active'))setDockCompact(false);else switchScreen(b.dataset.screen)});
 document.querySelector('#moreBtn').onclick=toggleProfileDrawer;
 document.querySelector('#profileDrawerBackdrop').onclick=e=>{if(e.target.id==='profileDrawerBackdrop')closeProfileDrawer()};
 document.querySelector('#profileDrawer').onclick=e=>e.stopPropagation();
@@ -961,6 +970,7 @@ document.querySelector('#openSettings').onclick=()=>{closeProfileDrawer();openSh
 document.querySelector('#incomeSummary').onclick=()=>openInsightSection('#incomeInsight');
 document.querySelector('#expenseSummary').onclick=()=>openInsightSection('#expenseInsight');
 document.querySelector('#quickEntryInput').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();submitQuickEntry()}};
+document.querySelector('#quickSend').onclick=submitQuickEntry;
 document.querySelector('#quickEntryInput').addEventListener('focus',positionQuickEntry);
 document.querySelector('#quickEntryInput').addEventListener('blur',()=>setTimeout(positionQuickEntry,120));
 document.querySelector('#homeSearch').addEventListener('input',renderTransactions);
@@ -1027,19 +1037,23 @@ window.visualViewport?.addEventListener('scroll',positionQuickEntry);
 addEventListener('orientationchange',()=>{if(document.activeElement!==document.querySelector('#voiceTestInput'))stableViewportHeight=Math.max(window.innerHeight,window.visualViewport?.height||0)});
 addEventListener('resize',()=>requestAnimationFrame(fitBalanceText));
 addEventListener('scroll',handlePageScroll,{passive:true});
-addEventListener('touchstart',e=>{if(e.touches.length===1)dockTouchStartY=e.touches[0].clientY},{passive:true});
+addEventListener('touchstart',e=>{if(e.touches.length!==1)return;dockTouchStartY=e.touches[0].clientY;const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);dockTouchAtTop=window.scrollY<=2;dockTouchAtBottom=maxScroll<2||window.scrollY>=maxScroll-2},{passive:true});
 addEventListener('touchend',handleDockTouchEnd,{passive:true});
+addEventListener('wheel',handleBoundaryWheel,{passive:true});
 
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   let reloadingForUpdate=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloadingForUpdate)return;reloadingForUpdate=true;location.reload()});
-  navigator.serviceWorker.register('./sw.js?v=25',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+  navigator.serviceWorker.register('./sw.js?v=26',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
 }
 try{
+  if('scrollRestoration' in history)history.scrollRestoration='manual';
+  window.scrollTo(0,0);lastPageScrollY=0;document.querySelector('#bottomZone').classList.remove('compact');dockCompact=false;
   setupSheetGestures();
   render();
   switchScreen(location.hash.slice(1)||'home');
   addEventListener('hashchange',()=>switchScreen(location.hash.slice(1)||'home'));
+  setTimeout(()=>{window.scrollTo(0,0);lastPageScrollY=0;setDockCompact(false);dockInteractionsReady=true},900);
   window.__VOICE_FINANCE_READY__=true;
   window.__VOICE_FINANCE_TEST__={parseVoice,getVoiceState:()=>voiceState,getActiveTrackCount:()=>mediaStream?.getTracks().filter(t=>t.readyState==='live').length||0};
 }catch(err){
