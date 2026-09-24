@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#050505" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="voice-finance-api" content="" />
   <title>Voice Finance</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <style>
@@ -37,9 +38,12 @@
       max-width:480px;
       margin:0 auto;
       min-height:100dvh;
-      padding:calc(env(safe-area-inset-top) + 18px) 18px calc(190px + env(safe-area-inset-bottom));
+      padding:calc(env(safe-area-inset-top) + 96px) 18px calc(190px + env(safe-area-inset-bottom));
       background:#050505;transition:transform .46s cubic-bezier(.2,.8,.2,1),filter .46s ease;
     }
+    .account-ticker{position:fixed;z-index:42;top:env(safe-area-inset-top);left:0;right:0;height:74px;overflow:hidden;background:rgba(5,5,5,.94);border-bottom:1px solid rgba(255,255,255,.06);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .ticker-track{height:100%;display:flex;width:max-content;align-items:center;will-change:transform;animation:tickerMove var(--ticker-duration,18s) linear infinite;transform:translate3d(0,0,0)}.ticker-sequence{display:flex;align-items:center;flex:none}.ticker-item{position:relative;width:126px;height:62px;display:grid;grid-template-columns:38px 1fr;grid-template-rows:1fr 1fr;column-gap:7px;align-items:center;padding:7px 8px 13px;border:0;border-right:1px solid rgba(255,255,255,.07);background:transparent;text-align:left}.ticker-logo{grid-row:1/3;width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#24242a,#0b0b0d);border:1px solid var(--line);display:grid;place-items:center;font-weight:750;font-size:12px}.ticker-name{font-size:10px;line-height:1;color:#f5f5f7}.ticker-value{font-size:11px;font-weight:650;white-space:nowrap}.ticker-spark{position:absolute;left:53px;bottom:1px;width:38px;height:13px}.ticker-change{position:absolute;right:5px;bottom:2px;font-size:8px;white-space:nowrap}.trend-up{color:var(--green)}.trend-down{color:#ff5364}.trend-flat{color:var(--muted)}@keyframes tickerMove{to{transform:translate3d(calc(-1 * var(--ticker-distance,600px)),0,0)}}
+    @media (prefers-reduced-motion:reduce){.account-ticker{overflow-x:auto;-webkit-overflow-scrolling:touch}.ticker-track{animation:none!important}.ticker-sequence[aria-hidden="true"]{display:none}}
     .topline{display:flex;justify-content:space-between;align-items:flex-start;margin:8px 4px 18px}
     .eyebrow{font-size:15px;color:var(--muted);margin-bottom:2px}
     h1{font-size:33px;line-height:1.05;margin:0;letter-spacing:-1.2px}
@@ -54,6 +58,7 @@
       border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow);
     }
     .balance-card{padding:24px 22px;margin-bottom:22px}
+    .balance-row{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:10px;align-items:center}.balance-row .balance{margin:9px 0 6px}.balance-chart-btn{border:0;background:transparent;padding:0;height:78px;display:block;position:relative}.balance-chart-btn svg{width:100%;height:100%;overflow:visible}.balance-chart-btn path:not(.fill){fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart-btn .fill{fill:url(#balanceGradient);stroke:none}.balance-chart-btn::after{content:'›';position:absolute;right:-7px;top:22px;color:var(--muted);font-size:27px}.balance-change{font-size:14px;color:var(--green);margin:0 0 18px;white-space:nowrap}
     .label{color:var(--muted);font-size:15px}
     .balance-main{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:10px;align-items:center;margin:7px 0 22px;min-width:0}.balance-main>*{min-width:0}.balance{width:100%;font-size:clamp(26px,7.8vw,34px);letter-spacing:-1.2px;line-height:1.05;font-weight:600;white-space:nowrap;overflow:hidden}.balance-chart{width:108px;height:52px;overflow:hidden}.balance-chart path{fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart .fill{fill:url(#balanceGradient);stroke:none}
     .split{display:grid;grid-template-columns:1fr 1px 1fr;gap:18px;align-items:center}
@@ -67,6 +72,7 @@
     .section-head{display:flex;align-items:center;justify-content:space-between;margin:0 4px 12px}
     .section-head h2{font-size:20px;margin:0;letter-spacing:-.3px}
     .section-head button{border:0;background:none;color:var(--muted);padding:5px}
+    .accounts-section{margin:4px 0 22px}.accounts-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px 8px;overflow:hidden;max-height:108px;transition:max-height .35s ease}.accounts-grid.expanded{max-height:360px}.account-tile{border:0;background:transparent;padding:0;min-width:0;text-align:center}.account-icon{width:58px;height:58px;border-radius:18px;margin:0 auto 7px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(145deg,#27272d,#0d0d10);display:grid;place-items:center;font-size:18px;font-weight:750;box-shadow:inset 0 1px rgba(255,255,255,.08)}.account-icon.erste{background:#0874df}.account-icon.revolut{font-size:30px}.account-name{display:block;font-size:12px;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.account-balance{display:block;font-size:11px;color:var(--green);margin-top:3px;white-space:nowrap}.account-balance.negative{color:#ff5364}.add-icon{font-size:29px;color:var(--muted)}
     .category-grid{display:block;border:1px solid var(--line);border-radius:var(--r-xl);overflow:hidden;background:var(--panel)}
     .category{
       min-height:46px;border:0;border-bottom:1px solid var(--line);border-radius:0;
@@ -146,6 +152,7 @@
     .muted{color:var(--muted)}
     .profile-actions button{width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;padding:16px 0}.profile-actions button:last-child{border-bottom:0}
     .tiny{font-size:12px;color:var(--muted)}
+    .provider-list{display:grid;gap:9px}.provider-button{width:100%;border:1px solid var(--line);background:#121215;border-radius:18px;padding:14px 15px;display:flex;align-items:center;justify-content:space-between;text-align:left}.provider-note{font-size:12px;color:var(--muted)}.analysis-head{margin-bottom:16px}.analysis-value{font-size:43px;font-weight:650;letter-spacing:-1.8px}.analysis-change{margin-top:6px;font-size:16px}.period-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;background:#111114;border:1px solid var(--line);border-radius:17px;padding:4px;margin-bottom:14px}.period-tabs button{border:0;background:transparent;color:var(--muted);font-size:12px;padding:8px 2px;border-radius:13px}.period-tabs button.active{background:#29292e;color:white}.analysis-chart{height:260px;border-bottom:1px solid var(--line);position:relative;touch-action:none;margin-bottom:18px}.analysis-chart svg{width:100%;height:100%;overflow:visible}.chart-tooltip{position:absolute;top:10px;left:10px;background:rgba(20,20,23,.92);border:1px solid var(--line);border-radius:12px;padding:7px 9px;font-size:12px;pointer-events:none}.chart-crosshair{stroke:rgba(255,255,255,.35);stroke-width:1;stroke-dasharray:3 3}.metrics-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:24px;overflow:hidden;margin-bottom:18px}.metric-row{padding:13px;border-bottom:1px solid var(--line)}.metric-row:nth-child(odd){border-right:1px solid var(--line)}.metric-row:nth-last-child(-n+2){border-bottom:0}.metric-row small{display:block;color:var(--muted);margin-bottom:4px}.back-button{border:0;background:transparent;color:var(--muted);padding:4px 0 16px;font-size:15px}
     .voice-popover{position:fixed;isolation:isolate;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));width:min(440px,calc(100% - 28px));z-index:55;display:none;background:linear-gradient(145deg,rgba(38,38,44,.5),rgba(12,12,15,.3) 48%,rgba(36,36,42,.36));border:1px solid rgba(255,255,255,.18);border-radius:26px;padding:16px;box-shadow:0 18px 70px rgba(0,0,0,.48),inset 0 2px 10px rgba(255,255,255,.035);backdrop-filter:blur(15px) saturate(145%);-webkit-backdrop-filter:blur(15px) saturate(145%);transition:bottom .18s ease}
     body.keyboard-open .bottom-zone{opacity:0;pointer-events:none;transform:translate(-50%,28px);transition:opacity .16s ease,transform .2s ease}
     body.sheet-open .bottom-zone{opacity:0;pointer-events:none;transform:translate(-50%,28px)}
@@ -167,6 +174,7 @@
   </style>
 </head>
 <body>
+<div class="account-ticker" id="accountTicker" aria-label="Рухомий список рахунків"><div class="ticker-track" id="tickerTrack"></div></div>
 <svg aria-hidden="true" width="0" height="0" style="position:fixed;pointer-events:none">
   <defs>
     <filter id="glassRefraction" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
@@ -202,7 +210,7 @@
 
     <div class="balance-card card">
       <div class="label">Загальний баланс</div>
-      <div class="balance-main"><div class="balance" id="balance">0 zł</div><svg class="balance-chart" viewBox="0 0 126 62" preserveAspectRatio="none" aria-label="Графік балансу"><defs><linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66d896" stop-opacity=".3"/><stop offset="1" stop-color="#66d896" stop-opacity="0"/></linearGradient></defs><path class="fill" id="balanceChartFill"/><path id="balanceChartLine"/></svg></div>
+      <div class="balance-row"><div><div class="balance" id="balance">0 zł</div><div class="balance-change" id="balanceChange">— за 30 днів</div></div><button class="balance-chart-btn" id="openBalanceAnalysis" aria-label="Відкрити аналіз балансу"><svg viewBox="0 0 126 70" preserveAspectRatio="none"><defs><linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66d896" stop-opacity=".3"/><stop offset="1" stop-color="#66d896" stop-opacity="0"/></linearGradient></defs><path class="fill" id="balanceChartFill"/><path id="balanceChartLine"/></svg></button></div>
       <div class="split">
         <button class="metric income" id="incomeSummary">
           <div class="dot">↑</div>
@@ -216,6 +224,11 @@
       </div>
     </div>
 
+    <div class="accounts-section">
+      <div class="section-head"><h2>Рахунки</h2><button id="toggleAccounts">Усі&nbsp; ›</button></div>
+      <div class="accounts-grid" id="accountsGrid"></div>
+    </div>
+
     <div class="section">
       <div class="section-head"><h2>Останні операції</h2><button id="seeAllTx">Усі</button></div>
       <div class="transactions" id="recentTx"></div>
@@ -226,6 +239,15 @@
       <div class="bar"><div id="goalBar" style="width:0%"></div></div><div class="tiny" id="goalCaption" style="margin-top:9px"></div>
     </div>
     <div class="goal-card"><div class="label">Накопичення</div><div class="big-stat" id="savingsValue">0 zł</div><div class="muted">Доходи мінус витрати за весь період.</div></div>
+  </section>
+
+  <section id="balanceAnalysis" class="screen">
+    <button class="back-button" id="balanceBack">‹ Дім</button>
+    <div class="analysis-head"><div class="eyebrow">Загальний баланс</div><div class="analysis-value" id="analysisValue">0 zł</div><div class="analysis-change trend-flat" id="analysisChange">—</div></div>
+    <div class="period-tabs" id="periodTabs"><button data-period="7D">7D</button><button class="active" data-period="1M">1M</button><button data-period="3M">3M</button><button data-period="YTD">YTD</button><button data-period="1Y">1Y</button><button data-period="ALL">ALL</button></div>
+    <div class="analysis-chart" id="analysisChart"><svg viewBox="0 0 440 250" preserveAspectRatio="none"><path id="analysisArea" fill="rgba(102,216,150,.12)"/><path id="analysisLine" fill="none" stroke="#66d896" stroke-width="2.3" vector-effect="non-scaling-stroke"/><line class="chart-crosshair hidden" id="chartCrosshair" y1="0" y2="250"/><circle class="hidden" id="chartPoint" r="5" fill="#66d896"/></svg><div class="chart-tooltip hidden" id="chartTooltip"></div></div>
+    <div class="metrics-grid"><div class="metric-row"><small>Поточний</small><strong id="metricCurrent"></strong></div><div class="metric-row"><small>Зміна</small><strong id="metricChange"></strong></div><div class="metric-row"><small>Максимум</small><strong id="metricMax"></strong></div><div class="metric-row"><small>Мінімум</small><strong id="metricMin"></strong></div><div class="metric-row"><small>Доходи</small><strong class="trend-up" id="metricIncome"></strong></div><div class="metric-row"><small>Витрати</small><strong class="trend-down" id="metricExpense"></strong></div></div>
+    <div class="section-head"><h2>Рахунки</h2></div><div class="transactions" id="analysisAccounts"></div>
   </section>
 
   <section id="insights" class="screen">
@@ -277,6 +299,10 @@
     </div></nav>
   </div>
 </div>
+
+<div class="sheet-backdrop" id="accountAddBackdrop"><div class="sheet"><div class="handle"></div><h3>Додати рахунок</h3><p>Банківські підключення працюють лише через захищений сервер. Паролі, PIN та SMS-коди тут ніколи не вводяться.</p><div class="provider-list"><button class="provider-button" data-provider="PKO"><span>PKO Bank Polski</span><span>›</span></button><button class="provider-button" data-provider="REVOLUT"><span>Revolut</span><span>›</span></button><button class="provider-button" data-provider="ERSTE"><span>Erste</span><span>›</span></button><button class="provider-button" data-provider="MONOBANK"><span>Monobank</span><span>›</span></button></div><div class="label" style="margin:20px 0 9px">Додати вручну</div><div class="provider-list"><button class="provider-button" data-manual-type="cash"><span>Готівка</span><span>＋</span></button><button class="provider-button" data-manual-type="manual"><span>Інший рахунок</span><span>＋</span></button></div><button class="danger" data-close-sheet="accountAddBackdrop">Закрити</button></div></div>
+<div class="sheet-backdrop" id="manualAccountBackdrop"><div class="sheet"><div class="handle"></div><h3 id="manualAccountTitle">Новий рахунок</h3><div class="field"><label>Назва</label><input id="manualAccountName" placeholder="Готівка"></div><div class="field"><label>Поточний баланс</label><input id="manualAccountBalance" inputmode="decimal" placeholder="0"></div><div class="field"><label>Валюта</label><select id="manualAccountCurrency"><option>PLN</option><option>EUR</option><option>USD</option><option>UAH</option></select></div><button class="primary" id="saveManualAccount">Зберегти</button><button class="danger" data-close-sheet="manualAccountBackdrop">Скасувати</button></div></div>
+<div class="sheet-backdrop" id="monobankBackdrop"><div class="sheet"><div class="handle"></div><h3>Підключити Monobank</h3><p>Токен буде відправлено один раз у захищений backend і зашифровано. Він ніколи не зберігається у браузері або git.</p><div class="field"><label>Особистий токен</label><input id="monobankToken" type="password" autocomplete="off" placeholder="Встав токен"></div><button class="primary" id="connectMonobank">Підключити</button><button class="danger" data-close-sheet="monobankBackdrop">Скасувати</button></div></div>
 
 <div class="sheet-backdrop" id="settingsBackdrop">
   <div class="sheet">
@@ -391,6 +417,14 @@ const DEFAULT_CATEGORIES=[
   {id:'travel',name:'Подорожі',icon:'✈︎'},
   {id:'other',name:'Інше',icon:'•••'}
 ];
+const DEFAULT_ACCOUNTS=[
+  {id:'mono-demo',provider:'MONOBANK',bankName:'Monobank',displayName:'Monobank',shortName:'MONO',currency:'PLN',currentBalance:2340,availableBalance:2340,isActive:true,source:'demo'},
+  {id:'pko-demo',provider:'PKO',bankName:'PKO Bank Polski',displayName:'PKO',shortName:'PKO',currency:'PLN',currentBalance:15240,availableBalance:15240,isActive:true,source:'demo'},
+  {id:'revolut-demo',provider:'REVOLUT',bankName:'Revolut',displayName:'Revolut',shortName:'REV',currency:'PLN',currentBalance:6480,availableBalance:6480,isActive:true,source:'demo'},
+  {id:'erste-demo',provider:'ERSTE',bankName:'Erste',displayName:'Erste',shortName:'ERSTE',currency:'PLN',currentBalance:1280,availableBalance:1280,isActive:true,source:'demo'},
+  {id:'cash-demo',provider:'CASH',bankName:'Готівка',displayName:'Готівка',shortName:'CASH',currency:'PLN',currentBalance:800,availableBalance:800,isActive:true,source:'demo'}
+];
+const BANKING_API_BASE=document.querySelector('meta[name="voice-finance-api"]')?.content?.replace(/\/$/,'')||'';
 const uid=()=>{try{if(globalThis.crypto&&typeof globalThis.crypto.randomUUID==='function')return globalThis.crypto.randomUUID()}catch(e){}return 'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)};
 const demoTx=[
   {id:uid(),type:'expense',amount:184,currency:'PLN',category:'groceries',client:'',note:'Biedronka',date:new Date().toISOString()},
@@ -439,6 +473,9 @@ let dockBoundaryHandled=false;
 let dockInteractionsReady=false;
 let dockIgnoreScrollUntil=0;
 let dockIndicatorIndex=0;
+let accountsExpanded=false;
+let analysisPeriod='1M';
+let chartPoints=[];
 let jellyVelocity=0;
 let jellyFrame=null;
 let jellyItems=[];
@@ -451,11 +488,13 @@ function loadState(){
   if(raw){
     try{
       const s=JSON.parse(raw);
-      return {categories:s.categories?.length?s.categories:DEFAULT_CATEGORIES,transactions:s.transactions||[],debts:s.debts||[],goal:s.goal||8000,speechLang:s.speechLang||'uk-UA'};
+      const accounts=s.accounts?.length?s.accounts:structuredClone(DEFAULT_ACCOUNTS);let balanceSnapshots=s.balanceSnapshots?.length?s.balanceSnapshots:createMockSnapshots(accounts);const current=accounts.filter(a=>a.isActive&&a.currency==='PLN').reduce((n,a)=>n+Number(a.currentBalance||0),0),last=Number(balanceSnapshots.at(-1)?.totalBalance);if(balanceSnapshots.every(x=>x.source==='demo')&&Math.abs(current-last)>.01)balanceSnapshots=createMockSnapshots(accounts);
+      return {categories:s.categories?.length?s.categories:DEFAULT_CATEGORIES,transactions:s.transactions||[],debts:s.debts||[],goal:s.goal||8000,speechLang:s.speechLang||'uk-UA',accounts,balanceSnapshots};
     }catch(e){}
   }
-  return {categories:[...DEFAULT_CATEGORIES],transactions:[],debts:[],goal:8000,speechLang:'uk-UA'};
+  const accounts=structuredClone(DEFAULT_ACCOUNTS);return {categories:[...DEFAULT_CATEGORIES],transactions:[],debts:[],goal:8000,speechLang:'uk-UA',accounts,balanceSnapshots:createMockSnapshots(accounts)};
 }
+function createMockSnapshots(accounts){const out=[];for(let day=34;day>=0;day--){const progress=(34-day)/34,ts=new Date(Date.now()-day*86400000).toISOString(),accountBalances={};let total=0;accounts.forEach((a,i)=>{const end=Number(a.currentBalance)||0,wave=(Math.sin((34-day)*(i+1)*.43)-Math.sin(34*(i+1)*.43))*28,v=i===3?end:Math.max(0,end-(1-progress)*(140+i*35)+wave);accountBalances[a.id]=Math.round(v*100)/100;total+=accountBalances[a.id]});out.push({id:'snapshot-'+day,timestamp:ts,totalBalance:Math.round(total*100)/100,convertedTotalBalance:Math.round(total*100)/100,baseCurrency:'PLN',accountBalances,source:'demo'})}return out}
 function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));render()}
 function fmt(n,c='PLN'){
   try{return new Intl.NumberFormat('uk-UA',{style:'currency',currency:c,maximumFractionDigits:2}).format(n)}
@@ -466,7 +505,8 @@ function totals(){
   const tx=plnOnly(state.transactions);
   const income=tx.filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
   const expense=tx.filter(t=>t.type==='expense').reduce((a,b)=>a+b.amount,0);
-  return {income,expense,balance:income-expense}
+  const accountBalance=(state.accounts||[]).filter(a=>a.isActive&&a.currency==='PLN').reduce((sum,a)=>sum+Number(a.currentBalance||0),0);
+  return {income,expense,balance:state.accounts?.length?accountBalance:income-expense}
 }
 function categoryById(id){return state.categories.find(c=>c.id===id)||{name:'Інше',icon:'•••'}}
 function dateLabel(iso){
@@ -485,6 +525,9 @@ function render(){
   requestAnimationFrame(fitBalanceText);
   document.querySelector('#todayLabel').textContent=new Date().toLocaleDateString('uk-UA',{weekday:'long',day:'numeric',month:'long'});
   renderBalanceChart();
+  renderAccounts();
+  renderTicker();
+  renderBalanceAnalysis();
   renderCategories();
   renderTransactions();
   renderInsights();
@@ -502,12 +545,19 @@ function fitTextToBox(el,minSize){
 }
 function fitBalanceText(){fitTextToBox(document.querySelector('#balance'),18);fitTextToBox(document.querySelector('#incomeTotal'),11);fitTextToBox(document.querySelector('#expenseTotal'),11)}
 function renderBalanceChart(){
-  const values=[0];let running=0;
-  plnOnly([...state.transactions].sort((a,b)=>new Date(a.date)-new Date(b.date))).forEach(t=>{running+=t.type==='income'?t.amount:-t.amount;values.push(running)});
-  const shown=values.slice(-10),min=Math.min(...shown),max=Math.max(...shown),range=max-min||1;
-  const points=shown.map((v,i)=>`${shown.length===1?0:i*126/(shown.length-1)},${56-(v-min)*48/range}`).join(' ');
-  const line=`M${points.replaceAll(' ',' L')}`;document.querySelector('#balanceChartLine').setAttribute('d',line);document.querySelector('#balanceChartFill').setAttribute('d',`${line} L126,62 L0,62 Z`);
+  const shown=(state.balanceSnapshots||[]).slice(-30),values=shown.map(s=>Number(s.convertedTotalBalance??s.totalBalance)),g=lineGeometry(values,126,62,4);document.querySelector('#balanceChartLine').setAttribute('d',g.line);document.querySelector('#balanceChartFill').setAttribute('d',g.area);const first=values[0]??totals().balance,last=values.at(-1)??first,change=last-first,pct=first?change/Math.abs(first)*100:0,el=document.querySelector('#balanceChange');el.textContent=`${formatMovement(change)} (${pct>=0?'+':''}${pct.toFixed(1)}%) за 30 днів`;el.className='balance-change '+(change>0?'trend-up':change<0?'trend-down':'trend-flat');
 }
+function lineGeometry(values,width,height,pad=4){if(!values.length)return{line:'',area:'',points:[]};const min=Math.min(...values),max=Math.max(...values),range=max-min||1,points=values.map((v,i)=>({x:values.length===1?width/2:pad+i*(width-pad*2)/(values.length-1),y:height-pad-(v-min)*(height-pad*2)/range,value:v})),line=points.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(' ');return{line,area:`${line} L${points.at(-1).x},${height} L${points[0].x},${height} Z`,points}}
+function accountIcon(a){return a.provider==='MONOBANK'?'mono':a.provider==='REVOLUT'?'R':a.provider==='CASH'?'▤':a.shortName||a.provider.slice(0,3)}
+function accountIconClass(a){return String(a.provider||'').toLowerCase()}
+function accountSnapshots(id){return(state.balanceSnapshots||[]).map(s=>({timestamp:s.timestamp,value:Number(s.accountBalances?.[id])})).filter(x=>Number.isFinite(x.value))}
+function formatMovement(n,c='PLN'){return`${n>0?'+':n<0?'−':''}${fmt(Math.abs(n),c)}`}
+function renderAccounts(){const grid=document.querySelector('#accountsGrid');if(!grid)return;const all=(state.accounts||[]).filter(a=>a.isActive),shown=accountsExpanded?all:all.slice(0,3);grid.classList.toggle('expanded',accountsExpanded);grid.innerHTML=shown.map(a=>`<button class="account-tile" data-account-id="${esc(a.id)}"><span class="account-icon ${accountIconClass(a)}">${accountIcon(a)}</span><span class="account-name">${esc(a.displayName)}</span><span class="account-balance ${a.currentBalance<0?'negative':''}">${fmt(a.currentBalance,a.currency)}</span></button>`).join('')+`<button class="account-tile" id="addAccount"><span class="account-icon add-icon">＋</span><span class="account-name">Додати</span><span class="account-balance">&nbsp;</span></button>`;grid.querySelectorAll('[data-account-id]').forEach(el=>el.onclick=()=>switchScreen('balanceAnalysis'));document.querySelector('#addAccount').onclick=()=>openSheet('#accountAddBackdrop');document.querySelector('#toggleAccounts').textContent=accountsExpanded?'Згорнути ˄':'Усі ›'}
+function renderTicker(){const track=document.querySelector('#tickerTrack');if(!track)return;const accounts=(state.accounts||[]).filter(a=>a.isActive);const item=a=>{const h=accountSnapshots(a.id),values=h.map(x=>x.value),g=lineGeometry(values.slice(-12),38,13,1),change=values.length>1?values.at(-1)-values[0]:0,cls=change>0?'trend-up':change<0?'trend-down':'trend-flat';return`<button class="ticker-item" data-ticker-account="${esc(a.id)}"><span class="ticker-logo">${accountIcon(a)}</span><span class="ticker-name">${esc(a.shortName||a.displayName)}</span><span class="ticker-value ${a.currentBalance<0?'trend-down':'trend-up'}">${fmt(a.currentBalance,a.currency)}</span><svg class="ticker-spark" viewBox="0 0 38 13"><path d="${g.line}" fill="none" stroke="currentColor" stroke-width="1.5" class="${cls}"/></svg><span class="ticker-change ${cls}">${formatMovement(change,a.currency)}</span></button>`};const seq=accounts.map(item).join('');track.innerHTML=Array.from({length:4},(_,i)=>`<div class="ticker-sequence" ${i?'aria-hidden="true"':''}>${seq}</div>`).join('');track.querySelectorAll('[data-ticker-account]').forEach(el=>el.onclick=()=>switchScreen('balanceAnalysis'));requestAnimationFrame(updateTickerSpeed)}
+function updateTickerSpeed(){const track=document.querySelector('#tickerTrack'),seq=track?.querySelector('.ticker-sequence');if(!seq)return;const distance=seq.getBoundingClientRect().width,speed=innerWidth/3;track.style.setProperty('--ticker-distance',distance+'px');track.style.setProperty('--ticker-duration',distance/speed+'s')}
+function periodStart(period){const d=new Date();if(period==='7D')d.setDate(d.getDate()-7);else if(period==='1M')d.setMonth(d.getMonth()-1);else if(period==='3M')d.setMonth(d.getMonth()-3);else if(period==='YTD')return new Date(d.getFullYear(),0,1);else if(period==='1Y')d.setFullYear(d.getFullYear()-1);else return new Date(0);return d}
+function renderBalanceAnalysis(){if(!document.querySelector('#analysisChart'))return;let points=(state.balanceSnapshots||[]).filter(s=>new Date(s.timestamp)>=periodStart(analysisPeriod));if(!points.length)points=state.balanceSnapshots||[];const values=points.map(p=>Number(p.convertedTotalBalance??p.totalBalance)),g=lineGeometry(values,440,250,8);chartPoints=g.points.map((p,i)=>({...p,data:points[i]}));document.querySelector('#analysisLine').setAttribute('d',g.line);document.querySelector('#analysisArea').setAttribute('d',g.area);const current=values.at(-1)||totals().balance,first=values[0]??current,change=current-first;document.querySelector('#analysisValue').textContent=fmt(current);document.querySelector('#analysisChange').textContent=`${formatMovement(change)} за період`;document.querySelector('#metricCurrent').textContent=fmt(current);document.querySelector('#metricChange').textContent=formatMovement(change);document.querySelector('#metricMax').textContent=fmt(values.length?Math.max(...values):current);document.querySelector('#metricMin').textContent=fmt(values.length?Math.min(...values):current);const tx=state.transactions.filter(t=>new Date(t.date)>=periodStart(analysisPeriod)&&t.currency==='PLN');document.querySelector('#metricIncome').textContent=fmt(tx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0));document.querySelector('#metricExpense').textContent=fmt(tx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0));document.querySelector('#analysisAccounts').innerHTML=(state.accounts||[]).filter(a=>a.isActive).map(a=>`<div class="tx"><div class="tx-icon">${accountIcon(a)}</div><div><div class="tx-title">${esc(a.displayName)}</div><div class="tx-meta">${esc(a.bankName)}</div></div><strong class="pos">${fmt(a.currentBalance,a.currency)}</strong></div>`).join('')}
+function inspectChart(clientX){if(!chartPoints.length)return;const box=document.querySelector('#analysisChart').getBoundingClientRect(),x=Math.max(0,Math.min(box.width,clientX-box.left)),scaled=x/box.width*440;let nearest=chartPoints[0];for(const p of chartPoints)if(Math.abs(p.x-scaled)<Math.abs(nearest.x-scaled))nearest=p;const cross=document.querySelector('#chartCrosshair'),point=document.querySelector('#chartPoint'),tip=document.querySelector('#chartTooltip');cross.setAttribute('x1',nearest.x);cross.setAttribute('x2',nearest.x);cross.classList.remove('hidden');point.setAttribute('cx',nearest.x);point.setAttribute('cy',nearest.y);point.classList.remove('hidden');tip.innerHTML=`${new Date(nearest.data.timestamp).toLocaleDateString('uk-UA',{day:'numeric',month:'short'})}<br><strong>${fmt(nearest.data.totalBalance)}</strong>`;tip.classList.remove('hidden');tip.style.left=`${Math.min(box.width-140,Math.max(6,x-50))}px`}
 function renderCategories(){
   const grid=document.querySelector('#categoryGrid');
   const sums={};
@@ -719,13 +769,13 @@ function openAllTx(){
 }
 function switchScreen(id){
   if(!document.getElementById(id)?.classList.contains('screen'))id='home';
-  const buttons=[...document.querySelectorAll('.dock [data-screen]')],navId=(id==='people'||id==='person')?'debts':id,nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===navId));
+  const buttons=[...document.querySelectorAll('.dock [data-screen]')],navId=(id==='people'||id==='person')?'debts':id==='balanceAnalysis'?'home':id,nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===navId));
   closeProfileDrawer();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   buttons.forEach(b=>b.classList.toggle('active',b.dataset.screen===navId));
   moveDockIndicator(nextIndex);
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
-  if(id==='home')requestAnimationFrame(fitBalanceText);
+  if(id==='home')requestAnimationFrame(fitBalanceText);if(id==='balanceAnalysis')renderBalanceAnalysis();
   dockIgnoreScrollUntil=performance.now()+550;window.scrollTo({top:0,behavior:'auto'});lastPageScrollY=0;
   requestAnimationFrame(refreshJellyItems);
 }
@@ -1026,6 +1076,10 @@ function exportData(){
   const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='voice-finance-data.json';a.click();URL.revokeObjectURL(a.href);
 }
+function openProvider(provider){if(provider==='MONOBANK'){closeSheet('#accountAddBackdrop');document.querySelector('#monobankToken').value='';openSheet('#monobankBackdrop');return}showToast(`${provider}: безпечне серверне підключення ще не налаштоване`)}
+function openManualAccount(type){closeSheet('#accountAddBackdrop');document.querySelector('#manualAccountTitle').textContent=type==='cash'?'Додати готівку':'Новий ручний рахунок';document.querySelector('#manualAccountName').value=type==='cash'?'Готівка':'';document.querySelector('#manualAccountBalance').value='';document.querySelector('#manualAccountBackdrop').dataset.type=type;openSheet('#manualAccountBackdrop')}
+function saveManualAccount(){const name=document.querySelector('#manualAccountName').value.trim(),amount=parseFloat(document.querySelector('#manualAccountBalance').value.replace(',','.')),currency=document.querySelector('#manualAccountCurrency').value,type=document.querySelector('#manualAccountBackdrop').dataset.type||'manual';if(!name)return showToast('Вкажи назву рахунку');if(!Number.isFinite(amount))return showToast('Вкажи баланс');state.accounts.push({id:uid(),provider:type==='cash'?'CASH':'MANUAL',bankName:name,displayName:name,shortName:name.slice(0,5).toUpperCase(),currency,currentBalance:amount,availableBalance:amount,isActive:true,source:type});state.balanceSnapshots.push({id:uid(),timestamp:new Date().toISOString(),totalBalance:totals().balance,convertedTotalBalance:totals().balance,baseCurrency:'PLN',accountBalances:Object.fromEntries(state.accounts.map(a=>[a.id,a.currentBalance])),source:'manual'});closeSheet('#manualAccountBackdrop');saveState();showToast('Рахунок додано')}
+async function connectMonobank(){const input=document.querySelector('#monobankToken'),token=input.value.trim();if(!token)return showToast('Встав особистий токен');if(!BANKING_API_BASE){input.value='';return showToast('Backend ще не налаштований. Токен не збережено')}try{const r=await fetch(`${BANKING_API_BASE}/api/banks/monobank/connect`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({token})});input.value='';if(!r.ok)throw new Error('Monobank не підтвердив токен');closeSheet('#monobankBackdrop');showToast('Monobank підключено')}catch(e){input.value='';showToast(e.message)}}
 document.querySelectorAll('.dock [data-screen]').forEach(b=>b.onclick=()=>{if(dockCompact&&b.classList.contains('active'))setDockCompact(false);else switchScreen(b.dataset.screen)});
 document.querySelector('#moreBtn').onclick=toggleProfileDrawer;
 document.querySelector('#profileDrawerBackdrop').onclick=e=>{if(e.target.id==='profileDrawerBackdrop')closeProfileDrawer()};
@@ -1038,6 +1092,15 @@ document.querySelector('#quickSend').onclick=submitQuickEntry;
 document.querySelector('#quickEntryInput').addEventListener('focus',positionQuickEntry);
 document.querySelector('#quickEntryInput').addEventListener('blur',()=>setTimeout(positionQuickEntry,120));
 document.querySelector('#homeSearch').addEventListener('input',renderTransactions);
+document.querySelector('#openBalanceAnalysis').onclick=()=>switchScreen('balanceAnalysis');
+document.querySelector('#balanceBack').onclick=()=>switchScreen('home');
+document.querySelector('#toggleAccounts').onclick=()=>{accountsExpanded=!accountsExpanded;renderAccounts()};
+document.querySelectorAll('#periodTabs button').forEach(b=>b.onclick=()=>{analysisPeriod=b.dataset.period;document.querySelectorAll('#periodTabs button').forEach(x=>x.classList.toggle('active',x===b));renderBalanceAnalysis()});
+document.querySelector('#analysisChart').addEventListener('pointerdown',e=>inspectChart(e.clientX));document.querySelector('#analysisChart').addEventListener('pointermove',e=>{if(e.buttons||e.pointerType==='touch')inspectChart(e.clientX)});
+document.querySelectorAll('[data-provider]').forEach(b=>b.onclick=()=>openProvider(b.dataset.provider));
+document.querySelectorAll('[data-manual-type]').forEach(b=>b.onclick=()=>openManualAccount(b.dataset.manualType));
+document.querySelectorAll('[data-close-sheet]').forEach(b=>b.onclick=()=>closeSheet('#'+b.dataset.closeSheet));
+document.querySelector('#saveManualAccount').onclick=saveManualAccount;document.querySelector('#connectMonobank').onclick=connectMonobank;
 document.querySelector('#debtSearch').addEventListener('input',renderDebts);
 document.querySelector('#typeExpense').onclick=()=>setFormType('expense');
 document.querySelector('#typeIncome').onclick=()=>setFormType('income');
@@ -1083,6 +1146,7 @@ document.querySelector('#listBackdrop').onclick=e=>{if(e.target.id==='listBackdr
 document.querySelector('#catBackdrop').onclick=e=>{if(e.target.id==='catBackdrop')closeSheet('#catBackdrop')};
 document.querySelector('#scanBackdrop').onclick=e=>{if(e.target.id==='scanBackdrop')closeSheet('#scanBackdrop')};
 document.querySelector('#settingsBackdrop').onclick=e=>{if(e.target.id==='settingsBackdrop')closeSheet('#settingsBackdrop')};
+document.querySelector('#accountAddBackdrop').onclick=e=>{if(e.target.id==='accountAddBackdrop')closeSheet('#accountAddBackdrop')};document.querySelector('#manualAccountBackdrop').onclick=e=>{if(e.target.id==='manualAccountBackdrop')closeSheet('#manualAccountBackdrop')};document.querySelector('#monobankBackdrop').onclick=e=>{if(e.target.id==='monobankBackdrop'){document.querySelector('#monobankToken').value='';closeSheet('#monobankBackdrop')}};
 document.querySelector('#scanCamera').onclick=()=>document.querySelector('#cameraInput').click();
 document.querySelector('#scanFile').onclick=()=>document.querySelector('#fileInput').click();
 document.querySelector('#scanClose').onclick=()=>closeSheet('#scanBackdrop');
@@ -1103,7 +1167,7 @@ window.visualViewport?.addEventListener('scroll',positionVoicePopover);
 window.visualViewport?.addEventListener('resize',positionQuickEntry);
 window.visualViewport?.addEventListener('scroll',positionQuickEntry);
 addEventListener('orientationchange',()=>{if(document.activeElement!==document.querySelector('#voiceTestInput'))stableViewportHeight=Math.max(window.innerHeight,window.visualViewport?.height||0)});
-addEventListener('resize',()=>requestAnimationFrame(fitBalanceText));
+addEventListener('resize',()=>requestAnimationFrame(()=>{fitBalanceText();updateTickerSpeed()}));
 addEventListener('scroll',handlePageScroll,{passive:true});
 addEventListener('touchstart',e=>{if(e.touches.length!==1)return;dockBoundaryHandled=false;dockTouchStartY=e.touches[0].clientY;const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);dockTouchAtTop=window.scrollY<=2;dockTouchAtBottom=maxScroll<2||window.scrollY>=maxScroll-2},{passive:true});
 addEventListener('touchmove',handleDockTouchMove,{passive:true});
