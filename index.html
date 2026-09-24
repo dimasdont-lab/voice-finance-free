@@ -86,15 +86,17 @@
     .tx-amount{font-size:17px;font-variant-numeric:tabular-nums}.pos{color:var(--green)}.neg{color:#f0f0f4}
     .empty{padding:28px;text-align:center;color:var(--muted)}
     .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:8px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(0deg,#050505 0 48%,transparent);z-index:30;transition:transform .5s cubic-bezier(.22,.82,.22,1),bottom .22s ease}
-    .dock-layout{display:flex;flex-direction:column;gap:8px;transition:.5s cubic-bezier(.22,.82,.22,1)}
-    .quick-entry-shell{height:60px;border:1px solid rgba(255,255,255,.16);border-radius:30px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);display:flex;align-items:center;padding:0 18px;transition:.5s cubic-bezier(.22,.82,.22,1);overflow:hidden}
+    .dock-layout{position:relative;height:146px;transition:height .8s cubic-bezier(.22,.72,.18,1)}
+    .quick-entry-shell{position:absolute;left:0;top:0;width:100%;height:60px;border:1px solid rgba(255,255,255,.16);border-radius:30px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);display:flex;align-items:center;padding:0 18px;transition:left .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),border-radius .8s cubic-bezier(.22,.72,.18,1),padding .8s cubic-bezier(.22,.72,.18,1);overflow:hidden}
     .quick-entry-shell svg{width:22px;height:22px;flex:none;color:#f5f5f7}.quick-entry-shell.listening{border-color:rgba(255,64,96,.6)}.quick-entry-input{min-width:0;width:100%;height:100%;border:0;outline:0;background:transparent;color:#f5f5f7;padding:0 11px;font-size:16px}.quick-entry-input::placeholder{color:#8d8d94}
-    .dock{height:78px;display:block}
-    .dock-group{position:relative;isolation:isolate;height:78px;border:1px solid rgba(255,255,255,.16);border-radius:39px;background:rgba(31,31,33,.94);display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding:6px;box-shadow:inset 0 1px rgba(255,255,255,.12);overflow:hidden;transition:.5s cubic-bezier(.22,.82,.22,1)}
+    .dock{position:absolute;left:0;top:68px;width:100%;height:78px;transition:top .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1)}
+    .dock-group{position:relative;isolation:isolate;width:100%;height:78px;border:1px solid rgba(255,255,255,.16);border-radius:39px;background:rgba(31,31,33,.94);box-shadow:inset 0 1px rgba(255,255,255,.12);overflow:hidden;transition:height .8s cubic-bezier(.22,.72,.18,1),border-color .8s ease,background-color .8s ease,box-shadow .8s ease}
     .profile-drawer::before{content:"";position:absolute;pointer-events:none;inset:1px;border-radius:inherit;background:linear-gradient(100deg,rgba(255,255,255,.07),transparent 18% 82%,rgba(255,255,255,.055));opacity:.5}
     .dock-group::after{content:"";position:absolute;pointer-events:none;inset:0;border-radius:inherit;padding:12px;background:rgba(255,255,255,.001);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;backdrop-filter:blur(.75px) contrast(112%);backdrop-filter:url(#glassRefraction) blur(.75px) contrast(112%);-webkit-backdrop-filter:blur(.75px) contrast(112%);-webkit-backdrop-filter:url(#glassRefraction) blur(.75px) contrast(112%)}
-    .dock button{border:0;color:#f1f1f3}.dock-group button{position:relative;z-index:1;min-width:0;border-radius:31px;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;padding:5px 2px;transition:.35s cubic-bezier(.22,.82,.22,1)}.dock-group button.active{color:#ff4060;background:#09090a}.dock-group button:active{transform:scale(.94)}.dock svg{width:25px;height:25px}.dock-label{font-size:10px;line-height:1;white-space:nowrap;letter-spacing:-.1px}
-    .bottom-zone.compact .dock-layout{display:grid;grid-template-columns:58px minmax(0,1fr) 58px;gap:8px;align-items:center}.bottom-zone.compact .quick-entry-shell{grid-column:2;grid-row:1;height:58px;border-radius:29px;padding:0 14px}.bottom-zone.compact .dock{display:contents}.bottom-zone.compact .dock-group{display:contents}.bottom-zone.compact .dock-group button{display:none}.bottom-zone.compact .dock-group button.active,.bottom-zone.compact .dock-group .more-btn{display:flex;width:58px;height:58px;border-radius:50%;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-group button.active{grid-column:1;grid-row:1}.bottom-zone.compact .dock-group .more-btn{grid-column:3;grid-row:1}.bottom-zone.compact .dock-label{display:none}.bottom-zone.compact .quick-entry-shell>svg{display:none}
+    .dock-indicator{position:absolute;z-index:0;left:6px;top:6px;width:calc((100% - 12px)/5);height:64px;border-radius:31px;background:#09090a;transform:translateX(0);transform-origin:center;will-change:transform,width,height,left,top;transition:left .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),border-radius .8s cubic-bezier(.22,.72,.18,1)}
+    .dock-indicator.moving{animation:dockIndicatorMove .8s cubic-bezier(.22,.72,.18,1) both}@keyframes dockIndicatorMove{0%{transform:translateX(var(--indicator-from)) scaleY(1)}50%{transform:translateX(var(--indicator-mid)) scaleY(var(--indicator-squeeze))}100%{transform:translateX(var(--indicator-to)) scaleY(1)}}
+    .dock button{border:0;color:#f1f1f3}.dock-group button{--i:0;position:absolute;z-index:1;left:6px;top:6px;width:calc((100% - 12px)/5);height:64px;border-radius:31px;background:transparent;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;padding:5px 2px;transform:translateX(calc(var(--i) * 100%));transition:transform .8s cubic-bezier(.22,.72,.18,1),opacity .55s ease,color .35s ease,width .8s cubic-bezier(.22,.72,.18,1),height .8s cubic-bezier(.22,.72,.18,1),top .8s cubic-bezier(.22,.72,.18,1),left .8s cubic-bezier(.22,.72,.18,1)}.dock-group button:nth-of-type(2){--i:1}.dock-group button:nth-of-type(3){--i:2}.dock-group button:nth-of-type(4){--i:3}.dock-group button:nth-of-type(5){--i:4}.dock-group button.active{color:#ff4060}.dock-group button:active{filter:brightness(.82)}.dock svg{width:25px;height:25px}.dock-label{font-size:10px;line-height:1;white-space:nowrap;letter-spacing:-.1px;transition:opacity .35s ease}
+    .bottom-zone.compact .dock-layout{height:58px}.bottom-zone.compact .quick-entry-shell{left:66px;top:0;width:calc(100% - 132px);height:58px;border-radius:29px;padding:0 14px}.bottom-zone.compact .dock{top:0;height:58px}.bottom-zone.compact .dock-group{height:58px;border-color:transparent;background:transparent;box-shadow:none;overflow:visible}.bottom-zone.compact .dock-group::after{opacity:0}.bottom-zone.compact .dock-indicator{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0)!important;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-group button{left:0;top:0;width:58px;height:58px;border-radius:50%;transform:translateX(0) scale(.72);opacity:0;pointer-events:none}.bottom-zone.compact .dock-group button.active{transform:translateX(0) scale(1);opacity:1;pointer-events:auto}.bottom-zone.compact .dock-group .more-btn{left:calc(100% - 58px);transform:translateX(0) scale(1);opacity:1;pointer-events:auto;background:rgba(31,31,33,.96);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px rgba(255,255,255,.12)}.bottom-zone.compact .dock-label{opacity:0}.bottom-zone.compact .quick-entry-shell>svg{width:0;opacity:0}
     .topline{padding-left:0}.page-search{height:58px;margin:0 0 18px;border:1px solid rgba(255,255,255,.1);border-radius:29px;background:#1c1c1e;display:flex;align-items:center;padding:0 16px}.page-search svg{width:23px;height:23px;flex:none}.page-search input{width:100%;height:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--text);padding:0 12px;font-size:17px}.page-search input::placeholder{color:#77777f}
     .home-topline{min-height:72px;align-items:flex-start}.home-topline h1{font-size:31px;margin-bottom:7px}.home-topline .sub{margin:0;font-size:16px;text-transform:capitalize}
     .profile-drawer-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0);pointer-events:none;transition:background .46s ease}
@@ -246,7 +248,7 @@
 <div class="bottom-zone" id="bottomZone">
   <div class="dock-layout">
     <label class="quick-entry-shell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5v14"/></svg><input class="quick-entry-input" id="quickEntryInput" placeholder="Введи операцію або борг" autocomplete="off" enterkeyhint="done"></label>
-    <nav class="dock" aria-label="Головна навігація"><div class="dock-group">
+    <nav class="dock" aria-label="Головна навігація"><div class="dock-group"><div class="dock-indicator" aria-hidden="true"></div>
       <button class="active" data-screen="home" aria-label="Дім"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg><span class="dock-label">Дім</span></button>
       <button data-screen="insights" aria-label="Аналітика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg><span class="dock-label">Аналітика</span></button>
       <button data-screen="debts" aria-label="Борги"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg><span class="dock-label">Борги</span></button>
@@ -408,6 +410,7 @@ let lockedScrollY=0;
 let lastPageScrollY=window.scrollY;
 let dockCompact=false;
 let dockTouchStartY=0;
+let dockIndicatorIndex=0;
 let jellyVelocity=0;
 let jellyFrame=null;
 let jellyItems=[];
@@ -660,9 +663,11 @@ function openAllTx(){
 }
 function switchScreen(id){
   if(!document.getElementById(id)?.classList.contains('screen'))id='home';
+  const buttons=[...document.querySelectorAll('.dock [data-screen]')],nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===id));
   closeProfileDrawer();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
-  document.querySelectorAll('.dock [data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+  buttons.forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
+  moveDockIndicator(nextIndex);
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
   if(id==='home')requestAnimationFrame(fitBalanceText);
   window.scrollTo({top:0,behavior:'smooth'});
@@ -672,6 +677,18 @@ function openProfileDrawer(){document.body.classList.add('drawer-open');document
 function closeProfileDrawer(){document.body.classList.remove('drawer-open');document.querySelector('#profileDrawerBackdrop')?.classList.remove('open');document.querySelector('#moreBtn')?.classList.remove('active')}
 function toggleProfileDrawer(){document.body.classList.contains('drawer-open')?closeProfileDrawer():openProfileDrawer()}
 function setDockCompact(compact){dockCompact=compact;document.querySelector('#bottomZone').classList.toggle('compact',compact)}
+function moveDockIndicator(nextIndex,animate=true){
+  const indicator=document.querySelector('.dock-indicator'),group=document.querySelector('.dock-group');if(!indicator||!group)return;
+  const unit=(group.clientWidth-12)/5,from=dockIndicatorIndex*unit,to=nextIndex*unit,distance=Math.abs(nextIndex-dockIndicatorIndex);
+  indicator.classList.remove('moving');
+  indicator.style.transform=`translateX(${to}px) scaleY(1)`;
+  if(animate&&distance&&!dockCompact&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const squeeze=Math.max(.62,1-distance*.085),mid=(from+to)/2;
+    indicator.style.setProperty('--indicator-from',`${from}px`);indicator.style.setProperty('--indicator-mid',`${mid}px`);indicator.style.setProperty('--indicator-to',`${to}px`);indicator.style.setProperty('--indicator-squeeze',squeeze);
+    void indicator.offsetWidth;indicator.classList.add('moving');setTimeout(()=>indicator.classList.remove('moving'),800);
+  }
+  dockIndicatorIndex=nextIndex;
+}
 function refreshJellyItems(){
   jellyItems=[...document.querySelectorAll('.screen.active .card,.screen.active .transactions,.screen.active .goal-card,.screen.active .insight-card,.screen.active .debt-total,.screen.active .debt-section')];
   jellyItems.forEach(el=>{el.classList.add('jelly-item');if(!jellyState.has(el))jellyState.set(el,{y:0})});
@@ -684,17 +701,17 @@ function runJelly(){
 function handlePageScroll(){
   if(document.body.classList.contains('sheet-open')||document.body.classList.contains('drawer-open'))return;
   const y=window.scrollY,delta=y-lastPageScrollY;lastPageScrollY=y;
-  const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
-  if(maxScroll>2&&y<=1)setDockCompact(false);else if(delta>5)setDockCompact(true);
+  if(delta>5)setDockCompact(true);
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   jellyVelocity=Math.max(-16,Math.min(16,delta));if(!jellyFrame)jellyFrame=requestAnimationFrame(runJelly);
 }
 function handleDockTouchEnd(e){
   if(document.body.classList.contains('sheet-open')||document.body.classList.contains('drawer-open'))return;
-  const endY=e.changedTouches?.[0]?.clientY??dockTouchStartY,swipeUp=dockTouchStartY-endY>26;
-  if(!swipeUp)return;
-  const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight),atBottom=maxScroll<2||window.scrollY>=maxScroll-2;
-  if(atBottom)setDockCompact(!dockCompact);else setDockCompact(true);
+  const endY=e.changedTouches?.[0]?.clientY??dockTouchStartY,delta=dockTouchStartY-endY;
+  if(Math.abs(delta)<26)return;
+  const maxScroll=Math.max(0,document.documentElement.scrollHeight-window.innerHeight),atTop=window.scrollY<=2,atBottom=maxScroll<2||window.scrollY>=maxScroll-2;
+  if(delta>0){if(atBottom&&dockCompact)setDockCompact(false);else setDockCompact(true)}
+  else if(atTop&&dockCompact)setDockCompact(false);
 }
 function positionQuickEntry(){
   const input=document.querySelector('#quickEntryInput'),zone=document.querySelector('#bottomZone'),viewport=window.visualViewport;
@@ -1016,7 +1033,7 @@ addEventListener('touchend',handleDockTouchEnd,{passive:true});
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   let reloadingForUpdate=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloadingForUpdate)return;reloadingForUpdate=true;location.reload()});
-  navigator.serviceWorker.register('./sw.js?v=24',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+  navigator.serviceWorker.register('./sw.js?v=25',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
 }
 try{
   setupSheetGestures();
