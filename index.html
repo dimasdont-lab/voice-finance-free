@@ -58,7 +58,7 @@
       border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow);
     }
     .balance-card{padding:24px 22px;margin-bottom:22px}
-    .balance-row{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:10px;align-items:center}.balance-row .balance{margin:9px 0 6px}.balance-chart-btn{border:0;background:transparent;padding:0;height:78px;display:block;position:relative}.balance-chart-btn svg{width:100%;height:100%;overflow:visible}.balance-chart-btn path:not(.fill){fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart-btn .fill{fill:url(#balanceGradient);stroke:none}.balance-chart-btn::after{content:'›';position:absolute;right:-7px;top:22px;color:var(--muted);font-size:27px}.balance-change{font-size:14px;color:var(--green);margin:0 0 18px;white-space:nowrap}
+    .balance-row{display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:10px;align-items:center}.balance-copy{min-width:0;overflow:hidden}.balance-row .balance{margin:9px 0 6px}.balance-chart-btn{border:0;background:transparent;padding:0;height:78px;display:block;position:relative}.balance-chart-btn svg{width:100%;height:100%;overflow:visible}.balance-chart-btn path:not(.fill){fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart-btn .fill{fill:url(#balanceGradient);stroke:none}.balance-chart-btn::after{content:'›';position:absolute;right:-7px;top:22px;color:var(--muted);font-size:27px}.balance-change{font-size:14px;color:var(--green);margin:0 0 18px;min-width:0}.balance-change strong,.balance-change span{display:block;max-width:100%;white-space:nowrap;overflow:hidden}.balance-change span{margin-top:2px}
     .label{color:var(--muted);font-size:15px}
     .balance-main{display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:10px;align-items:center;margin:7px 0 22px;min-width:0}.balance-main>*{min-width:0}.balance{width:100%;font-size:clamp(26px,7.8vw,34px);letter-spacing:-1.2px;line-height:1.05;font-weight:600;white-space:nowrap;overflow:hidden}.balance-chart{width:108px;height:52px;overflow:hidden}.balance-chart path{fill:none;stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}.balance-chart .fill{fill:url(#balanceGradient);stroke:none}
     .split{display:grid;grid-template-columns:1fr 1px 1fr;gap:18px;align-items:center}
@@ -116,6 +116,7 @@
     body.drawer-open .bottom-zone{z-index:52}body.drawer-open .quick-entry-shell,body.drawer-open .dock-indicator,body.drawer-open .dock-group button:not(.more-btn){opacity:0;pointer-events:none}body.drawer-open .dock-group{background:transparent;border-color:transparent;box-shadow:none}body.drawer-open .dock-group::after{opacity:0}.more-btn .more-icon,.more-btn .back-icon{position:absolute;left:50%;top:13px;width:25px;height:25px;transform:translateX(-50%);transition:opacity .25s ease,transform .3s cubic-bezier(.65,0,.35,1)}.more-btn .back-icon{opacity:0;transform:translateX(-50%) scale(.65) rotate(-24deg)}.more-btn .dock-label{position:absolute;left:50%;bottom:8px;transform:translateX(-50%)}body.drawer-open .more-btn .more-icon{opacity:0;transform:translateX(-50%) scale(.65) rotate(24deg)}body.drawer-open .more-btn .back-icon{opacity:1;transform:translateX(-50%) scale(1) rotate(0)}body.drawer-open .more-btn .dock-label{font-size:0}body.drawer-open .more-btn .dock-label::after{content:"Назад";font-size:10px}.bottom-zone.compact .more-btn .more-icon,.bottom-zone.compact .more-btn .back-icon{top:16px}
     .drawer-title{font-size:28px;margin:0 0 5px}.drawer-sub{color:var(--muted);font-size:13px;margin-bottom:22px}.drawer-section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 3px 10px}.drawer-section-head h2{font-size:18px;margin:0}.drawer-section-head button{border:0;background:transparent;color:var(--muted);padding:5px}.drawer-settings{width:100%;margin-top:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.045);padding:15px;display:flex;justify-content:space-between;align-items:center;text-align:left}.profile-drawer .category-grid{border-radius:24px}.profile-drawer .category{grid-template-columns:39px minmax(0,1fr) auto;padding-inline:9px}.profile-drawer .cat-icon{width:34px;height:34px}.profile-drawer .cat-name,.profile-drawer .cat-sum{font-size:14px}
     .person-status{font-size:12px;font-weight:650}.person-status.paid{color:var(--green)}.person-status.unpaid{color:var(--accent-strong)}.person-back{border:0;background:transparent;color:var(--muted);padding:5px 0 15px;font-size:15px}.person-summary{margin-bottom:14px}.person-list .tx{grid-template-columns:42px minmax(0,1fr) auto}.person-list .debt-amount{grid-row:1 / span 2;grid-column:3;align-self:center}
+    .market-picker{margin-top:18px}.market-search{height:48px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.045);padding:0 15px;color:var(--text);width:100%;outline:0}.market-list{max-height:290px;overflow:auto;margin-top:10px;border:1px solid var(--line);border-radius:20px}.market-option{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line)}.market-option:last-child{border-bottom:0}.market-option input{accent-color:#ff4060}.market-option small{margin-left:auto;color:var(--muted)}.data-note{font-size:12px;color:var(--muted);line-height:1.45;margin-top:10px}.empty-chart{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);padding:28px}.detail-title{margin:2px 0 18px}.detail-title h1{font-size:30px}.account-picker{margin:0 0 14px}.account-picker select{width:100%;height:48px;border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--text);padding:0 14px}
     .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:60;display:none;align-items:flex-end;justify-content:center}
     .sheet-backdrop.open{display:flex}
     .sheet{
@@ -210,8 +211,8 @@
     <label class="page-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="homeSearch" type="search" placeholder="Пошук операцій" autocomplete="off"></label>
 
     <div class="balance-card card">
-      <div class="label">Загальний баланс</div>
-      <div class="balance-row"><div><div class="balance" id="balance">0 zł</div><div class="balance-change" id="balanceChange">— за 30 днів</div></div><button class="balance-chart-btn" id="openBalanceAnalysis" aria-label="Відкрити аналіз балансу"><svg viewBox="0 0 126 70" preserveAspectRatio="none"><defs><linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66d896" stop-opacity=".3"/><stop offset="1" stop-color="#66d896" stop-opacity="0"/></linearGradient></defs><path class="fill" id="balanceChartFill"/><path id="balanceChartLine"/></svg></button></div>
+      <div class="label" id="openBalanceLabel">Загальний баланс</div>
+      <div class="balance-row"><div class="balance-copy" id="openBalanceSummary"><div class="balance" id="balance">0 zł</div><div class="balance-change" id="balanceChange"><strong>—</strong><span>за 30 днів</span></div></div><button class="balance-chart-btn" id="openBalanceAnalysis" aria-label="Відкрити аналіз балансу"><svg viewBox="0 0 126 70" preserveAspectRatio="none"><defs><linearGradient id="balanceGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#66d896" stop-opacity=".3"/><stop offset="1" stop-color="#66d896" stop-opacity="0"/></linearGradient></defs><path class="fill" id="balanceChartFill"/><path id="balanceChartLine"/></svg></button></div>
       <div class="split">
         <button class="metric income" id="incomeSummary">
           <div class="dot">↑</div>
@@ -249,6 +250,23 @@
     <div class="analysis-chart" id="analysisChart"><svg viewBox="0 0 440 250" preserveAspectRatio="none"><path id="analysisArea" fill="rgba(102,216,150,.12)"/><path id="analysisLine" fill="none" stroke="#66d896" stroke-width="2.3" vector-effect="non-scaling-stroke"/><line class="chart-crosshair hidden" id="chartCrosshair" y1="0" y2="250"/><circle class="hidden" id="chartPoint" r="5" fill="#66d896"/></svg><div class="chart-tooltip hidden" id="chartTooltip"></div></div>
     <div class="metrics-grid"><div class="metric-row"><small>Поточний</small><strong id="metricCurrent"></strong></div><div class="metric-row"><small>Зміна</small><strong id="metricChange"></strong></div><div class="metric-row"><small>Максимум</small><strong id="metricMax"></strong></div><div class="metric-row"><small>Мінімум</small><strong id="metricMin"></strong></div><div class="metric-row"><small>Доходи</small><strong class="trend-up" id="metricIncome"></strong></div><div class="metric-row"><small>Витрати</small><strong class="trend-down" id="metricExpense"></strong></div></div>
     <div class="section-head"><h2>Рахунки</h2></div><div class="transactions" id="analysisAccounts"></div>
+  </section>
+
+  <section id="accountDetail" class="screen">
+    <button class="back-button" id="accountBack">‹ Дім</button>
+    <div class="detail-title"><div class="eyebrow">Рахунок</div><h1 id="accountDetailTitle">Рахунок</h1><div class="sub" id="accountDetailBalance"></div></div>
+    <div class="period-tabs" id="accountPeriodTabs"><button data-period="7D">7D</button><button class="active" data-period="1M">1M</button><button data-period="3M">3M</button><button data-period="YTD">YTD</button><button data-period="1Y">1Y</button><button data-period="ALL">ALL</button></div>
+    <div class="analysis-chart" id="accountChart"><svg viewBox="0 0 440 250" preserveAspectRatio="none"><path id="accountArea" fill="rgba(102,216,150,.12)"/><path id="accountLine" fill="none" stroke="#66d896" stroke-width="2.3" vector-effect="non-scaling-stroke"/></svg><div class="empty-chart hidden" id="accountChartEmpty">Історія з’явиться після змін балансу або синхронізації.</div></div>
+    <div class="metrics-grid"><div class="metric-row"><small>Поточний</small><strong id="accountCurrent"></strong></div><div class="metric-row"><small>Зміна</small><strong id="accountChange"></strong></div><div class="metric-row"><small>Максимум</small><strong id="accountMax"></strong></div><div class="metric-row"><small>Мінімум</small><strong id="accountMin"></strong></div></div>
+    <div class="section-head"><h2>Операції рахунку</h2></div><div class="transactions" id="accountTransactions"></div>
+  </section>
+
+  <section id="flowDetail" class="screen">
+    <button class="back-button" id="flowBack">‹ Дім</button>
+    <div class="detail-title"><div class="eyebrow" id="flowEyebrow">Операції</div><h1 id="flowTitle">Доходи</h1><div class="sub" id="flowTotal"></div></div>
+    <div class="period-tabs" id="flowPeriodTabs"><button data-period="7D">7D</button><button class="active" data-period="1M">1M</button><button data-period="3M">3M</button><button data-period="YTD">YTD</button><button data-period="1Y">1Y</button><button data-period="ALL">ALL</button></div>
+    <div class="analysis-chart"><svg viewBox="0 0 440 250" preserveAspectRatio="none"><path id="flowArea" fill="rgba(102,216,150,.12)"/><path id="flowLine" fill="none" stroke="#66d896" stroke-width="2.3" vector-effect="non-scaling-stroke"/></svg><div class="empty-chart hidden" id="flowChartEmpty">Немає реальних операцій за цей період.</div></div>
+    <div class="section-head"><h2 id="flowListTitle">Усі доходи</h2></div><div class="transactions" id="flowTransactions"></div>
   </section>
 
   <section id="insights" class="screen">
@@ -292,10 +310,10 @@
   <div class="dock-layout">
     <div class="quick-entry-shell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M12 5v14"/></svg><input class="quick-entry-input" id="quickEntryInput" placeholder="Введи операцію або борг" autocomplete="off" enterkeyhint="done"><button class="quick-send" id="quickSend" aria-label="Розпізнати фразу"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"/></svg></button></div>
     <nav class="dock" aria-label="Головна навігація"><div class="dock-group"><div class="dock-indicator" aria-hidden="true"></div>
-      <button class="active" data-screen="home" aria-label="Дім"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg><span class="dock-label">Дім</span></button>
+      <button data-screen="goals" aria-label="Цілі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m14 10 5-5"/></svg><span class="dock-label">Цілі</span></button>
       <button data-screen="insights" aria-label="Аналітика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg><span class="dock-label">Аналітика</span></button>
       <button data-screen="debts" aria-label="Борги"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg><span class="dock-label">Борги</span></button>
-      <button data-screen="goals" aria-label="Цілі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m14 10 5-5"/></svg><span class="dock-label">Цілі</span></button>
+      <button class="active" data-screen="home" aria-label="Дім"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg><span class="dock-label">Дім</span></button>
       <button class="more-btn" id="moreBtn" aria-label="Додатково"><svg class="more-icon" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg><svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 6-6 6 6 6"/></svg><span class="dock-label">Додатково</span></button>
     </div></nav>
   </div>
@@ -313,7 +331,6 @@
     <div class="profile-card profile-actions">
       <button id="manageCategories">Керувати категоріями</button>
       <button id="exportData">Експорт JSON</button>
-      <button id="loadDemo">Завантажити демо-дані</button>
       <button id="clearData" style="color:var(--accent)">Очистити всі дані</button>
     </div>
     <div class="profile-card">
@@ -321,6 +338,13 @@
       <div class="big-stat" style="font-size:22px;margin-top:8px">UA + PL + EN текстом</div>
       <div class="tiny" style="margin-top:8px">Нижнє поле відкриває клавіатуру. Фраза локально перетворюється на операцію або борг без API.</div>
       <div class="tiny" id="modelProfileStatus" style="margin-top:10px">Готово до введення</div>
+    </div>
+    <div class="profile-card market-picker">
+      <div class="label">Верхній тікер</div>
+      <div class="big-stat" style="font-size:20px;margin-top:7px">Валюти й криптовалюта</div>
+      <div class="data-note">Валютні курси: Frankfurter. Крипто: публічні дані Kraken. Без ключів і платних запитів.</div>
+      <input class="market-search" id="marketSearch" type="search" placeholder="Пошук пари або криптовалюти">
+      <div class="market-list" id="marketList"></div>
     </div>
   </div>
 </div>
@@ -333,6 +357,7 @@
     <div class="type-seg"><button id="typeExpense" class="active">Витрата</button><button id="typeIncome">Дохід</button></div>
     <div class="field"><label>Сума</label><input id="amountInput" inputmode="decimal" placeholder="200"></div>
     <div class="field"><label>Валюта</label><select id="currencyInput"><option>PLN</option><option>EUR</option><option>USD</option><option>GBP</option></select></div>
+    <div class="field"><label>Рахунок</label><select id="accountInput"><option value="">Без прив’язки</option></select></div>
     <div class="field" id="categoryField"><label>Категорія</label><select id="categoryInput"></select></div>
     <div class="field hidden" id="clientField"><label>Клієнт</label><input id="clientInput" placeholder="Johnny"></div>
     <div class="field"><label>Опис</label><input id="noteInput" placeholder="Biedronka, монтаж, бензин…"></div>
@@ -418,20 +443,13 @@ const DEFAULT_CATEGORIES=[
   {id:'travel',name:'Подорожі',icon:'✈︎'},
   {id:'other',name:'Інше',icon:'•••'}
 ];
-const DEFAULT_ACCOUNTS=[
-  {id:'mono-demo',provider:'MONOBANK',bankName:'Monobank',displayName:'Monobank',shortName:'MONO',currency:'PLN',currentBalance:2340,availableBalance:2340,isActive:true,source:'demo'},
-  {id:'pko-demo',provider:'PKO',bankName:'PKO Bank Polski',displayName:'PKO',shortName:'PKO',currency:'PLN',currentBalance:15240,availableBalance:15240,isActive:true,source:'demo'},
-  {id:'revolut-demo',provider:'REVOLUT',bankName:'Revolut',displayName:'Revolut',shortName:'REV',currency:'PLN',currentBalance:6480,availableBalance:6480,isActive:true,source:'demo'},
-  {id:'erste-demo',provider:'ERSTE',bankName:'Erste',displayName:'Erste',shortName:'ERSTE',currency:'PLN',currentBalance:1280,availableBalance:1280,isActive:true,source:'demo'},
-  {id:'cash-demo',provider:'CASH',bankName:'Готівка',displayName:'Готівка',shortName:'CASH',currency:'PLN',currentBalance:800,availableBalance:800,isActive:true,source:'demo'}
-];
+const DEFAULT_ACCOUNTS=[];
+const FIAT_CURRENCIES=['PLN','EUR','USD','GBP','CHF','UAH','CZK','SEK','NOK','DKK','CAD','AUD','NZD','JPY','CNY','HKD','SGD','HUF','RON','BGN','TRY','ILS','INR','BRL','MXN','ZAR'];
+const FIAT_PAIRS=FIAT_CURRENCIES.flatMap(base=>FIAT_CURRENCIES.filter(quote=>quote!==base).map(quote=>({id:`fx:${base}${quote}`,kind:'fx',base,quote,label:`${base}/${quote}`}))).slice(0,100);
+const CRYPTO_MARKETS=[['XBTUSD','BTC','Bitcoin'],['ETHUSD','ETH','Ethereum'],['USDTUSD','USDT','Tether'],['SOLUSD','SOL','Solana'],['XRPUSD','XRP','XRP'],['USDCUSD','USDC','USD Coin'],['DOGEUSD','DOGE','Dogecoin'],['ADAUSD','ADA','Cardano'],['LTCUSD','LTC','Litecoin'],['DOTUSD','DOT','Polkadot']].map(([pair,symbol,name])=>({id:`crypto:${pair}`,kind:'crypto',pair,symbol,name,label:`${symbol}/USD`}));
+const DEFAULT_MARKETS=['fx:EURPLN','fx:USDPLN','fx:EURUSD',...CRYPTO_MARKETS.map(m=>m.id)];
 const BANKING_API_BASE=document.querySelector('meta[name="voice-finance-api"]')?.content?.replace(/\/$/,'')||'';
 const uid=()=>{try{if(globalThis.crypto&&typeof globalThis.crypto.randomUUID==='function')return globalThis.crypto.randomUUID()}catch(e){}return 'id-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)};
-const demoTx=[
-  {id:uid(),type:'expense',amount:184,currency:'PLN',category:'groceries',client:'',note:'Biedronka',date:new Date().toISOString()},
-  {id:uid(),type:'expense',amount:42,currency:'PLN',category:'transport',client:'',note:'Uber',date:new Date(Date.now()-86400000).toISOString()},
-  {id:uid(),type:'income',amount:3000,currency:'PLN',category:'business',client:'Johnny',note:'Зйомка',date:new Date(Date.now()-172800000).toISOString()}
-];
 let state=loadState();
 let editingId=null;
 let formType='expense';
@@ -478,6 +496,11 @@ let dockIndicatorIndex=0;
 let dockIndicatorAnimation=null;
 let accountsExpanded=false;
 let analysisPeriod='1M';
+let accountPeriod='1M';
+let flowPeriod='1M';
+let selectedAccountId='';
+let selectedFlowType='income';
+let marketData={};
 let chartPoints=[];
 let jellyVelocity=0;
 let jellyFrame=null;
@@ -491,13 +514,12 @@ function loadState(){
   if(raw){
     try{
       const s=JSON.parse(raw);
-      const accounts=s.accounts?.length?s.accounts:structuredClone(DEFAULT_ACCOUNTS);let balanceSnapshots=s.balanceSnapshots?.length?s.balanceSnapshots:createMockSnapshots(accounts);const current=accounts.filter(a=>a.isActive&&a.currency==='PLN').reduce((n,a)=>n+Number(a.currentBalance||0),0),last=Number(balanceSnapshots.at(-1)?.totalBalance);if(balanceSnapshots.every(x=>x.source==='demo')&&Math.abs(current-last)>.01)balanceSnapshots=createMockSnapshots(accounts);
-      return {categories:s.categories?.length?s.categories:DEFAULT_CATEGORIES,transactions:s.transactions||[],debts:s.debts||[],goal:s.goal||8000,speechLang:s.speechLang||'uk-UA',accounts,balanceSnapshots};
+      const accounts=(s.accounts||[]).filter(a=>a.source!=='demo'&&!String(a.id).endsWith('-demo'));const balanceSnapshots=(s.balanceSnapshots||[]).filter(x=>x.source!=='demo');
+      return {categories:s.categories?.length?s.categories:DEFAULT_CATEGORIES,transactions:s.transactions||[],debts:s.debts||[],goal:s.goal||8000,speechLang:s.speechLang||'uk-UA',accounts,balanceSnapshots,marketSelection:s.marketSelection?.length?s.marketSelection:DEFAULT_MARKETS};
     }catch(e){}
   }
-  const accounts=structuredClone(DEFAULT_ACCOUNTS);return {categories:[...DEFAULT_CATEGORIES],transactions:[],debts:[],goal:8000,speechLang:'uk-UA',accounts,balanceSnapshots:createMockSnapshots(accounts)};
+  return {categories:[...DEFAULT_CATEGORIES],transactions:[],debts:[],goal:8000,speechLang:'uk-UA',accounts:[],balanceSnapshots:[],marketSelection:DEFAULT_MARKETS};
 }
-function createMockSnapshots(accounts){const out=[];for(let day=34;day>=0;day--){const progress=(34-day)/34,ts=new Date(Date.now()-day*86400000).toISOString(),accountBalances={};let total=0;accounts.forEach((a,i)=>{const end=Number(a.currentBalance)||0,wave=(Math.sin((34-day)*(i+1)*.43)-Math.sin(34*(i+1)*.43))*28,v=i===3?end:Math.max(0,end-(1-progress)*(140+i*35)+wave);accountBalances[a.id]=Math.round(v*100)/100;total+=accountBalances[a.id]});out.push({id:'snapshot-'+day,timestamp:ts,totalBalance:Math.round(total*100)/100,convertedTotalBalance:Math.round(total*100)/100,baseCurrency:'PLN',accountBalances,source:'demo'})}return out}
 function saveState(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));render()}
 function fmt(n,c='PLN'){
   try{return new Intl.NumberFormat('uk-UA',{style:'currency',currency:c,maximumFractionDigits:2}).format(n)}
@@ -509,8 +531,11 @@ function totals(){
   const income=tx.filter(t=>t.type==='income').reduce((a,b)=>a+b.amount,0);
   const expense=tx.filter(t=>t.type==='expense').reduce((a,b)=>a+b.amount,0);
   const accountBalance=(state.accounts||[]).filter(a=>a.isActive&&a.currency==='PLN').reduce((sum,a)=>sum+Number(a.currentBalance||0),0);
-  return {income,expense,balance:state.accounts?.length?accountBalance:income-expense}
+  const unlinked=tx.filter(t=>!t.accountId).reduce((sum,t)=>sum+(t.type==='income'?t.amount:-t.amount),0);
+  return {income,expense,balance:accountBalance+unlinked}
 }
+function transactionEffect(tx){return tx?(tx.type==='income'?Number(tx.amount||0):-Number(tx.amount||0)):0}
+function applyAccountTransaction(next,previous){if(previous?.accountId){const a=state.accounts.find(x=>x.id===previous.accountId);if(a)a.currentBalance=Number(a.currentBalance||0)-transactionEffect(previous)}if(next?.accountId){const a=state.accounts.find(x=>x.id===next.accountId);if(a)a.currentBalance=Number(a.currentBalance||0)+transactionEffect(next)}if(previous?.accountId||next?.accountId){const accountBalances=Object.fromEntries(state.accounts.map(a=>[a.id,Number(a.currentBalance||0)])),total=state.accounts.filter(a=>a.isActive&&a.currency==='PLN').reduce((n,a)=>n+Number(a.currentBalance||0),0);state.balanceSnapshots.push({id:uid(),timestamp:new Date().toISOString(),totalBalance:total,convertedTotalBalance:total,baseCurrency:'PLN',accountBalances,source:'transaction'})}}
 function categoryById(id){return state.categories.find(c=>c.id===id)||{name:'Інше',icon:'•••'}}
 function dateLabel(iso){
   const d=new Date(iso), now=new Date();
@@ -530,6 +555,7 @@ function render(){
   renderBalanceChart();
   renderAccounts();
   renderTicker();
+  renderMarketPicker();
   renderBalanceAnalysis();
   renderCategories();
   renderTransactions();
@@ -540,26 +566,35 @@ function render(){
   renderPeople();
   renderPersonProfile();
   fillCategorySelect();
+  fillAccountSelect();
   requestAnimationFrame(refreshJellyItems);
 }
 function fitTextToBox(el,minSize){
   el.style.fontSize='';let size=parseFloat(getComputedStyle(el).fontSize);if(!el.clientWidth)return;
   while(el.scrollWidth>el.clientWidth&&size>minSize){size-=.5;el.style.fontSize=size+'px'}
 }
-function fitBalanceText(){fitTextToBox(document.querySelector('#balance'),18);fitTextToBox(document.querySelector('#incomeTotal'),11);fitTextToBox(document.querySelector('#expenseTotal'),11)}
+function fitBalanceText(){fitTextToBox(document.querySelector('#balance'),18);fitTextToBox(document.querySelector('#incomeTotal'),11);fitTextToBox(document.querySelector('#expenseTotal'),11);document.querySelectorAll('#balanceChange strong,#balanceChange span').forEach(el=>fitTextToBox(el,10))}
 function renderBalanceChart(){
-  const shown=(state.balanceSnapshots||[]).slice(-30),values=shown.map(s=>Number(s.convertedTotalBalance??s.totalBalance)),g=lineGeometry(values,126,62,4);document.querySelector('#balanceChartLine').setAttribute('d',g.line);document.querySelector('#balanceChartFill').setAttribute('d',g.area);const first=values[0]??totals().balance,last=values.at(-1)??first,change=last-first,pct=first?change/Math.abs(first)*100:0,el=document.querySelector('#balanceChange');el.textContent=`${formatMovement(change)} (${pct>=0?'+':''}${pct.toFixed(1)}%) за 30 днів`;el.className='balance-change '+(change>0?'trend-up':change<0?'trend-down':'trend-flat');
+  const shown=(state.balanceSnapshots||[]).slice(-30),values=shown.map(s=>Number(s.convertedTotalBalance??s.totalBalance)),g=lineGeometry(values,126,62,4);document.querySelector('#balanceChartLine').setAttribute('d',g.line);document.querySelector('#balanceChartFill').setAttribute('d',g.area);const first=values[0]??totals().balance,last=values.at(-1)??first,change=values.length>1?last-first:0,pct=first?change/Math.abs(first)*100:0,el=document.querySelector('#balanceChange');el.innerHTML=`<strong>${values.length>1?formatMovement(change):'—'}</strong><span>${values.length>1?`(${pct>=0?'+':''}${pct.toFixed(1)}%) `:''}за 30 днів</span>`;el.className='balance-change '+(change>0?'trend-up':change<0?'trend-down':'trend-flat');
 }
 function lineGeometry(values,width,height,pad=4){if(!values.length)return{line:'',area:'',points:[]};const min=Math.min(...values),max=Math.max(...values),range=max-min||1,points=values.map((v,i)=>({x:values.length===1?width/2:pad+i*(width-pad*2)/(values.length-1),y:height-pad-(v-min)*(height-pad*2)/range,value:v})),line=points.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(' ');return{line,area:`${line} L${points.at(-1).x},${height} L${points[0].x},${height} Z`,points}}
 function accountIcon(a){return a.provider==='MONOBANK'?'mono':a.provider==='REVOLUT'?'R':a.provider==='CASH'?'▤':a.shortName||a.provider.slice(0,3)}
 function accountIconClass(a){return String(a.provider||'').toLowerCase()}
 function accountSnapshots(id){return(state.balanceSnapshots||[]).map(s=>({timestamp:s.timestamp,value:Number(s.accountBalances?.[id])})).filter(x=>Number.isFinite(x.value))}
 function formatMovement(n,c='PLN'){return`${n>0?'+':n<0?'−':''}${fmt(Math.abs(n),c)}`}
-function renderAccounts(){const grid=document.querySelector('#accountsGrid');if(!grid)return;const all=(state.accounts||[]).filter(a=>a.isActive),shown=accountsExpanded?all:all.slice(0,3);grid.classList.toggle('expanded',accountsExpanded);grid.innerHTML=shown.map(a=>`<button class="account-tile" data-account-id="${esc(a.id)}"><span class="account-icon ${accountIconClass(a)}">${accountIcon(a)}</span><span class="account-name">${esc(a.displayName)}</span><span class="account-balance ${a.currentBalance<0?'negative':''}">${fmt(a.currentBalance,a.currency)}</span></button>`).join('')+`<button class="account-tile" id="addAccount"><span class="account-icon add-icon">＋</span><span class="account-name">Додати</span><span class="account-balance">&nbsp;</span></button>`;grid.querySelectorAll('[data-account-id]').forEach(el=>el.onclick=()=>switchScreen('balanceAnalysis'));document.querySelector('#addAccount').onclick=()=>openSheet('#accountAddBackdrop');document.querySelector('#toggleAccounts').textContent=accountsExpanded?'Згорнути ˄':'Усі ›'}
-function renderTicker(){const track=document.querySelector('#tickerTrack');if(!track)return;const accounts=(state.accounts||[]).filter(a=>a.isActive);const item=a=>{const h=accountSnapshots(a.id),values=h.map(x=>x.value),g=lineGeometry(values.slice(-12),38,13,1),change=values.length>1?values.at(-1)-values[0]:0,cls=change>0?'trend-up':change<0?'trend-down':'trend-flat';return`<button class="ticker-item" data-ticker-account="${esc(a.id)}"><span class="ticker-logo">${accountIcon(a)}</span><span class="ticker-name">${esc(a.shortName||a.displayName)}</span><span class="ticker-value ${a.currentBalance<0?'trend-down':'trend-up'}">${fmt(a.currentBalance,a.currency)}</span><svg class="ticker-spark" viewBox="0 0 38 13"><path d="${g.line}" fill="none" stroke="currentColor" stroke-width="1.5" class="${cls}"/></svg><span class="ticker-change ${cls}">${formatMovement(change,a.currency)}</span></button>`};const seq=accounts.map(item).join('');track.innerHTML=Array.from({length:4},(_,i)=>`<div class="ticker-sequence" ${i?'aria-hidden="true"':''}>${seq}</div>`).join('');track.querySelectorAll('[data-ticker-account]').forEach(el=>el.onclick=()=>switchScreen('balanceAnalysis'));requestAnimationFrame(updateTickerSpeed)}
+function renderAccounts(){const grid=document.querySelector('#accountsGrid');if(!grid)return;const all=(state.accounts||[]).filter(a=>a.isActive),shown=accountsExpanded?all:all.slice(0,3);grid.classList.toggle('expanded',accountsExpanded);grid.innerHTML=shown.map(a=>`<button class="account-tile" data-account-id="${esc(a.id)}"><span class="account-icon ${accountIconClass(a)}">${accountIcon(a)}</span><span class="account-name">${esc(a.displayName)}</span><span class="account-balance ${a.currentBalance<0?'negative':''}">${fmt(a.currentBalance,a.currency)}</span></button>`).join('')+`<button class="account-tile" id="addAccount"><span class="account-icon add-icon">＋</span><span class="account-name">Додати</span><span class="account-balance">&nbsp;</span></button>`;grid.querySelectorAll('[data-account-id]').forEach(el=>el.onclick=()=>openAccountDetail(el.dataset.accountId));document.querySelector('#addAccount').onclick=()=>openSheet('#accountAddBackdrop');document.querySelector('#toggleAccounts').textContent=all.length>3?(accountsExpanded?'Згорнути ˄':'Усі ›'):''}
+function renderTicker(){const track=document.querySelector('#tickerTrack');if(!track)return;const selected=state.marketSelection||DEFAULT_MARKETS,items=selected.map(id=>marketData[id]).filter(Boolean);const item=m=>{const values=m.history||[],g=lineGeometry(values.slice(-12),38,13,1),cls=m.change>0?'trend-up':m.change<0?'trend-down':'trend-flat';return`<div class="ticker-item"><span class="ticker-logo">${esc(m.symbol||m.base)}</span><span class="ticker-name">${esc(m.label)}</span><span class="ticker-value ${cls}">${Number(m.value).toLocaleString('uk-UA',{maximumFractionDigits:m.value<10?4:2})}</span><svg class="ticker-spark" viewBox="0 0 38 13"><path d="${g.line}" fill="none" stroke="currentColor" stroke-width="1.5" class="${cls}"/></svg><span class="ticker-change ${cls}">${Number.isFinite(m.change)?`${m.change>=0?'+':''}${m.change.toFixed(2)}%`:'—'}</span></div>`};const seq=items.length?items.map(item).join(''):`<div class="ticker-item"><span class="ticker-logo">↻</span><span class="ticker-name">Курси</span><span class="ticker-value trend-flat">Оновлення…</span></div>`;track.innerHTML=Array.from({length:4},(_,i)=>`<div class="ticker-sequence" ${i?'aria-hidden="true"':''}>${seq}</div>`).join('');requestAnimationFrame(updateTickerSpeed)}
 function updateTickerSpeed(){const track=document.querySelector('#tickerTrack'),seq=track?.querySelector('.ticker-sequence');if(!seq)return;const distance=seq.getBoundingClientRect().width,speed=innerWidth/10;track.style.setProperty('--ticker-distance',distance+'px');track.style.setProperty('--ticker-duration',distance/speed+'s')}
+function marketCatalog(){return[...FIAT_PAIRS,...CRYPTO_MARKETS]}
+function renderMarketPicker(){const list=document.querySelector('#marketList');if(!list)return;const q=(document.querySelector('#marketSearch')?.value||'').trim().toLowerCase(),selected=new Set(state.marketSelection||DEFAULT_MARKETS),catalog=marketCatalog().filter(m=>!q||`${m.label} ${m.name||''}`.toLowerCase().includes(q));list.innerHTML=catalog.map(m=>`<label class="market-option"><input type="checkbox" value="${m.id}" ${selected.has(m.id)?'checked':''}><span>${esc(m.label)}</span><small>${m.kind==='crypto'?'Крипто':'Валюта'}</small></label>`).join('')||'<div class="empty">Нічого не знайдено</div>';list.querySelectorAll('input').forEach(input=>input.onchange=()=>{const set=new Set(state.marketSelection||DEFAULT_MARKETS);input.checked?set.add(input.value):set.delete(input.value);state.marketSelection=[...set].slice(0,20);saveState();loadMarketData()})}
+async function loadMarketData(){const catalog=marketCatalog(),selected=new Set(state.marketSelection||DEFAULT_MARKETS),wanted=catalog.filter(m=>selected.has(m.id)),cacheKey='voice-finance-market-cache';try{const cached=JSON.parse(localStorage.getItem(cacheKey)||'{}');if(cached.data)marketData=cached.data}catch(e){}renderTicker();await Promise.all(wanted.map(async m=>{try{if(m.kind==='fx'){const [latest,history]=await Promise.all([fetch(`https://api.frankfurter.dev/v2/rate/${m.base.toLowerCase()}/${m.quote.toLowerCase()}`).then(r=>{if(!r.ok)throw Error();return r.json()}),fetch(`https://api.frankfurter.dev/v2/rates?from=${new Date(Date.now()-14*86400000).toISOString().slice(0,10)}&base=${m.base.toLowerCase()}&quotes=${m.quote.toLowerCase()}`).then(r=>r.json())]);const values=history.map(x=>Number(x.rate)).filter(Number.isFinite),first=values[0]||Number(latest.rate),value=Number(latest.rate);marketData[m.id]={...m,value,history:values,change:first?(value-first)/first*100:0,updated:latest.date}}else{const data=await fetch(`https://api.kraken.com/0/public/Ticker?pair=${m.pair}`).then(r=>{if(!r.ok)throw Error();return r.json()}),row=Object.values(data.result||{})[0];if(!row)throw Error();const value=Number(row.c[0]),open=Number(row.o);marketData[m.id]={...m,value,history:[open,value],change:open?(value-open)/open*100:0,updated:new Date().toISOString()}}}catch(e){}}));localStorage.setItem(cacheKey,JSON.stringify({updated:Date.now(),data:marketData}));renderTicker()}
+function filteredSnapshots(period,id){return(state.balanceSnapshots||[]).filter(s=>new Date(s.timestamp)>=periodStart(period)&&(!id||Number.isFinite(Number(s.accountBalances?.[id]))))}
+function openAccountDetail(id){selectedAccountId=id;switchScreen('accountDetail')}
+function renderAccountDetail(){const a=(state.accounts||[]).find(x=>x.id===selectedAccountId);if(!a)return;document.querySelector('#accountDetailTitle').textContent=a.displayName;document.querySelector('#accountDetailBalance').textContent=fmt(a.currentBalance,a.currency);const snapshots=filteredSnapshots(accountPeriod,a.id),values=snapshots.map(s=>Number(s.accountBalances[a.id])),g=lineGeometry(values,440,250,12),empty=values.length<2;document.querySelector('#accountLine').setAttribute('d',empty?'':g.line);document.querySelector('#accountArea').setAttribute('d',empty?'':g.area);document.querySelector('#accountChartEmpty').classList.toggle('hidden',!empty);const first=values[0]??a.currentBalance,last=values.at(-1)??a.currentBalance,change=last-first;document.querySelector('#accountCurrent').textContent=fmt(a.currentBalance,a.currency);document.querySelector('#accountChange').textContent=values.length>1?formatMovement(change,a.currency):'—';document.querySelector('#accountMax').textContent=values.length?fmt(Math.max(...values),a.currency):'—';document.querySelector('#accountMin').textContent=values.length?fmt(Math.min(...values),a.currency):'—';const tx=state.transactions.filter(t=>t.accountId===a.id).sort((x,y)=>new Date(y.date)-new Date(x.date));const el=document.querySelector('#accountTransactions');el.innerHTML=tx.length?tx.map(txHtml).join(''):'<div class="empty">До цього рахунку ще не прив’язано операцій</div>';bindTxRows(el)}
+function openFlowDetail(type){selectedFlowType=type;switchScreen('flowDetail')}
+function renderFlowDetail(){const income=selectedFlowType==='income',color=income?'#66d896':'#ff5364',arr=state.transactions.filter(t=>t.type===selectedFlowType&&new Date(t.date)>=periodStart(flowPeriod)).sort((a,b)=>new Date(a.date)-new Date(b.date)),days=new Map();arr.forEach(t=>{const key=t.date.slice(0,10);days.set(key,(days.get(key)||0)+Number(t.amount||0))});let cumulative=0,values=[...days.values()].map(v=>cumulative+=v),g=lineGeometry(values,440,250,12);document.querySelector('#flowTitle').textContent=income?'Доходи':'Витрати';document.querySelector('#flowTotal').textContent=fmt(arr.filter(t=>t.currency==='PLN').reduce((n,t)=>n+t.amount,0));document.querySelector('#flowListTitle').textContent=income?'Усі доходи':'Усі витрати';document.querySelector('#flowLine').setAttribute('stroke',color);document.querySelector('#flowArea').setAttribute('fill',income?'rgba(102,216,150,.12)':'rgba(255,83,100,.12)');document.querySelector('#flowLine').setAttribute('d',values.length>1?g.line:'');document.querySelector('#flowArea').setAttribute('d',values.length>1?g.area:'');document.querySelector('#flowChartEmpty').classList.toggle('hidden',values.length>1);const list=document.querySelector('#flowTransactions');list.innerHTML=arr.length?arr.reverse().map(txHtml).join(''):'<div class="empty">Немає операцій за цей період</div>';bindTxRows(list)}
 function periodStart(period){const d=new Date();if(period==='7D')d.setDate(d.getDate()-7);else if(period==='1M')d.setMonth(d.getMonth()-1);else if(period==='3M')d.setMonth(d.getMonth()-3);else if(period==='YTD')return new Date(d.getFullYear(),0,1);else if(period==='1Y')d.setFullYear(d.getFullYear()-1);else return new Date(0);return d}
-function renderBalanceAnalysis(){if(!document.querySelector('#analysisChart'))return;let points=(state.balanceSnapshots||[]).filter(s=>new Date(s.timestamp)>=periodStart(analysisPeriod));if(!points.length)points=state.balanceSnapshots||[];const values=points.map(p=>Number(p.convertedTotalBalance??p.totalBalance)),g=lineGeometry(values,440,250,8);chartPoints=g.points.map((p,i)=>({...p,data:points[i]}));document.querySelector('#analysisLine').setAttribute('d',g.line);document.querySelector('#analysisArea').setAttribute('d',g.area);const current=values.at(-1)||totals().balance,first=values[0]??current,change=current-first;document.querySelector('#analysisValue').textContent=fmt(current);document.querySelector('#analysisChange').textContent=`${formatMovement(change)} за період`;document.querySelector('#metricCurrent').textContent=fmt(current);document.querySelector('#metricChange').textContent=formatMovement(change);document.querySelector('#metricMax').textContent=fmt(values.length?Math.max(...values):current);document.querySelector('#metricMin').textContent=fmt(values.length?Math.min(...values):current);const tx=state.transactions.filter(t=>new Date(t.date)>=periodStart(analysisPeriod)&&t.currency==='PLN');document.querySelector('#metricIncome').textContent=fmt(tx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0));document.querySelector('#metricExpense').textContent=fmt(tx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0));document.querySelector('#analysisAccounts').innerHTML=(state.accounts||[]).filter(a=>a.isActive).map(a=>`<div class="tx"><div class="tx-icon">${accountIcon(a)}</div><div><div class="tx-title">${esc(a.displayName)}</div><div class="tx-meta">${esc(a.bankName)}</div></div><strong class="pos">${fmt(a.currentBalance,a.currency)}</strong></div>`).join('')}
+function renderBalanceAnalysis(){if(!document.querySelector('#analysisChart'))return;let points=(state.balanceSnapshots||[]).filter(s=>new Date(s.timestamp)>=periodStart(analysisPeriod));if(!points.length)points=state.balanceSnapshots||[];const values=points.map(p=>Number(p.convertedTotalBalance??p.totalBalance)),g=lineGeometry(values,440,250,8);chartPoints=g.points.map((p,i)=>({...p,data:points[i]}));document.querySelector('#analysisLine').setAttribute('d',g.line);document.querySelector('#analysisArea').setAttribute('d',g.area);const current=values.at(-1)||totals().balance,first=values[0]??current,change=values.length>1?current-first:0;document.querySelector('#analysisValue').textContent=fmt(current);document.querySelector('#analysisChange').textContent=values.length>1?`${formatMovement(change)} за період`:'Ще немає історії';document.querySelector('#metricCurrent').textContent=fmt(current);document.querySelector('#metricChange').textContent=values.length>1?formatMovement(change):'—';document.querySelector('#metricMax').textContent=fmt(values.length?Math.max(...values):current);document.querySelector('#metricMin').textContent=fmt(values.length?Math.min(...values):current);const tx=state.transactions.filter(t=>new Date(t.date)>=periodStart(analysisPeriod)&&t.currency==='PLN');document.querySelector('#metricIncome').textContent=fmt(tx.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0));document.querySelector('#metricExpense').textContent=fmt(tx.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0));const accounts=document.querySelector('#analysisAccounts');accounts.innerHTML=(state.accounts||[]).filter(a=>a.isActive).map(a=>`<div class="tx" data-account-detail="${esc(a.id)}"><div class="tx-icon">${accountIcon(a)}</div><div><div class="tx-title">${esc(a.displayName)}</div><div class="tx-meta">${esc(a.bankName)}</div></div><strong class="pos">${fmt(a.currentBalance,a.currency)}</strong></div>`).join('')||'<div class="empty">Додай перший рахунок</div>';accounts.querySelectorAll('[data-account-detail]').forEach(el=>el.onclick=()=>openAccountDetail(el.dataset.accountDetail))}
 function inspectChart(clientX){if(!chartPoints.length)return;const box=document.querySelector('#analysisChart').getBoundingClientRect(),x=Math.max(0,Math.min(box.width,clientX-box.left)),scaled=x/box.width*440;let nearest=chartPoints[0];for(const p of chartPoints)if(Math.abs(p.x-scaled)<Math.abs(nearest.x-scaled))nearest=p;const cross=document.querySelector('#chartCrosshair'),point=document.querySelector('#chartPoint'),tip=document.querySelector('#chartTooltip');cross.setAttribute('x1',nearest.x);cross.setAttribute('x2',nearest.x);cross.classList.remove('hidden');point.setAttribute('cx',nearest.x);point.setAttribute('cy',nearest.y);point.classList.remove('hidden');tip.innerHTML=`${new Date(nearest.data.timestamp).toLocaleDateString('uk-UA',{day:'numeric',month:'short'})}<br><strong>${fmt(nearest.data.totalBalance)}</strong>`;tip.classList.remove('hidden');tip.style.left=`${Math.min(box.width-140,Math.max(6,x-50))}px`}
 function renderCategories(){
   const grid=document.querySelector('#categoryGrid');
@@ -603,9 +638,10 @@ function renderInsights(){
   wrap.innerHTML=`
     <div class="insight-card"><div class="label">Чистий результат</div><div class="big-stat">${fmt(t.balance)}</div><div class="muted">Доходи мінус витрати</div></div>
     <div class="insight-card clickable-card" id="debtInsight"><div class="label">Борги</div><div class="list-row"><span>Я винен</span><strong class="neg">${fmt(owed)}</strong></div><div class="list-row"><span>Мені винні</span><strong class="pos">${fmt(receivable)}</strong></div><div class="list-row"><span>Чиста позиція</span><strong class="${receivable-owed>=0?'pos':'neg'}">${fmt(receivable-owed)}</strong></div><div class="tiny" style="margin-top:12px">Термінових: ${urgent} · Оплачено: ${paid}</div></div>
-    <div class="insight-card" id="expenseInsight"><div class="label">Витрати по категоріях</div>${top.length?top.map(([id,v])=>`<div class="list-row"><span>${esc(categoryById(id).name)}</span><strong>${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає даних</div>'}</div>
-    <div class="insight-card" id="incomeInsight"><div class="label">Доходи по клієнтах</div>${Object.keys(clients).length?Object.entries(clients).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="list-row"><span>${esc(k)}</span><strong class="pos">+${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає доходів по клієнтах</div>'}</div>`;
+    <div class="insight-card clickable-card" id="expenseInsight"><div class="label">Витрати по категоріях</div>${top.length?top.map(([id,v])=>`<div class="list-row"><span>${esc(categoryById(id).name)}</span><strong>${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає даних</div>'}</div>
+    <div class="insight-card clickable-card" id="incomeInsight"><div class="label">Доходи по клієнтах</div>${Object.keys(clients).length?Object.entries(clients).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="list-row"><span>${esc(k)}</span><strong class="pos">+${fmt(v)}</strong></div>`).join(''):'<div class="empty">Немає доходів по клієнтах</div>'}</div>`;
   document.querySelector('#debtInsight').onclick=()=>switchScreen('debts');
+  document.querySelector('#expenseInsight').onclick=()=>openFlowDetail('expense');document.querySelector('#incomeInsight').onclick=()=>openFlowDetail('income');
 }
 function renderGoals(){
   const t=totals(), pct=Math.min(100,(t.expense/state.goal)*100);
@@ -716,6 +752,7 @@ function resetForm(){
   document.querySelector('#formTitle').textContent='Нова операція';
   document.querySelector('#amountInput').value='';
   document.querySelector('#currencyInput').value='PLN';
+  document.querySelector('#accountInput').value='';
   document.querySelector('#categoryInput').value=state.categories[0]?.id||'other';
   document.querySelector('#clientInput').value='';
   document.querySelector('#noteInput').value='';
@@ -726,6 +763,7 @@ function openAdd(prefill={}){
   if(prefill.type)setFormType(prefill.type);
   if(prefill.amount!=null)document.querySelector('#amountInput').value=prefill.amount;
   if(prefill.currency)document.querySelector('#currencyInput').value=prefill.currency;
+  if(prefill.accountId)document.querySelector('#accountInput').value=prefill.accountId;
   if(prefill.category)document.querySelector('#categoryInput').value=prefill.category;
   if(prefill.client)document.querySelector('#clientInput').value=prefill.client;
   if(prefill.note)document.querySelector('#noteInput').value=prefill.note;
@@ -737,6 +775,7 @@ function openEdit(id){
   document.querySelector('#formTitle').textContent='Редагувати операцію';
   document.querySelector('#amountInput').value=tx.amount;
   document.querySelector('#currencyInput').value=tx.currency;
+  document.querySelector('#accountInput').value=tx.accountId||'';
   document.querySelector('#categoryInput').value=tx.category;
   document.querySelector('#clientInput').value=tx.client||'';
   document.querySelector('#noteInput').value=tx.note||'';
@@ -747,14 +786,15 @@ function saveForm(){
   const amount=parseFloat(String(document.querySelector('#amountInput').value).replace(',','.'));
   if(!(amount>0)){showToast('Вкажи суму');return}
   const tx={
-    id:editingId||uid(),type:formType,amount,currency:document.querySelector('#currencyInput').value,
+    id:editingId||uid(),type:formType,amount,currency:document.querySelector('#currencyInput').value,accountId:document.querySelector('#accountInput').value||'',
     category:document.querySelector('#categoryInput').value,client:document.querySelector('#clientInput').value.trim(),
     note:document.querySelector('#noteInput').value.trim(),date:editingId?(state.transactions.find(t=>t.id===editingId)?.date||new Date().toISOString()):new Date().toISOString()
   };
-  if(editingId){state.transactions=state.transactions.map(t=>t.id===editingId?tx:t)}
-  else state.transactions.push(tx);
+  const previous=editingId?state.transactions.find(t=>t.id===editingId):null;applyAccountTransaction(tx,previous);
+  if(editingId){state.transactions=state.transactions.map(t=>t.id===editingId?tx:t)}else state.transactions.push(tx);
   closeSheet('#manualBackdrop');saveState();showToast('Збережено');
 }
+function fillAccountSelect(){const el=document.querySelector('#accountInput');if(!el)return;const value=el.value;el.innerHTML='<option value="">Без прив’язки</option>'+state.accounts.filter(a=>a.isActive).map(a=>`<option value="${esc(a.id)}">${esc(a.displayName)}</option>`).join('');el.value=[...el.options].some(o=>o.value===value)?value:''}
 function openCategory(id){
   const c=categoryById(id);
   const arr=state.transactions.filter(t=>t.category===id).sort((a,b)=>new Date(b.date)-new Date(a.date));
@@ -772,13 +812,13 @@ function openAllTx(){
 }
 function switchScreen(id){
   if(!document.getElementById(id)?.classList.contains('screen'))id='home';
-  const buttons=[...document.querySelectorAll('.dock [data-screen]')],navId=(id==='people'||id==='person')?'debts':id==='balanceAnalysis'?'home':id,nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===navId));
+  const buttons=[...document.querySelectorAll('.dock [data-screen]')],navId=(id==='people'||id==='person')?'debts':['balanceAnalysis','accountDetail','flowDetail'].includes(id)?'home':id,nextIndex=Math.max(0,buttons.findIndex(b=>b.dataset.screen===navId));
   closeProfileDrawer();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   buttons.forEach(b=>b.classList.toggle('active',b.dataset.screen===navId));
   moveDockIndicator(nextIndex);
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
-  if(id==='home')requestAnimationFrame(fitBalanceText);if(id==='balanceAnalysis')renderBalanceAnalysis();
+  if(id==='home')requestAnimationFrame(fitBalanceText);if(id==='balanceAnalysis')renderBalanceAnalysis();if(id==='accountDetail')renderAccountDetail();if(id==='flowDetail')renderFlowDetail();
   dockIgnoreScrollUntil=performance.now()+550;window.scrollTo({top:0,behavior:'auto'});lastPageScrollY=0;
   requestAnimationFrame(refreshJellyItems);
 }
@@ -957,17 +997,21 @@ function detectClient(raw,type){
 }
 function detectDebt(raw){
   const x=foldText(raw);let direction='';
-  const clientMatch=raw.match(/^\s*(?:клієнт|клиент|client|klient)\s+([\p{L}'’\-]+)(?=\s|$)/iu);
-  const owedMatch=raw.match(/^\s*(?:борг|долг|debt|dług|dlug)\s+(?!мені\b|мне\b|mnie\b)([\p{L}'’\-]+)(?=\s|$)/iu);
+  let clientMatch=raw.match(/(?:^|\s)(?:клієнт|клиент|client|klient)\s+([\p{L}'’\-]+)(?=\s|$)/iu);
+  let owedMatch=raw.match(/(?:^|\s)(?:борг|долг|debt|dług|dlug)\s+(?!мені\b|мне\b|mnie\b)([\p{L}'’\-]+)(?=\s|$)/iu);
+  if(clientMatch&&/(термінов|срочн|urgent)/.test(foldText(clientMatch[1])))clientMatch=null;if(owedMatch&&/(термінов|срочн|urgent)/.test(foldText(owedMatch[1])))owedMatch=null;
   if(clientMatch)direction='receivable';
   else if(owedMatch)direction='owed';
   else if(/(борг мені|мені вин(ен|на|ні)|вин(ен|на|ні) мені)/.test(x))direction='receivable';
   else if(/(я вин(ен|на)|мій борг|вин(ен|на) комусь)/.test(x))direction='owed';
+  else if(/(?:^|\s)(клієнт|клиент|client|klient)(?:\s|$)/.test(x))direction='receivable';
+  else if(/(?:^|\s)(борг|долг|debt|dług|dlug)(?:\s|$)/.test(x))direction='owed';
   if(!direction)return null;
   if(clientMatch)return{direction,person:clientMatch[1],urgent:/(термінов|срочн|urgent)/.test(x)};
   if(owedMatch)return{direction,person:owedMatch[1],urgent:/(термінов|срочн|urgent)/.test(x)};
   const patterns=direction==='owed'?[/(?:я\s+вин(?:ен|на)|мій\s+борг)\s+([\p{L}'-]+)/iu]:[/([\p{L}'-]+)\s+вин(?:ен|на|ні)\s+мені/iu,/мені\s+вин(?:ен|на|ні)\s+([\p{L}'-]+)/iu,/борг\s+мені\s+([\p{L}'-]+)/iu];
   let person='';for(const re of patterns){const m=raw.match(re);if(m){person=m[1];break;}}
+  if(!person){const stop=new Set(['борг','долг','debt','dług','dlug','клієнт','клиент','client','klient','мені','мне','я','винен','винна','винні','терміново','срочно','urgent','pln','zł','zl','грн','uah','eur','usd','злотих','злоті','євро','доларів']);const words=raw.match(/[\p{L}'’\-]+/gu)||[],candidate=words.find(w=>!stop.has(foldText(w))&&/^[A-ZА-ЯІЇЄҐŁŚŻŹĆŃ]/u.test(w))||words.find(w=>!stop.has(foldText(w)));person=candidate||''}
   return{direction,person,urgent:/(термінов|срочн|urgent)/.test(x)};
 }
 function parseVoice(text){
@@ -1089,17 +1133,24 @@ document.querySelector('#moreBtn').onclick=toggleProfileDrawer;
 document.querySelector('#profileDrawerBackdrop').onclick=e=>{if(e.target.id==='profileDrawerBackdrop')closeProfileDrawer()};
 document.querySelector('#profileDrawer').onclick=e=>e.stopPropagation();
 document.querySelector('#openSettings').onclick=()=>{closeProfileDrawer();openSheet('#settingsBackdrop')};
-document.querySelector('#incomeSummary').onclick=()=>openInsightSection('#incomeInsight');
-document.querySelector('#expenseSummary').onclick=()=>openInsightSection('#expenseInsight');
+document.querySelector('#incomeSummary').onclick=()=>openFlowDetail('income');
+document.querySelector('#expenseSummary').onclick=()=>openFlowDetail('expense');
 document.querySelector('#quickEntryInput').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();submitQuickEntry()}};
 document.querySelector('#quickSend').onclick=submitQuickEntry;
 document.querySelector('#quickEntryInput').addEventListener('focus',positionQuickEntry);
 document.querySelector('#quickEntryInput').addEventListener('blur',()=>setTimeout(positionQuickEntry,120));
 document.querySelector('#homeSearch').addEventListener('input',renderTransactions);
 document.querySelector('#openBalanceAnalysis').onclick=()=>switchScreen('balanceAnalysis');
+document.querySelector('#openBalanceSummary').onclick=()=>switchScreen('balanceAnalysis');
+document.querySelector('#openBalanceLabel').onclick=()=>switchScreen('balanceAnalysis');
 document.querySelector('#balanceBack').onclick=()=>switchScreen('home');
+document.querySelector('#accountBack').onclick=()=>switchScreen('home');
+document.querySelector('#flowBack').onclick=()=>switchScreen('home');
 document.querySelector('#toggleAccounts').onclick=()=>{accountsExpanded=!accountsExpanded;renderAccounts()};
 document.querySelectorAll('#periodTabs button').forEach(b=>b.onclick=()=>{analysisPeriod=b.dataset.period;document.querySelectorAll('#periodTabs button').forEach(x=>x.classList.toggle('active',x===b));renderBalanceAnalysis()});
+document.querySelectorAll('#accountPeriodTabs button').forEach(b=>b.onclick=()=>{accountPeriod=b.dataset.period;document.querySelectorAll('#accountPeriodTabs button').forEach(x=>x.classList.toggle('active',x===b));renderAccountDetail()});
+document.querySelectorAll('#flowPeriodTabs button').forEach(b=>b.onclick=()=>{flowPeriod=b.dataset.period;document.querySelectorAll('#flowPeriodTabs button').forEach(x=>x.classList.toggle('active',x===b));renderFlowDetail()});
+document.querySelector('#marketSearch').addEventListener('input',renderMarketPicker);
 document.querySelector('#analysisChart').addEventListener('pointerdown',e=>inspectChart(e.clientX));document.querySelector('#analysisChart').addEventListener('pointermove',e=>{if(e.buttons||e.pointerType==='touch')inspectChart(e.clientX)});
 document.querySelectorAll('[data-provider]').forEach(b=>b.onclick=()=>openProvider(b.dataset.provider));
 document.querySelectorAll('[data-manual-type]').forEach(b=>b.onclick=()=>openManualAccount(b.dataset.manualType));
@@ -1110,7 +1161,7 @@ document.querySelector('#typeExpense').onclick=()=>setFormType('expense');
 document.querySelector('#typeIncome').onclick=()=>setFormType('income');
 document.querySelector('#saveTx').onclick=saveForm;
 document.querySelector('#deleteTx').onclick=()=>{
-  if(!editingId)return;const removed=state.transactions.find(t=>t.id===editingId);state.transactions=state.transactions.filter(t=>t.id!==editingId);if(removed?.debtId)state.debts=state.debts.map(d=>d.id===removed.debtId?{...d,paid:false}:d);closeSheet('#manualBackdrop');saveState();showToast('Видалено')
+  if(!editingId)return;const removed=state.transactions.find(t=>t.id===editingId);applyAccountTransaction(null,removed);state.transactions=state.transactions.filter(t=>t.id!==editingId);if(removed?.debtId)state.debts=state.debts.map(d=>d.id===removed.debtId?{...d,paid:false}:d);closeSheet('#manualBackdrop');saveState();showToast('Видалено')
 };
 document.querySelector('#voiceCancel').onclick=closeVoice;
 document.querySelector('#voiceTestBtn').onclick=()=>{
@@ -1142,7 +1193,6 @@ document.querySelector('#debtReceivable').onclick=()=>setDebtDirection('receivab
 document.querySelector('#saveDebt').onclick=saveDebt;
 document.querySelector('#deleteDebt').onclick=()=>{if(!editingDebtId)return;state.debts=state.debts.filter(d=>d.id!==editingDebtId);state.transactions=state.transactions.filter(t=>t.debtId!==editingDebtId);closeSheet('#debtBackdrop');saveState();showToast('Борг видалено')};
 document.querySelector('#exportData').onclick=exportData;
-document.querySelector('#loadDemo').onclick=()=>{state.transactions=demoTx.map(x=>({...x,id:uid()}));saveState();showToast('Демо-дані завантажено')};
 document.querySelector('#clearData').onclick=()=>{if(confirm('Очистити всі операції та борги?')){state.transactions=[];state.debts=[];saveState();showToast('Дані очищено')}};
 document.querySelector('#manualBackdrop').onclick=e=>{if(e.target.id==='manualBackdrop')closeSheet('#manualBackdrop')};
 document.querySelector('#debtBackdrop').onclick=e=>{if(e.target.id==='debtBackdrop')closeSheet('#debtBackdrop')};
@@ -1181,13 +1231,14 @@ addEventListener('wheel',handleBoundaryWheel,{passive:true});
 if('serviceWorker' in navigator && location.protocol!=='file:'){
   let reloadingForUpdate=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloadingForUpdate)return;reloadingForUpdate=true;location.reload()});
-  navigator.serviceWorker.register('./sw.js?v=30',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+  navigator.serviceWorker.register('./sw.js?v=36',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
 }
 try{
   if('scrollRestoration' in history)history.scrollRestoration='manual';
   window.scrollTo(0,0);lastPageScrollY=0;document.querySelector('#bottomZone').classList.remove('compact');dockCompact=false;
   setupSheetGestures();
   render();
+  loadMarketData();
   switchScreen(location.hash.slice(1)||'home');
   addEventListener('hashchange',()=>switchScreen(location.hash.slice(1)||'home'));
   setTimeout(()=>{window.scrollTo(0,0);lastPageScrollY=0;setDockCompact(false);dockInteractionsReady=true},900);
