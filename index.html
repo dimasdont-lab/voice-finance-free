@@ -38,7 +38,7 @@
       margin:0 auto;
       min-height:100dvh;
       padding:calc(env(safe-area-inset-top) + 18px) 18px calc(128px + env(safe-area-inset-bottom));
-      background:#050505;
+      background:#050505;transition:transform .46s cubic-bezier(.2,.8,.2,1),filter .46s ease;
     }
     .topline{display:flex;justify-content:space-between;align-items:flex-start;margin:8px 4px 18px}
     .eyebrow{font-size:15px;color:var(--muted);margin-bottom:2px}
@@ -85,12 +85,20 @@
     .tx-title{font-size:16px}.tx-meta{font-size:13px;color:var(--muted);margin-top:3px}
     .tx-amount{font-size:17px;font-variant-numeric:tabular-nums}.pos{color:var(--green)}.neg{color:#f0f0f4}
     .empty{padding:28px;text-align:center;color:var(--muted)}
-    .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:9px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,5,5,0),rgba(5,5,5,.56) 25%,rgba(5,5,5,.62));z-index:30}
-    .dock{height:84px;display:grid;grid-template-columns:1fr 78px 1fr;gap:9px;align-items:center}
-    .dock-group{height:72px;border:1px solid rgba(255,255,255,.1);border-radius:36px;background:rgba(20,20,24,.48);display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px;box-shadow:inset 0 1px rgba(255,255,255,.025),0 14px 40px rgba(0,0,0,.22);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-    .dock button{border:0;padding:0;color:#d7d7dd;display:grid;place-items:center}.dock-group button{border-radius:50%;background:linear-gradient(180deg,rgba(34,34,40,.56),rgba(18,18,22,.5));border:1px solid rgba(255,255,255,.055)}.dock-group button.active{color:var(--accent);background:rgba(32,32,36,.58)}.dock svg{width:27px;height:27px}
-    .dock-plus{width:78px;height:78px;border-radius:50%;background:var(--accent-strong)!important;border:4px solid #f7f7f7!important;box-shadow:0 0 0 6px rgba(255,69,79,.16),0 0 28px rgba(255,69,79,.3);transition:.2s transform}.dock-plus:active{transform:scale(.96)}.dock-plus svg{width:38px;height:38px}.dock-plus.listening{transform:scale(1.05)}
-    .profile-shortcut{position:fixed;top:calc(env(safe-area-inset-top) + 18px);left:max(18px,calc((100vw - 480px)/2 + 18px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#111114;color:var(--text);display:grid;place-items:center;z-index:25}.profile-shortcut.active{color:var(--accent);border-color:rgba(255,125,131,.28)}.profile-shortcut svg{width:22px;height:22px}.topline{padding-left:54px}
+    .bottom-zone{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(480px,100%);padding:9px 15px calc(11px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(5,5,5,0),rgba(5,5,5,.38) 30%,rgba(5,5,5,.48));z-index:30;transition:transform .46s cubic-bezier(.2,.8,.2,1)}
+    .dock{height:82px;display:grid;grid-template-columns:minmax(0,1fr) 74px;gap:10px;align-items:center}
+    .dock-group{height:66px;border:1px solid rgba(255,255,255,.075);border-radius:34px;background:rgba(24,24,28,.12);display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:5px;box-shadow:inset 0 1px rgba(255,255,255,.035),0 14px 40px rgba(0,0,0,.14);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+    .dock button{border:0;padding:0;color:#d7d7dd;display:grid;place-items:center}.dock-group button{border-radius:50%;background:rgba(255,255,255,.018);border:1px solid rgba(255,255,255,.03)}.dock-group button.active{color:var(--accent);background:rgba(255,255,255,.055)}.dock svg{width:25px;height:25px}
+    .dock-plus{width:74px;height:74px;border-radius:50%;background:rgba(255,45,58,.48)!important;border:2px solid rgba(255,255,255,.72)!important;box-shadow:inset 0 1px rgba(255,255,255,.24),0 0 0 5px rgba(255,69,79,.07),0 12px 34px rgba(255,20,40,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:.2s transform}.dock-plus:active{transform:scale(.96)}.dock-plus svg{width:36px;height:36px}.dock-plus.listening{transform:scale(1.05)}
+    .profile-shortcut{position:fixed;top:calc(env(safe-area-inset-top) + 18px);left:max(18px,calc((100vw - 480px)/2 + 18px));width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#111114;color:var(--text);display:grid;place-items:center;z-index:52;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .25s}.profile-shortcut.active{color:var(--accent);border-color:rgba(255,125,131,.28);transform:translateX(calc(min(76vw,360px) - 62px))}.profile-shortcut svg{width:22px;height:22px}.topline{padding-left:54px}
+    .home-topline{min-height:52px;align-items:center}.home-topline .sub{margin:0;font-size:16px;text-transform:capitalize}
+    .profile-drawer-backdrop{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0);pointer-events:none;transition:background .46s ease}
+    .profile-drawer-backdrop.open{background:rgba(0,0,0,.38);pointer-events:auto}
+    .profile-drawer{position:absolute;left:0;top:0;bottom:0;width:min(76vw,360px);padding:calc(env(safe-area-inset-top) + 82px) 16px calc(env(safe-area-inset-bottom) + 24px);background:rgba(14,14,17,.94);border-right:1px solid rgba(255,255,255,.12);border-radius:0 30px 30px 0;box-shadow:26px 0 70px rgba(0,0,0,.48);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);overflow:auto;transform:translateX(-104%);transition:transform .36s cubic-bezier(.22,.9,.28,1)}
+    .profile-drawer-backdrop.open .profile-drawer{transform:translateX(0)}
+    body.drawer-open .app{transform:translateX(min(22vw,105px));filter:brightness(.72)}
+    body.drawer-open .bottom-zone{transform:translateX(calc(-50% + min(22vw,105px)))}
+    .drawer-title{font-size:28px;margin:0 0 5px}.drawer-sub{color:var(--muted);font-size:13px;margin-bottom:22px}.drawer-section-head{display:flex;align-items:center;justify-content:space-between;margin:18px 3px 10px}.drawer-section-head h2{font-size:18px;margin:0}.drawer-section-head button{border:0;background:transparent;color:var(--muted);padding:5px}.drawer-settings{width:100%;margin-top:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.045);padding:15px;display:flex;justify-content:space-between;align-items:center;text-align:left}.profile-drawer .category-grid{border-radius:24px}.profile-drawer .category{grid-template-columns:39px minmax(0,1fr) auto;padding-inline:9px}.profile-drawer .cat-icon{width:34px;height:34px}.profile-drawer .cat-name,.profile-drawer .cat-sum{font-size:14px}
     .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:60;display:none;align-items:flex-end;justify-content:center}
     .sheet-backdrop.open{display:flex}
     .sheet{
@@ -144,14 +152,19 @@
 </head>
 <body>
 <button class="profile-shortcut" id="profileShortcut" aria-label="Profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></button>
+<div class="profile-drawer-backdrop" id="profileDrawerBackdrop">
+  <aside class="profile-drawer" id="profileDrawer" aria-label="Меню профілю">
+    <h2 class="drawer-title">Профіль</h2>
+    <div class="drawer-sub">Швидкий доступ до категорій і налаштувань</div>
+    <div class="drawer-section-head"><h2>Категорії</h2><button id="allCategories">Усі</button></div>
+    <div class="category-grid" id="categoryGrid"></div>
+    <button class="drawer-settings" id="openSettings"><span>Налаштування</span><span aria-hidden="true">›</span></button>
+  </aside>
+</div>
 <div class="app">
   <section id="home" class="screen active">
-    <div class="topline">
-      <div>
-        <div class="eyebrow">Фінанси</div>
-        <h1>Огляд</h1>
-        <div class="sub" id="todayLabel"></div>
-      </div>
+    <div class="topline home-topline">
+      <div class="sub" id="todayLabel"></div>
       <button class="icon-btn" id="openHistory" aria-label="Історія">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
       </button>
@@ -171,11 +184,6 @@
           <div><div class="label">Витрати</div><strong id="expenseTotal">0 zł</strong></div>
         </button>
       </div>
-    </div>
-
-    <div class="section">
-      <div class="section-head"><h2>Категорії</h2><button id="allCategories">Усі</button></div>
-      <div class="category-grid" id="categoryGrid"></div>
     </div>
 
     <div class="section">
@@ -205,8 +213,25 @@
     <div id="debtGroups"></div>
   </section>
 
-  <section id="profile" class="screen">
-    <div class="topline"><div><div class="eyebrow">Налаштування</div><h1>Profile</h1><div class="sub">Дані зберігаються локально у браузері</div></div></div>
+</div>
+
+<div class="bottom-zone" id="bottomZone">
+  <nav class="dock" aria-label="Головна навігація">
+    <div class="dock-group">
+      <button id="scanBtn" aria-label="Scan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><rect x="8" y="8" width="8" height="8" rx="2"/></svg></button>
+      <button data-screen="insights" aria-label="Аналітика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg></button>
+      <button class="active" data-screen="home" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg></button>
+      <button data-screen="goals" aria-label="Борги"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
+    </div>
+    <button class="dock-plus" id="voiceBtn" aria-label="Додати фразою"><svg id="voiceCircle" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  </nav>
+</div>
+
+<div class="sheet-backdrop" id="settingsBackdrop">
+  <div class="sheet">
+    <div class="handle"></div>
+    <h3>Налаштування</h3>
+    <p>Дані зберігаються локально у браузері.</p>
     <div class="profile-card profile-actions">
       <button id="manageCategories">Керувати категоріями</button>
       <button id="exportData">Експорт JSON</button>
@@ -216,26 +241,10 @@
     <div class="profile-card">
       <div class="label">Швидке введення</div>
       <div class="big-stat" style="font-size:22px;margin-top:8px">UA + PL + EN текстом</div>
-      <div class="tiny" style="margin-top:8px">
-        Центральний плюс відкриває клавіатуру. Фраза локально перетворюється на операцію або борг без API та без завантаження аудіо.
-      </div>
+      <div class="tiny" style="margin-top:8px">Червоний плюс відкриває клавіатуру. Фраза локально перетворюється на операцію або борг без API.</div>
       <div class="tiny" id="modelProfileStatus" style="margin-top:10px">Готово до введення</div>
     </div>
-  </section>
-</div>
-
-<div class="bottom-zone" id="bottomZone">
-  <nav class="dock" aria-label="Головна навігація">
-    <div class="dock-group">
-      <button data-screen="insights" aria-label="Аналітика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 20V11M10 20V5M15 20v-8M20 20V8"/></svg></button>
-      <button id="scanBtn" aria-label="Scan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><rect x="8" y="8" width="8" height="8" rx="2"/></svg></button>
-    </div>
-    <button class="dock-plus" id="voiceBtn" aria-label="Додати фразою"><svg id="voiceCircle" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-    <div class="dock-group">
-      <button data-screen="goals" aria-label="Борги"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></button>
-      <button class="active" data-screen="home" aria-label="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3z"/></svg></button>
-    </div>
-  </nav>
+  </div>
 </div>
 
 <div class="sheet-backdrop" id="manualBackdrop">
@@ -598,13 +607,16 @@ function openAllTx(){
 }
 function switchScreen(id){
   if(!document.getElementById(id)?.classList.contains('screen'))id='home';
+  closeProfileDrawer();
   document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
   document.querySelectorAll('.dock [data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));
-  document.querySelector('#profileShortcut').classList.toggle('active',id==='profile');
   if(location.hash!==`#${id}`)history.replaceState(null,'',`#${id}`);
   if(id==='home')requestAnimationFrame(fitBalanceText);
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function openProfileDrawer(){document.body.classList.add('drawer-open');document.querySelector('#profileDrawerBackdrop').classList.add('open');document.querySelector('#profileShortcut').classList.add('active')}
+function closeProfileDrawer(){document.body.classList.remove('drawer-open');document.querySelector('#profileDrawerBackdrop')?.classList.remove('open');document.querySelector('#profileShortcut')?.classList.remove('active')}
+function toggleProfileDrawer(){document.body.classList.contains('drawer-open')?closeProfileDrawer():openProfileDrawer()}
 function openInsightSection(id){switchScreen('insights');requestAnimationFrame(()=>document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'}))}
 function normalizeWords(s){
   return String(s||'')
@@ -836,7 +848,10 @@ function exportData(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='voice-finance-data.json';a.click();URL.revokeObjectURL(a.href);
 }
 document.querySelectorAll('.dock [data-screen]').forEach(b=>b.onclick=()=>switchScreen(b.dataset.screen));
-document.querySelector('#profileShortcut').onclick=()=>switchScreen('profile');
+document.querySelector('#profileShortcut').onclick=toggleProfileDrawer;
+document.querySelector('#profileDrawerBackdrop').onclick=e=>{if(e.target.id==='profileDrawerBackdrop')closeProfileDrawer()};
+document.querySelector('#profileDrawer').onclick=e=>e.stopPropagation();
+document.querySelector('#openSettings').onclick=()=>{closeProfileDrawer();openSheet('#settingsBackdrop')};
 document.querySelector('#incomeSummary').onclick=()=>openInsightSection('#incomeInsight');
 document.querySelector('#expenseSummary').onclick=()=>openInsightSection('#expenseInsight');
 document.querySelector('#voiceBtn').onclick=startVoice;
@@ -881,6 +896,7 @@ document.querySelector('#debtBackdrop').onclick=e=>{if(e.target.id==='debtBackdr
 document.querySelector('#listBackdrop').onclick=e=>{if(e.target.id==='listBackdrop')closeSheet('#listBackdrop')};
 document.querySelector('#catBackdrop').onclick=e=>{if(e.target.id==='catBackdrop')closeSheet('#catBackdrop')};
 document.querySelector('#scanBackdrop').onclick=e=>{if(e.target.id==='scanBackdrop')closeSheet('#scanBackdrop')};
+document.querySelector('#settingsBackdrop').onclick=e=>{if(e.target.id==='settingsBackdrop')closeSheet('#settingsBackdrop')};
 document.querySelector('#scanCamera').onclick=()=>document.querySelector('#cameraInput').click();
 document.querySelector('#scanFile').onclick=()=>document.querySelector('#fileInput').click();
 document.querySelector('#scanClose').onclick=()=>closeSheet('#scanBackdrop');
